@@ -1,0 +1,2434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{artist} — Presskit Oficial</title><!-- {artist} é resolvido pelo JS (ARTIST, do CSV) — ver M11/D3 -->
+<!-- preconnect do CDN: base configurável via config.csv (cdn_base_url) — M8/M12 -->
+<link rel="preconnect" href="https://samavelpointappprodwe.blob.core.windows.net" crossorigin>
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preconnect" href="https://www.youtube.com">
+<link rel="preconnect" href="https://r.jina.ai">
+<!-- favicon estático = fallback pré-JS; o JS o regenera a partir de THEME.acc/acc2 (M9) -->
+<link rel="icon" data-theme-favicon href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='7' width='13' height='8' rx='1' fill='%23ff7a1a'/%3E%3Crect x='17' y='7' width='13' height='8' rx='1' fill='%23ffb56b'/%3E%3Crect x='9' y='17' width='13' height='8' rx='1' fill='%23ff7a1a'/%3E%3C/svg%3E">
+<script>window.IS_PRINT=location.search.indexOf('print=1')>=0;</script>
+<style>
+  :root{
+    --bg:#0b0b10; --bg2:#12121a; --card:#16161f; --card2:#1c1c28;
+    --line:#2a2a38; --txt:#f2f2f5; --mut:#9a9aae;
+    --acc:#ff7a1a; --acc2:#ffb56b; --neon:#c8ff3e;
+    --r:16px; --shadow:0 10px 40px rgba(0,0,0,.45);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      /* brilhos derivados das vars do tema (acc/neon) — acompanham tema.csv (M10) */
+      radial-gradient(1100px 500px at 85% -10%, color-mix(in srgb, var(--acc) 14%, transparent), transparent 60%),
+      radial-gradient(900px 420px at -10% 8%, color-mix(in srgb, var(--neon) 7%, transparent), transparent 55%),
+      var(--bg);
+    color:var(--txt);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Ubuntu,sans-serif;
+    line-height:1.6;
+  }
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+  a{color:var(--acc2)}
+  .vidslist{display:none}
+  .print-only{display:none}
+  svg.ic{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.12em}
+  svg.ic.fill{fill:currentColor;stroke:none}
+
+  /* ===== NAV ===== */
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,11,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:14px;height:62px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.5px;font-size:1.05rem;text-decoration:none;color:var(--txt)}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc)}
+  .navlinks{display:flex;gap:2px;margin:0 auto;flex-wrap:wrap;align-items:center}
+  .navlinks a{color:var(--mut);text-decoration:none;font-size:.86rem;font-weight:600;padding:7px 11px;border-radius:999px;transition:.18s;display:inline-flex;align-items:center;gap:6px}
+  .navlinks a:hover{color:var(--txt);background:var(--card2)}
+  .navlinks a.topdf{background:var(--acc);color:#161009;border-radius:999px}
+  .navlinks a.topdf:hover{background:var(--acc2)}
+  a.topdf{display:inline-flex;align-items:center;gap:6px;background:var(--acc);color:#161009;border-radius:999px;text-decoration:none;font-size:.86rem;font-weight:600;padding:7px 11px;transition:.18s}
+  a.topdf:hover{background:var(--acc2)}
+  .langsel{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 10px;color:var(--txt)}
+  .langsel svg{color:var(--neon);font-size:1rem}
+  .langsel select{background:transparent;border:none;color:var(--txt);font-weight:700;font-size:.82rem;outline:none;cursor:pointer}
+  .langsel select option{background:var(--card);color:var(--txt)}
+  /* hambúrguer (mobile) */
+  .burger{display:none;margin-left:auto;width:40px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--card);cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+  .burger span{display:block;width:18px;height:2px;background:var(--txt);border-radius:2px;transition:.2s}
+  nav.open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  nav.open .burger span:nth-child(2){opacity:0}
+  nav.open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mmenu{display:none;flex-direction:column;padding:6px 18px 16px;border-top:1px solid var(--line)}
+  .mmenu a{color:var(--txt);text-decoration:none;font-weight:700;font-size:.95rem;padding:12px 6px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+  .mmenu a:active{color:var(--acc2)}
+  .mmenu a.topdf{margin-top:12px;justify-content:center;background:var(--acc);color:#161009;border-radius:999px;border-bottom:none;padding:11px}
+
+  /* ===== HERO ===== */
+  header.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 28%;filter:brightness(.32) saturate(1.15)}
+  .hero-in{position:relative;padding:64px 0 44px;display:grid;grid-template-columns:230px 1fr;gap:34px;align-items:center}
+  .avatar{width:230px;height:230px;border-radius:24px;object-fit:cover;border:2px solid rgba(255,255,255,.14);box-shadow:var(--shadow)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:800;letter-spacing:2.2px;color:var(--neon);text-transform:uppercase;margin-bottom:10px}
+  .kicker::before{content:"";width:26px;height:2px;background:var(--neon);display:inline-block}
+  h1{font-size:clamp(2.4rem,6vw,3.9rem);line-height:1.02;letter-spacing:-1px;text-transform:uppercase}
+  h1 .l{display:block;font-size:.42em;letter-spacing:6px;color:var(--acc);font-weight:800;margin-bottom:6px}
+  .metas{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+  .chip{background:rgba(255,122,26,.1);border:1px solid rgba(255,122,26,.5);border-radius:999px;padding:5px 13px;font-size:.8rem;color:var(--txt);display:inline-flex;gap:7px;align-items:center}
+  .chip b{color:var(--acc2)}
+  #bpmRange{color:var(--txt)}
+  /* botões de redes — estilo único, com ícone da marca, compactos */
+  .soc{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .soc a{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;font-weight:700;font-size:.8rem;text-decoration:none;color:var(--acc2);background:rgba(255,122,26,.13);border:1px solid rgba(255,122,26,.45);transition:.18s}
+  .soc a:hover{transform:translateY(-2px);background:rgba(255,122,26,.24);border-color:var(--acc);color:var(--acc2)}
+  .soc svg{width:14px;height:14px;fill:currentColor;stroke:none;flex:none}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;font-weight:700;font-size:.88rem;text-decoration:none;border:1px solid var(--line);background:var(--card);color:var(--txt);cursor:pointer;transition:.18s}
+  .btn:hover{transform:translateY(-2px);border-color:var(--acc)}
+  .btn.solid{background:var(--acc);border-color:var(--acc);color:#161009}
+  .btn.solid:hover{background:var(--acc2);border-color:var(--acc2)}
+
+  /* ===== LIVE PANEL (compacto) ===== */
+  .livebar{position:relative;z-index:2;margin:-28px auto 4px;max-width:1000px;padding:0 24px}
+  .live-title{font-size:.72rem;font-weight:800;letter-spacing:1.4px;color:var(--acc2);text-transform:uppercase;text-align:center;margin:22px 0 20px;position:relative;z-index:2}
+  .livegrid{display:grid;grid-template-columns:repeat(4,minmax(170px,215px));justify-content:center;gap:12px}
+  .live{width:auto;background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:14px;padding:13px 17px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:2px}
+  .live .k{font-size:.64rem;letter-spacing:1.4px;font-weight:800;color:var(--mut);text-transform:uppercase;display:flex;align-items:center;gap:6px}
+  .live .v{font-size:1.42rem;font-weight:900;letter-spacing:-.5px}
+  .pulse{width:7px;height:7px;border-radius:50%;background:var(--acc);animation:pl 1.8s infinite}
+  .pulse.ok{background:var(--neon)}
+  .pulse.err{background:#ff4136}
+  .pulse.off{animation:none;background:var(--mut)}
+  @keyframes pl{0%,100%{opacity:1}50%{opacity:.55}}
+  .live-stamp{text-align:center;font-size:.68rem;color:var(--mut);margin:10px 0 0}
+  /* seções: alternância grid ↔ lista */
+  .vbtn{width:36px;height:36px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--acc2);display:grid;place-items:center;cursor:pointer;transition:.15s}
+  .vbtn:hover{border-color:var(--acc)}
+  .vbtn svg{width:15px;height:15px}
+  /* modo lista: linhas compactas (músicas com "Ver links" à direita) */
+  .tracks.listmode{display:flex;flex-direction:column;gap:5px}
+  .tracks.listmode .tk{flex-direction:row;align-items:center}
+  .tracks.listmode .tk .top{flex:1;padding:5px 12px;gap:10px}
+  .tracks.listmode .tk .cap{display:none}
+  .tracks.listmode .tk .info{display:flex;flex-direction:row;align-items:center;flex-wrap:wrap;gap:2px 12px;flex:1;min-width:0}
+  .tracks.listmode .tk h3{font-size:.88rem;margin:0;line-height:1.2}
+  .tracks.listmode .tk .sub{font-size:.72rem}
+  .tracks.listmode .tk .meta{font-size:.68rem}
+  .tracks.listmode .tk .linksbar{margin-left:auto;flex:none}
+  .tracks.listmode .tl-wrap{display:none}
+  .vgrid.listmode{display:flex;flex-direction:column;gap:5px}
+  .vgrid.listmode .vit{display:flex;align-items:center;gap:12px;aspect-ratio:auto;padding:5px 12px}
+  .vgrid.listmode .vit img,.vgrid.listmode .vit .vply{display:none}
+  .vgrid.listmode .vit .vcap{padding:0;border:none;background:transparent;position:static;opacity:1;transform:none;display:flex;gap:10px;align-items:baseline}
+  .vgrid.listmode .vit .vt{font-size:.84rem;color:var(--txt)}
+  .gal.listmode{display:flex;flex-direction:column;gap:5px}
+  .gal.listmode .git{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:4px 8px;background:var(--card)}
+  .gal.listmode .git img{width:44px;height:44px;object-fit:cover;border-radius:7px;flex:none}
+  .gal.listmode .git .bar{position:static;opacity:1;transform:none;margin-left:auto}
+  .gal.listmode .git .bar .iconbtn{width:28px;height:28px}
+  .gal.listmode .git figcaption{order:-1;flex:1;font-size:.78rem;color:var(--txt)}
+
+  /* ===== SECTIONS ===== */
+  section{padding:56px 0 8px}
+  #destaque{padding-top:26px}
+  #sobre{padding-top:14px}
+  .sh{display:flex;align-items:baseline;gap:14px;margin-bottom:26px;flex-wrap:wrap}
+  .sh .n{font-family:Consolas,monospace;color:var(--acc);font-weight:700;font-size:.95rem}
+  h2{font-size:clamp(1.5rem,3.4vw,2.2rem);letter-spacing:-.5px;text-transform:uppercase}
+  .sh .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent);min-width:60px}
+
+  /* SOBRE — bio à esquerda + gêneros em botões coloridos à direita */
+  .destaque .frame{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+  .destaque .frame .ph{position:relative;display:block;width:100%;aspect-ratio:16/9;background:#0a0a10 center/cover no-repeat;border:0;padding:0;cursor:pointer;font:inherit;background-image:url('https://i.ytimg.com/vi/ROrZ0NT3Rc0/hqdefault.jpg')}
+  .destaque .frame .ph::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(5,5,8,0) 30%,rgba(5,5,8,.55) 100%)}
+  .destaque .frame .ph .pb{position:absolute;inset:0;margin:auto;width:78px;height:78px;border-radius:50%;background:var(--acc);color:#161009;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 10px rgba(255,122,26,.25);transition:.18s;z-index:2}
+  .destaque .frame .ph:hover .pb{transform:scale(1.07);background:var(--acc2)}
+  .destaque iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .destaque .frame.live .ph{display:none}
+  .destaque .frame.live{aspect-ratio:16/9;background-image:none}
+  .hlm{display:inline-flex;margin:12px auto 0;left:50%;position:relative;transform:translateX(-50%);font-size:.8rem;font-weight:700;color:var(--acc2);text-decoration:none;border:1px solid rgba(255,122,26,.35);border-radius:999px;padding:6px 16px;transition:.15s}
+  .hlm:hover{border-color:var(--acc);color:var(--acc)}
+
+  .about{display:block;max-width:840px;margin:0 auto}
+  .about .genres{margin-top:18px;max-width:none}
+  .bio{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 28px;font-size:1.02rem}
+  /* botão discreto (só ícone) para copiar a bio — canto superior direito */
+  .bioCopy{position:absolute;top:10px;right:10px;width:30px;height:30px;border:1px solid var(--line);background:transparent;color:var(--mut);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.5;transition:.15s}
+  .bioCopy:hover{opacity:1;color:var(--acc);border-color:var(--acc)}
+  .bioCopy .ic{width:14px;height:14px}
+  .bio p+p{margin-top:14px}
+  .bio .lead{font-size:1.12rem;color:#fff}
+  .bio .lead b{color:var(--acc2)}
+  /* coluna de gêneros: chips modernos semi-transparentes, 2 por linha */
+  .genres{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 14px;max-width:240px}
+  .genres h4{font-size:.7rem;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--mut);margin:0 0 12px}
+  .gwrap{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:7px}
+  .gchip{display:inline-flex;align-items:center;justify-content:center;text-align:center;min-width:0;max-width:100%;white-space:nowrap;font-size:.72rem;font-weight:700;color:var(--txt);border-radius:999px;padding:5px 13px;line-height:1.3;border:1px solid transparent;transition:.15s}
+  .gchip:hover{transform:translateY(-1px)}
+  .gchip.long{grid-column:1/-1}
+  .livegrid:not(.all) .live:nth-child(n+4){display:none}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px}
+  .stat .v{font-size:1.28rem;font-weight:900;color:var(--acc);letter-spacing:-.5px;line-height:1.25}
+  .stat .k{font-size:.62rem;letter-spacing:1.4px;color:var(--mut);font-weight:800;text-transform:uppercase}
+
+  /* TRACKS */
+  .toolbar{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap;align-items:center}
+  .fbtn{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:8px 16px;font-size:.84rem;font-weight:700;cursor:pointer;transition:.15s}
+  .fbtn.on{background:var(--acc);border-color:var(--acc);color:#161009}
+  .sorter{display:flex;gap:6px;align-items:center}
+  .sel{background:var(--card);border:1px solid var(--line);color:var(--txt);border-radius:999px;padding:8px 12px;font-weight:700;font-size:.82rem;outline:none;cursor:pointer}
+  .sel option{background:var(--card)}
+  /* barra de pesquisa em destaque */
+  .srch{flex:1 1 240px;min-width:210px;border-color:rgba(255,122,26,.5);background:rgba(255,122,26,.07);color:var(--txt);font-weight:600}
+  .srch::placeholder{color:var(--mut)}
+  .srch:focus{outline:none;border-color:var(--acc);background:rgba(255,122,26,.1);box-shadow:0 0 0 3px rgba(255,122,26,.16)}
+  .dirbtn{width:36px;height:36px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--acc2);display:grid;place-items:center;cursor:pointer;font-size:1rem;transition:.15s}
+  .dirbtn:hover{border-color:var(--acc)}
+  .tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .tk{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+  .tk:hover{transform:translateY(-3px);border-color:rgba(255,122,26,.5)}
+  /* topo horizontal do card: capa + info (data/views/links) */
+  .tk .top{display:flex;gap:14px;padding:14px 16px}
+  .tk .cap{position:relative;width:104px;height:104px;flex:none;border-radius:12px;overflow:hidden;background:var(--bg2);cursor:zoom-in}
+  .tk .cap img{width:100%;height:100%;object-fit:cover;display:block}
+  .tk .tt{position:absolute;top:8px;left:8px;display:flex;flex-direction:column;gap:5px;align-items:flex-start}
+  .tag{font-size:.58rem;font-weight:900;letter-spacing:1.1px;padding:3px 8px;border-radius:999px;background:rgba(11,11,16,.75);border:1px solid var(--line);color:var(--acc2);text-transform:uppercase;backdrop-filter:blur(4px)}
+  .tag.ep{color:var(--neon);border-color:rgba(200,255,62,.4)}
+  .tk .info{display:flex;flex-direction:column;gap:7px;min-width:0;flex:1}
+  .tk h3{font-size:1rem;line-height:1.25}
+  .tk .sub{font-size:.78rem;color:var(--mut);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .tk .meta{display:flex;flex-wrap:nowrap;gap:10px;overflow:hidden}
+  .tk .meta span{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;color:var(--mut);white-space:nowrap}
+  .tk .meta svg.ic{width:.85em;height:.85em}
+  .tk .links{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;padding-top:2px}
+  .lbtn{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;font-weight:800;padding:7px 11px;border-radius:9px;text-decoration:none;color:var(--txt);background:var(--card2);border:1px solid var(--line);transition:.15s;cursor:pointer}
+  .lbtn:hover{border-color:var(--acc);color:var(--acc2)}
+  .lbtn.yt{color:#fff}.lbtn.yt:hover{border-color:#f33;color:#ff8080}
+  .lbtn.sp{color:#1ed760}.lbtn.sp:hover{border-color:#1ed760;color:#1ed760}
+  .lbtn.sc{color:#ff9a4d}.lbtn.sc:hover{border-color:#ff7700}
+  .lbtn.bc{color:#8db8f5}.lbtn.bc:hover{border-color:#629ae9}
+  .lbtn.cpy{color:var(--mut)}
+  .linksbar{margin-top:auto;display:flex;justify-content:flex-start;padding-top:2px}
+  /* modal "Ver links" */
+  #lk{position:fixed;inset:0;background:rgba(5,5,8,.82);backdrop-filter:blur(6px);display:none;place-items:center;z-index:110;padding:20px}
+  #lk.on{display:grid}
+  .lkbox{background:var(--card2);border:1px solid rgba(255,122,26,.45);border-radius:var(--r);box-shadow:var(--shadow);width:min(360px,92vw);padding:20px 20px 18px;position:relative}
+  .lkbox h4{font-size:1rem;margin:0 26px 12px 0;line-height:1.3}
+  .lkbox .x{position:absolute;top:10px;right:10px}
+  .lklinks{display:flex;flex-direction:column;gap:8px}
+  .lklinks a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--txt);text-decoration:none;font-weight:700;font-size:.85rem;transition:.15s}
+  .lklinks a:hover{border-color:var(--acc);color:var(--acc2);transform:translateY(-1px)}
+  .lklinks a svg{width:14px;height:14px;fill:currentColor;stroke:none;flex:none}
+  .lklinks a .ext{font-size:.68rem;color:var(--mut);font-weight:600}
+  .lkfoot{margin-top:14px;display:flex;justify-content:center}
+  .lkfoot .lbtn{width:100%;justify-content:center}
+  /* tracklist colapsável (3 faixas + 4ª semi-transparente) */
+  .tl-wrap{border-top:1px solid var(--line);padding:10px 16px 8px}
+  .tl-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.4px;color:var(--acc);text-transform:uppercase;margin-bottom:4px}
+  .tl{margin:0;padding:0;list-style:none;font-size:.78rem;color:var(--mut)}
+  .tl li{display:flex;align-items:center;gap:8px;padding:5px 0;border-top:1px dashed var(--line);flex-wrap:wrap}
+  .tl li:first-child{border-top:none}
+  .tl .tn{font-family:Consolas,monospace;font-size:.68rem;color:var(--acc);min-width:18px;flex:none}
+  .tl li b{color:var(--txt)}
+  .tl .tt2{margin-left:auto;font-family:Consolas,monospace;font-size:.7rem;flex:none}
+  .tl-wrap:not(.open) .tl li:nth-child(n+5){display:none}
+  .tl-wrap:not(.open) .tl li.peek{opacity:.4}
+  .tl-tgl{display:flex;justify-content:center;width:100%;margin-top:4px;background:none;border:none;color:var(--mut);cursor:pointer;padding:3px;transition:.15s}
+  .tl-tgl:hover{color:var(--acc)}
+  .tl-tgl svg{width:16px;height:16px;transition:transform .2s}
+  .tl-wrap.open .tl-tgl svg{transform:rotate(180deg)}
+  .views{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;color:var(--neon);font-weight:800}
+  .stamp-src{font-size:.72rem;color:var(--mut);margin-top:14px}
+
+  /* VIDEOS */
+  .vgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .vit{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--bg2);display:block;text-decoration:none;aspect-ratio:16/9}
+  .vit img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9;transition:.25s}
+  .vit:hover img{opacity:1;transform:scale(1.05)}
+  .vit .vply{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:8px;background:rgba(11,11,16,.8);display:grid;place-items:center;color:#fff}
+  .vit .vply svg{width:13px;height:13px}
+  .vit .vcap{position:absolute;left:0;right:0;bottom:0;padding:18px 8px 6px;background:linear-gradient(transparent,rgba(0,0,0,.85));display:flex;flex-direction:column;gap:2px}
+  .vit .vt{font-size:.66rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .vit .views{font-size:.6rem}
+  /* fallback (enquanto o feed do YouTube não chega) */
+  .vids{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .facade{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);cursor:pointer;aspect-ratio:16/9;background:var(--bg2);display:block;text-decoration:none}
+  .facade img{width:100%;height:100%;object-fit:cover;opacity:.92;transition:.3s}
+  .facade:hover img{opacity:1;transform:scale(1.02)}
+  .facade .ply{position:absolute;inset:0;display:grid;place-items:center}
+  .facade .ply .c{width:70px;height:48px;background:rgba(17,17,17,.85);border-radius:12px;display:grid;place-items:center;transition:.2s;color:#fff}
+  .facade:hover .ply .c{background:var(--acc);color:#161009}
+  .facade .ply .c svg{width:22px;height:22px}
+  .facade .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 12px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-weight:700;font-size:.92rem;display:flex;justify-content:space-between;gap:10px;align-items:flex-end;color:#fff}
+
+  /* botão "mostrar mais/menos" dos grids */
+  .morebtn{display:none;margin:18px auto 0;background:var(--card);border:1px solid var(--line);color:var(--acc2);border-radius:999px;padding:9px 22px;font-weight:700;font-size:.85rem;cursor:pointer;transition:.15s}
+  .morebtn:hover{border-color:var(--acc);color:var(--acc)}
+  #liveMore{margin-top:12px}
+
+  /* painel de diagnóstico (Alt+Shift+D) */
+  #devPanel{position:fixed;right:16px;bottom:72px;width:min(420px,92vw);max-height:60vh;background:rgba(11,11,16,.96);border:1px solid var(--acc);border-radius:14px;box-shadow:var(--shadow);z-index:130;display:none;flex-direction:column;overflow:hidden;font-family:Consolas,monospace}
+  #devPanel.on{display:flex}
+  #devPanel .dvhead{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--line);font-family:inherit}
+  #devPanel .dvhead b{color:var(--acc);font-size:.8rem;letter-spacing:1px;text-transform:uppercase}
+  #devPanel .dvbody{overflow:auto;padding:10px 14px;font-size:.72rem;line-height:1.55;color:var(--txt)}
+  #devPanel .l{padding:3px 0;border-bottom:1px dashed rgba(255,255,255,.06);word-break:break-word}
+  #devPanel .t{color:var(--mut);margin-right:6px}
+  #devPanel .i{color:#7ec8ff}
+  #devPanel .w{color:var(--acc2)}
+  #devPanel .e{color:#ff6b61}
+  #devPanel .s{color:var(--neon)}
+  #devPanel .dvfoot{padding:8px 14px;border-top:1px solid var(--line);display:flex;gap:8px;align-items:center;justify-content:space-between;font-size:.68rem;color:var(--mut)}
+  #devPanel .dvfoot button{background:var(--card);border:1px solid var(--line);color:var(--acc2);border-radius:8px;padding:5px 10px;font-family:inherit;font-size:.68rem;cursor:pointer}
+  #devPanel .dvfoot button:hover{border-color:var(--acc)}
+  #devPanel .dvhead .dvbtns{display:flex;gap:6px}
+  #devPanel .dvhead button{background:var(--card);border:1px solid var(--line);color:var(--acc2);border-radius:8px;padding:3px 9px;font-family:inherit;font-size:.72rem;cursor:pointer;line-height:1.2}
+  #devPanel .dvhead button:hover{border-color:var(--acc)}
+  #devPanel.min{max-height:none}
+  #devPanel.min .dvbody,#devPanel.min .dvfoot{display:none}
+
+  /* GALERIA */
+  .gtbar{display:flex;gap:8px;margin:-8px 0 18px;flex-wrap:wrap}
+  .gal{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .git{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--bg2);margin:0}
+  .git img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:1;cursor:zoom-in;transition:.25s}
+  .git img:hover{transform:scale(1.03)}
+  .git .vth{cursor:pointer}
+  .git .bar{position:absolute;right:8px;top:8px;display:flex;gap:6px;opacity:0;transition:.2s}
+  .git:hover .bar{opacity:1}
+  .iconbtn{width:34px;height:34px;border-radius:9px;border:1px solid rgba(255,255,255,.25);background:rgba(11,11,16,.72);color:#fff;display:grid;place-items:center;cursor:pointer;text-decoration:none;transition:.15s;backdrop-filter:blur(4px);font-size:.95rem}
+  .iconbtn:hover{background:var(--acc);border-color:var(--acc);color:#161009}
+  .vplay{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+  .vplay .c{width:46px;height:46px;border-radius:50%;background:rgba(11,11,16,.72);display:grid;place-items:center;border:1px solid rgba(255,255,255,.3);color:#fff}
+  .vplay .c svg{width:17px;height:17px}
+  .gcap{font-size:.7rem;color:var(--mut);margin-top:6px;text-align:center}
+
+  /* CONTATO */
+  .contact{display:grid;grid-template-columns:1fr;gap:26px;align-items:stretch}
+  .cbox{background:linear-gradient(135deg,rgba(255,122,26,.13),rgba(255,122,26,.04));border:1px solid rgba(255,122,26,.4);border-radius:var(--r);padding:28px}
+  .cbox h3{font-size:1.4rem;margin-bottom:8px;text-transform:uppercase;letter-spacing:-.3px}
+  .cbox p{color:var(--mut);margin-bottom:18px}
+  .mailrow{display:flex;gap:10px;flex-wrap:wrap}
+  .mail{font-family:Consolas,monospace;font-weight:700;font-size:1.02rem;background:rgba(11,11,16,.5);border:1px dashed rgba(255,255,255,.3);padding:10px 14px;border-radius:10px}
+  .socrow{margin-top:22px}
+  .gchip:nth-child(5n+1){background:rgba(255,122,26,.14);border-color:rgba(255,122,26,.5);color:var(--acc2)}
+  .gchip:nth-child(5n+2){background:rgba(200,255,62,.12);border-color:rgba(200,255,62,.45);color:var(--neon)}
+  .gchip:nth-child(5n+3){background:rgba(126,200,255,.12);border-color:rgba(126,200,255,.45);color:#7ec8ff}
+  .gchip:nth-child(5n+4){background:rgba(255,181,107,.13);border-color:rgba(255,181,107,.45);color:var(--acc)}
+  .gchip:nth-child(5n){background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);color:var(--txt)}
+
+  /* modal de confirmação do modo dev */
+  #dvAsk{position:fixed;inset:0;background:rgba(5,5,8,.82);backdrop-filter:blur(6px);display:none;place-items:center;z-index:120;padding:20px}
+  #dvAsk.on{display:grid}
+  .dvbox{background:var(--card2);border:1px solid rgba(255,122,26,.45);border-radius:var(--r);box-shadow:var(--shadow);width:min(360px,92vw);padding:20px 20px 18px;position:relative}
+  .dvbox h4{font-size:1rem;margin:0 26px 8px 0;line-height:1.3}
+  .dvbox p{font-size:.85rem;color:var(--mut);margin:0 0 16px}
+  .dvbox .row{display:flex;gap:10px;justify-content:flex-end}
+  .dvbox .row button{border-radius:999px;padding:9px 18px;font-size:.84rem;font-weight:700;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--txt);transition:.15s}
+  .dvbox .row .ok{background:var(--acc);border-color:var(--acc);color:#161009}
+  .dvbox .row button:hover{border-color:var(--acc)}
+
+  footer{margin-top:70px;border-top:1px solid var(--line);padding:26px 0 34px;font-size:.78rem;color:var(--mut)}
+  footer .wrap{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;text-align:center}
+
+  /* LIGHTBOX */
+  #lb{position:fixed;inset:0;background:rgba(5,5,8,.94);display:none;place-items:center;z-index:100;padding:24px}
+  #lb.on{display:grid}
+  #lb .box{max-width:min(1100px,94vw);display:flex;flex-direction:column;gap:12px;align-items:center}
+  #lb img,#lb video{max-width:100%;max-height:76vh;border-radius:12px;box-shadow:var(--shadow)}
+  #lb .x{position:absolute;top:18px;right:22px}
+  #lb .lbrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+  #lb .lbcap{font-size:.85rem;color:var(--mut);text-align:center}
+  /* barra de carregamento do vídeo */
+  .lbload{display:flex;flex-direction:column;gap:9px;align-items:center;background:rgba(11,11,16,.88);border:1px solid var(--line);border-radius:12px;padding:14px 22px;font-size:.85rem;color:var(--txt);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2}
+  .lbload:not(.on){display:none}
+  .lbload .lbbar{width:220px;height:6px;border-radius:99px;background:var(--card2);overflow:hidden;border:1px solid var(--line)}
+  .lbload .lbbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .3s}
+  .lbload a{color:var(--acc2)}
+  .lbspin{width:18px;height:18px;border-radius:50%;border:2px solid var(--acc);border-top-color:transparent;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .lbvwrap{position:relative;display:flex;max-width:min(1000px,94vw)}
+
+  /* TOAST */
+  #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card2);border:1px solid var(--acc);color:var(--txt);padding:11px 20px;border-radius:999px;font-size:.85rem;font-weight:700;opacity:0;transition:.3s;z-index:120;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+  #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* VOLTAR AO TOPO (mobile) */
+  #toTop{position:fixed;right:16px;bottom:18px;z-index:90;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,122,26,.5);background:rgba(22,22,31,.9);color:var(--acc2);display:grid;place-items:center;cursor:pointer;opacity:0;pointer-events:none;transition:.25s;box-shadow:var(--shadow);backdrop-filter:blur(6px)}
+  #toTop svg{width:20px;height:20px}
+  #toTop.on{opacity:1;pointer-events:auto}
+  #toTop:hover{background:var(--acc);color:#161009}
+  @media(min-width:769px){#toTop{display:none}}
+
+  @media(max-width:960px){
+    .tracks{grid-template-columns:repeat(2,1fr)}
+    .gal,.vgrid{grid-template-columns:repeat(4,1fr)}
+    .about,.contact,.vids{grid-template-columns:1fr}
+    .genres{max-width:none}
+    .gwrap{justify-content:center;gap:5px}
+    .live-title{margin-top:26px}
+    .livebar{margin-top:-38px}
+    .livegrid{grid-template-columns:repeat(2,1fr);max-width:560px;margin:0 auto}
+    .live{width:100%}
+    .about{max-width:560px}
+    .genres{margin-top:14px}
+    .destaque .frame .pb{width:58px;height:58px}
+  }
+  @media(max-width:768px){
+    .burger{display:flex}
+    .navlinks{display:none}
+    .langsel{margin-left:auto;flex:none}
+    .brand{font-size:.95rem;white-space:nowrap;flex:none}
+    a.topdf{white-space:nowrap;flex:none}
+    nav .wrap{gap:8px}
+    nav.open .mmenu{display:flex}
+  }
+  @media(max-width:640px){
+    .hero-in{grid-template-columns:1fr;text-align:center;gap:20px}
+    .avatar{margin:0 auto;width:180px;height:180px}
+    .kicker{justify-content:center}
+    .metas,.soc,.mailrow{justify-content:center}
+    .tracks{grid-template-columns:1fr;gap:12px}
+    /* grids mobile: 2 colunas (fotos/vídeos), imagens maiores */
+    .gal,.vgrid{grid-template-columns:repeat(2,1fr);gap:8px}
+    .gcap{display:none}
+    .git .bar{opacity:1}
+    .vit .vt{font-size:.6rem}
+    .live .v{font-size:1.15rem}
+    /* card de música: capa horizontal no topo, lista embaixo */
+    .tk .top{padding:12px;gap:11px}
+    .tk .cap{width:88px;height:88px}
+    .tk h3{font-size:.88rem}
+    .tk .sub{font-size:.72rem}
+    .tk .meta{gap:6px}
+    .tl{font-size:.7rem}
+    .lbtn{font-size:.7rem;padding:6px 8px}
+    .toolbar{margin:12px 0 0;width:100%}
+    .srch{flex:1 1 100%;width:100%}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  /* ===== PRINT / PDF ===== */
+  @media print{
+    @page{size:A4;margin:12mm 12mm 14mm}
+    html,body{background:#fff!important;color:#111!important}
+    .print-only{display:block}
+    .no-print{display:none!important}
+    nav,.livebar,.live-title,.facade,.vgrid,.morebtn,.gtbar,.toolbar,#toTop,.burger,.mmenu,#devPanel,#lb,#lk,#dvAsk,#toast{display:none!important}
+    section{padding:16px 0 4px}
+    .hero{border:none}
+    .hero-bg{display:none}
+    .hero-in{grid-template-columns:110px 1fr;gap:20px;padding:4mm 0 2mm}
+    .avatar{width:110px;height:110px;border-radius:16px;border:1px solid #ddd;box-shadow:none}
+    h1{font-size:28pt;color:#000}
+    h1 .l{color:#c2570a}
+    .kicker{color:#6b7d0f}
+    .metas .chip{border-color:#ccc;background:#f6f6f6;color:#111}
+    #bpmRange{color:#111!important}
+    .soc{margin-top:10px}
+    .soc a{border-color:#ccc;background:#f6f6f6;color:#111;font-size:.68rem;padding:5px 9px;border-radius:8px}
+    .soc svg{fill:#c2570a;width:10px;height:10px}
+    .btn{border-color:#ccc;background:#f6f6f6;color:#111;font-size:.72rem;padding:6px 10px}
+    .btn.solid{background:#c2570a;color:#fff;border-color:#c2570a}
+    .print-only{font-size:.68rem;color:#555;margin-top:6px}
+    .sh .n{color:#c2570a}
+    h2{font-size:15pt;color:#000}
+    .bio,.cbox,.genres{background:#fff;border:1px solid #ddd;box-shadow:none;color:#111}
+    .genres{max-width:46mm}
+    .gchip{background:#f6f6f6!important;border-color:#ccc!important;color:#111!important}
+    .bio{padding:14px 18px;font-size:.85rem}
+    .bio .lead,.bio .lead b{color:#000}
+    .fold{display:none}
+    /* músicas: apenas sets/álbuns + singles (faixas de sets ocultas); cards claros */
+    .tracks{grid-template-columns:repeat(2,1fr);gap:10px}
+    .tk{page-break-inside:avoid;background:#fff;border:1px solid #ddd;box-shadow:none}
+    .tk h3{font-size:.9rem;color:#000}
+    .tk .sub{color:#555}
+    .tk .meta{color:#444}
+    .tk .meta svg{color:#666}
+    .lbtn{font-size:.68rem;border:1px solid #bbb;background:#f6f6f6;color:#111;padding:5px 9px}
+    .linksbar .lbtn{display:inline-flex}
+    .views{color:#333}
+    #lk{display:none!important}
+    .tag{background:#f0f0f0;border-color:#ccc;color:#8a5200}
+    .tag.ep{color:#556b00}
+    .views{color:#556b00}
+    /* sets não exibem a lista de faixas; faixas de sets somem (permanecem singles) */
+    .tl-wrap{display:none!important}
+    .tk[data-album]{display:none!important}
+    /* galeria: apenas fotos; vídeos viram lista de links */
+    .gal{grid-template-columns:repeat(2,1fr);gap:8px}
+    .git.vid{display:none!important}
+    #galVidLinks{display:block!important;font-size:.75rem;color:#333;margin-top:8px}
+    .vidslist{display:block!important;font-size:.78rem;line-height:1.7}
+    .vidslist b{color:#000}
+    .vidslist a{color:#0a57c2;text-decoration:none}
+    .git{border:1px solid #ddd}
+    .git .bar,.vplay,.gcap{display:none}
+    .cbox{background:#fff7f0;border-color:#e8b98f}
+    .cbox h3{color:#000}
+    .cbox p{color:#555}
+    .mail{border-color:#999;color:#000}
+    .tl-lbl{color:#c2570a}
+    footer{border-top-color:#ddd;color:#666;margin-top:22px;font-size:.68rem}
+    a{color:#0a57c2;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav class="no-print" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot"></span>{artist}</a>
+    <div class="navlinks">
+      <a href="#destaque" data-i="navDestaque">Destaque</a>
+      <a href="#sobre" data-i="navSobre">Sobre</a>
+      <a href="#musicas" data-i="navMusicas">Músicas</a>
+      <a href="#videos" data-i="navVideos">Vídeos</a>
+      <a href="#galeria" data-i="navGaleria">Galeria</a>
+      <a href="#contato" data-i="navContato">Contato</a>
+    </div>
+    <span class="langsel">
+      <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 3.6 3 14.4 0 18"/><path d="M12 3c-3 3.6-3 14.4 0 18"/></svg>
+      <select id="langSel" aria-label="Language">
+        <option value="pt">PT</option><option value="en">EN</option><option value="es">ES</option>
+        <option value="de">DE</option><option value="fr">FR</option><option value="zh">中文</option>
+      </select>
+    </span>
+    <a class="topdf" href="DJ-TIJOLO-presskit.pdf" download>
+      <svg class="ic" viewBox="0 0 24 24"><path d="M12 3v13"/><path d="M6 12l6 6 6-6"/><path d="M4 21h16"/></svg>
+      <span data-i="navPdf">Baixar PDF</span>
+    </a>
+    <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false" aria-controls="mMenu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mMenu">
+    <a href="#destaque" data-i="navDestaque">Destaque</a>
+    <a href="#sobre" data-i="navSobre">Sobre</a>
+    <a href="#musicas" data-i="navMusicas">Músicas</a>
+    <a href="#videos" data-i="navVideos">Vídeos</a>
+    <a href="#galeria" data-i="navGaleria">Galeria</a>
+    <a href="#contato" data-i="navContato">Contato</a>
+    <a class="topdf" href="DJ-TIJOLO-presskit.pdf" download>
+      <svg class="ic" viewBox="0 0 24 24"><path d="M12 3v13"/><path d="M6 12l6 6 6-6"/><path d="M4 21h16"/></svg>
+      <span data-i="navPdf">Baixar PDF</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <!-- URL montada em runtime a partir de BLOB (config: cdn_base_url) — override: foto_fundo do CSV (M12/M8) -->
+  <div class="hero-bg"></div>
+  <div class="wrap hero-in">
+    <img class="avatar" src="" alt="{artist}" onerror="this.style.opacity=.35">
+    <div>
+      <div class="kicker" data-i="kicker">Presskit Oficial · 2026</div>
+      <h1><span class="l" data-i="role">DJ &amp; prod.</span>{artist}</h1>
+      <div class="metas">
+        <span class="chip"><svg class="ic" viewBox="0 0 24 24"><path d="M12 21s-6-5.3-6-10a6 6 0 1 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg><span id="cityTxt">Carapicuíba · SP · Brasil</span></span>
+        <span class="chip"><svg class="ic" viewBox="0 0 24 24"><path d="M4 16a8 8 0 1 1 16 0"/><path d="M12 16l4.5-5.5"/><path d="M2.5 20h19"/></svg><b id="bpmRange">90–210 BPM</b></span>
+        <span class="chip"><svg class="ic" viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg><span data-i="chipLive">Festas, clubs &amp; eventos</span></span>
+      </div>
+      <div class="soc" id="socHero"></div>
+      <div class="print-only" id="heroPrintLinks"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= LIVE (números estáticos instantâneos; ao vivo depois) ================= -->
+<!-- Métricas ao vivo (título fora do bloco escuro, logo abaixo do hero) -->
+<div class="livebar no-print" id="livebar">
+  <div class="livegrid" id="liveGrid">
+    <div class="live"><span class="k"><span class="pulse" id="plYt1"></span><span data-i="stSubs">Inscritos no YouTube</span></span><span class="v" id="stSubs">2,3 mil</span></div>
+    <div class="live"><span class="k"><span class="pulse" id="plYt2"></span><span data-i="stViews">Views no canal</span></span><span class="v" id="stViews">95,2 mil</span></div>
+    <div class="live"><span class="k"><span class="pulse off" id="plSp"></span><span data-i="mListeners">Ouvintes mensais no Spotify</span></span><span class="v" id="spListeners">—</span></div>
+    <div class="live"><span class="k"><span class="pulse" id="plSc1"></span><span data-i="scFollowers">Seguidores no SoundCloud</span></span><span class="v" id="scFollowers">223</span></div>
+  </div>
+  <button class="morebtn no-print" id="liveMore" style="display:none"></button>
+  <div class="live-stamp" id="liveStamp"></div>
+</div>
+
+<main>
+<!-- ================= DESTAQUE (façade → iframe do YouTube com referrer policy; evita erro 153) ================= -->
+<section id="destaque" class="destaque no-print">
+  <div class="wrap">
+    <div class="sh"><span class="n">01</span><h2 data-i="hDestaque">Destaque</h2><div class="rule"></div></div>
+    <div class="frame" id="hlFrame">
+      <button type="button" class="ph" id="hlPh" data-yt="ytVol1" title="MÚSICAS PARA BATER LAJE vol.1" aria-label="MÚSICAS PARA BATER LAJE vol.1">
+        <span class="pb"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span>
+      </button>
+    </div>
+    <a class="hlm" href="#musicas" data-i="hlMore">Ver mais</a>
+  </div>
+</section>
+<section id="sobre">
+  <div class="wrap">
+    <div class="sh"><span class="n">02</span><h2 data-i="hSobre">Sobre</h2><div class="rule"></div></div>
+    <div class="about">
+      <div class="bio" id="bioBox"><!-- renderizado via JS (idioma) --></div>
+      <div class="genres"><h4 data-i="genresLabel">Gêneros:</h4><div class="gwrap" id="genreBox"><!-- chips via JS --></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MÚSICAS ================= -->
+<section id="musicas">
+  <div class="wrap">
+    <div class="sh">
+      <span class="n">02</span><h2 data-i="hMusicas">Músicas &amp; Sets</h2><div class="rule"></div>
+      <div class="toolbar no-print">
+        <input class="sel srch" id="trkSearch" type="search" data-i-ph="srchPh" aria-label="Buscar" placeholder="Buscar nome, BPM, escala, duração…">
+        <button class="fbtn on" data-f="all" data-i="fAll">Todas</button>
+        <button class="fbtn" data-f="track" data-i="fTracks">Faixas</button>
+        <button class="fbtn" data-f="release" data-i="fReleases">Livesets &amp; Álbuns</button>
+        <span class="sorter">
+          <select class="sel" id="sortSel" aria-label="Ordenar por">
+            <option value="views" data-i="sortViews">Mais relevantes (views)</option>
+            <option value="date" data-i="sortDate">Data de lançamento</option>
+            <option value="name" data-i="sortName">Ordem alfabética</option>
+          </select>
+          <button class="dirbtn" id="dirBtn" title="Inverter ordem" aria-label="Inverter ordem">
+            <svg class="ic" viewBox="0 0 24 24" id="dirIco"><path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/></svg>
+          </button>
+          <button class="vbtn" id="trkView" aria-label="Alternar visualização"><svg class="ic" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+        </span>
+      </div>
+    </div>
+    <div class="tracks" id="trackGrid"></div>
+    <div class="nores no-print" id="trkNoRes" style="display:none" data-i="noRes">Nada encontrado.</div>
+    <button class="morebtn no-print" id="trkMore" style="display:none"></button>
+  </div>
+</section>
+
+<!-- ================= VÍDEOS ================= -->
+<section id="videos">
+  <div class="wrap">
+    <div class="sh">
+      <span class="n">03</span><h2 data-i="hVideos">Vídeos</h2><div class="rule"></div>
+      <div class="toolbar no-print">
+        <button class="fbtn on" data-vf="all" data-i="fAll">Todas</button>
+        <button class="fbtn" data-vf="tracks" data-i="fTracks">Faixas</button>
+        <button class="fbtn" data-vf="sets" data-i="fReleases">Sets &amp; Álbuns</button>
+        <span class="sorter">
+          <select class="sel" id="vidSortSel" aria-label="Ordenar por">
+            <option value="views" data-i="sortViews">Mais relevantes (views)</option>
+            <option value="date" data-i="sortDate">Data de lançamento</option>
+            <option value="name" data-i="sortName">Ordem alfabética</option>
+          </select>
+          <button class="dirbtn" id="vidDirBtn" title="Inverter ordem" aria-label="Inverter ordem">
+            <svg class="ic" viewBox="0 0 24 24" id="vidDirIco"><path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/></svg>
+          </button>
+          <button class="vbtn" id="vidView" aria-label="Alternar visualização"><svg class="ic" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+        </span>
+      </div>
+    </div>
+    <div class="stamp-src no-print" data-i="vidsNote" style="margin-top:-14px">Clique para assistir no YouTube (abre em nova aba).</div>
+    <div class="vgrid no-print" id="vidGrid"></div>
+    <button class="morebtn no-print" id="vidMore" style="display:none"></button>
+    <div class="vidslist" id="vidsPrintList"><!-- links dos vídeos (impressão) --></div>
+    <div class="vids" id="vidFallback">
+      <a class="facade" data-yt="ytCastelosEP" href="#" target="_blank" rel="noopener">
+        <img data-ytthumb="ytCastelosEP" data-yt-alt="{artist} — Castelos de Tijolo (EP)" alt="{artist} — Castelos de Tijolo (EP)" loading="lazy">
+        <div class="ply"><div class="c"><svg class="ic fill" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="cap"><span data-i="facEp">Castelos de Tijolo — EP completo</span><span class="views" id="facVw-ep"></span></div>
+      </a>
+      <a class="facade" data-yt="ytVol1" href="#" target="_blank" rel="noopener">
+        <img data-ytthumb="ytVol1" alt="DJ Tijolo — MÚSICAS PARA BATER LAJE vol.1" loading="lazy">
+        <div class="ply"><div class="c"><svg class="ic fill" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="cap"><span data-i="facAlbum">MÚSICAS PARA BATER LAJE vol.1 — Álbum completo</span><span class="views" id="facVw-vol1"></span></div>
+      </a>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALERIA ================= -->
+<section id="galeria">
+  <div class="wrap">
+    <div class="sh"><span class="n">04</span><h2 data-i="hGaleria">Galeria</h2><div class="rule"></div></div>
+    <div class="gtbar no-print">
+      <button class="fbtn on" data-g="all" data-i="gAll">Todas</button>
+      <button class="fbtn" data-g="img" data-i="gPhotos">Fotos</button>
+      <button class="fbtn" data-g="vid" data-i="gVideos">Vídeos</button>
+      <button class="vbtn" id="galView" aria-label="Alternar visualização"><svg class="ic" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+    <div class="gal" id="galGrid"></div>
+    <button class="morebtn no-print" id="galMore" style="display:none"></button>
+    <div class="vidslist" id="galVidLinks"><!-- links dos vídeos da galeria (impressão) --></div>
+    <div class="stamp-src no-print" data-i="galNote">Passe o mouse (ou toque) para baixar. Fotos e vídeos hospedados no CDN oficial do press kit — clique para ampliar.</div>
+  </div>
+</section>
+
+<!-- ================= CONTATO ================= -->
+<section id="contato">
+  <div class="wrap">
+    <div class="sh"><span class="n">05</span><h2 data-i="hContato">Contato &amp; Booking</h2><div class="rule"></div></div>
+    <div class="contact">
+      <div class="cbox">
+        <h3 data-i="cHead">Vamos fechar uma data?</h3>
+        <p data-i="cBody">{artist} está disponível para festas, clubs, festivais e eventos — sets de Baile Funk experimental ao Gabber, com energia de 90 a 210 BPM.</p>
+        <div class="mailrow">
+          <span class="mail">djtijoloofc@gmail.com</span><!-- preenchido via LINKS.email no boot -->
+          <button class="btn" onclick="copyMail()"><svg class="ic" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span data-i="copyMail">Copiar e-mail</span></button>
+          <a class="btn solid" data-mail data-subject="Booking — {artist}" href="#"><svg class="ic" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i="sendProp">Enviar proposta</span></a>
+        </div>
+        <div class="socrow soc" id="socContact"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <!-- {artist} e ano são reescritos por renderCSVIdentity (M11/M12) -->
+    <div>© 2026 {artist} — <span data-i="fRights">Todos os direitos reservados</span> · <a data-mail href="#"></a></div>
+  </div>
+  <div class="print-only" id="footPrintLinks" style="padding:0 12mm;text-align:center;width:100%"></div>
+</footer>
+
+<!-- ================= LIGHTBOX ================= -->
+<div id="lb" class="no-print" aria-hidden="true">
+  <button class="iconbtn x" onclick="lbClose()" aria-label="Fechar"><svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+  <div class="box" id="lbBox"></div>
+  <div class="lbrow">
+    <span class="lbcap" id="lbCap"></span>
+    <a class="iconbtn" id="lbDl" href="#" download title="Download"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3v13"/><path d="M6 12l6 6 6-6"/><path d="M4 21h16"/></svg></a>
+  </div>
+</div>
+
+<!-- voltar ao topo (mobile) -->
+<button id="toTop" class="no-print" aria-label="Voltar ao topo" title="Voltar ao topo"><svg class="ic" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>
+
+<!-- confirmação do modo dev -->
+<div id="dvAsk" class="no-print" aria-hidden="true">
+  <div class="dvbox">
+    <h4 data-i="dvT">Ativar modo dev?</h4>
+    <p data-i="dvP">O painel mostra o log técnico de rede e dados da página (para diagnóstico). Feche com Alt+Shift+D quando quiser.</p>
+    <div class="row"><button id="dvNo" data-i="cancel">Cancelar</button><button id="dvYes" class="ok" data-i="dvYes">Ativar</button></div>
+  </div>
+</div>
+
+<!-- modal "Ver links" (cards de músicas/sets) -->
+<div id="lk" class="no-print" aria-hidden="true">
+  <div class="lkbox" id="lkBox"></div>
+</div>
+
+<!-- painel de diagnóstico (Alt+Shift+D) -->
+<div id="devPanel" class="no-print" aria-hidden="true">
+  <div class="dvhead"><b>Dev log</b><span class="dvbtns"><button id="devMin" title="Minimizar">—</button><button id="devX" title="Fechar">✕</button></span><button id="devCopy">copiar</button></div>
+  <div class="dvbody" id="devBody"></div>
+  <div class="dvfoot"><span>Alt+Shift+D abre/fecha · laranja=carregando · verde=ok · vermelho=erro · cinza=indisponível</span><button id="devClear">limpar</button></div>
+</div>
+
+<div id="toast" class="no-print"></div>
+
+<script>
+/* =====================================================================
+   CSV — FONTE EDITÁVEL DE DADOS DO CURRÍCULO
+   ---------------------------------------------------------------------
+   O arquivo data.csv (mesma pasta, editável no Google Sheets) alimenta
+   o site inteiro: artista, bio, gêneros, BPM, faixas/sets, links,
+   galeria e métricas. Sem ele (ou offline), a página usa os dados
+   embutidos abaixo como fallback — nunca quebra. Ver COMO-EDITAR.md.
+   ===================================================================== */
+/* CSV_URL: link(s) de publicação do Google Sheets — uma URL por ABA da planilha.
+   Pode ser uma string ou um array (uma entrada por aba: config, textos, gêneros, músicas, galeria).
+   Ex.: let CSV_URL=['https://docs.google.com/.../pub?gid=0&...output=csv', '...gid=1...'];
+   Vazio = usa o data.csv da pasta. ?csv= na URL vence sobre tudo; ?nocsv=1 desliga. */
+let CSV_URL='';
+let THEME={}; /* cores do CSV (seção TEMA) → variáveis CSS; aplicado no load */
+let CSV_URLS=[];         /* fontes em ordem: ['data.csv'] + CSV_URL + ?csv= */
+let ARTIST='DJ TIJOLO';       /* substituído pelo CSV (linha config) */
+/* placeholders de template do texto embutido: {artist} nos T_SETS/HTML é trocado
+   pelo nome do artista do CSV em T()/renderBio()/renderCSVIdentity (M11/D3).
+   Dados de catálogo (TRACKS/SNAPSHOT_VIDEOS) ficam literais — são reescritos
+   por artista no Presskit Manager, não pertencem à camada de template. */
+const TPL={artist:ARTIST};
+/* prefixo do localStorage derivado do artista — reutilizar este template para
+   outro artista (mudando o nome acima) isola caches de métricas/idioma/dev;
+   nada vaza de um presskit para o outro */
+const LS_PREFIX='pk_'+String(ARTIST).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')+'_';
+const CSVDATA={};             /* imagens/cidade/bpm vindos do CSV (uso em renderCSVIdentity) */
+try{const p=new URLSearchParams(location.search);const q=p.get('csv');if(q!==null&&q!=='')q.split(',').map(s=>s.trim()).filter(Boolean).forEach(u=>CSV_URLS.push(u));if(p.get('nocsv')==='1')CSV_URLS.length=0;}catch(e){}
+
+function parseCSV(text){
+  const rows=[];let row=[],cell='',q=false;
+  const t=text.replace(/^\ufeff/,'');
+  for(let i=0;i<t.length;i++){
+    const c=t[i];
+    if(q){
+      if(c==='"'){if(t[i+1]==='"'){cell+='"';i++;}else q=false;}
+      else cell+=c;
+    }else{
+      if(c==='"')q=true;
+      else if(c===','){row.push(cell);cell='';}
+      else if(c==='\n'){row.push(cell);rows.push(row);row=[];cell='';}
+      else if(c==='\r'){/* ignora */}
+      else cell+=c;
+    }
+  }
+  if(cell!==''||row.length){row.push(cell);rows.push(row);}
+  return rows.filter(r=>r.length>1||(r[0]||'').trim()!=='');
+}
+function kv(s,sep){const o={};(s||'').split(/\s+/).forEach(p=>{if(!p)return;const i=p.indexOf(sep);if(i>0)o[p.slice(0,i)]=p.slice(i+1);});return o;}
+
+/* cabeçalhos canônicos por tipo de aba — a ordem das colunas segue estes nomes */
+const CSV_HEADERS={
+  config:['campo','valor'],
+  textos:['idioma','campo','texto'],
+  generos:['ordem','nome'],
+  musicas:['tipo','nome','data','bpm','escala','duracao','album','capa','spotify','soundcloud','bandcamp','youtube','apple','deezer','colaboradores','tracklist','id'],
+  galeria:['tipo','legenda','nome','thumb','url']
+};
+function csvSlug(s){
+  return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40)||'item';
+}
+function csvRel(iso){ /* 2026-06-13 → 13/06/2026 */
+  const m=String(iso||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  return m?m[3]+'/'+m[2]+'/'+m[1]:'';
+}
+function applyCSVData(rows){
+  if(!rows||!rows.length)return false;
+  let mode=null,col={};
+  const st={cfg:{},tema:{},bios:{},cbody:{},links:{},generos:[],tracks:[],gallery:[],videos:[],metrics:{views:{},custom:{},subs:null,sc:null}};
+  const hit={};
+  rows.forEach(r=>{
+    const c0=String(r[0]||'').replace(/^\ufeff/,'').trim();
+    /* linha de cabeçalho: troca o modo de leitura */
+    if(c0==='campo'&&r.length<=2){mode='kv';col={c:0,v:1};return;}
+    if(c0==='idioma'){mode='txt';col={l:0,c:1,t:2};return;}
+    if(c0==='ordem'){mode='gen';col={o:0,n:1};return;}
+    if(c0==='id'&&r.some(c=>/^titulo$/i.test(String(c||'').trim()))){
+      mode='vid';col={};
+      r.forEach((cell,i)=>{const k=String(cell||'').trim().toLowerCase();if(k)col[k]=i;});
+      return;
+    }
+    if(c0==='tipo'&&(r.includes('nome'))){
+      mode=r.includes('legenda')?'gal':'mus';
+      /* mapeia colunas pela PRÓPRIA linha de cabeçalho do arquivo (ordem livre) */
+      col={};
+      r.forEach((cell,i)=>{const k=String(cell||'').trim().toLowerCase();if(k)col[k]=i;});
+      return;
+    }
+    if(c0===''||c0[0]==='#')return;
+    const g=k=>{const i=col[k];return i==null?'':String(r[i]==null?'':r[i]).trim();};
+    if(mode==='kv'){ /* config e métricas */
+      const v=g('v');
+      /* views_<VIDEOID>: o id de vídeo do YouTube é case-sensitive — extrair
+         ANTES do toLowerCase, senão "xHRpJHqKH0g" vira chave duplicada "xhrpjhqkh0g"
+         e a mesma view é somada duas vezes no card "Views no canal" */
+      const mvRaw=c0.match(/^views_([\w-]+)$/);
+      if(mvRaw){st.metrics.views[mvRaw[1]]=parseInt(v,10)||0;return;}
+      const k=c0.toLowerCase();
+      /* cores do TEMA: chave = variável CSS, valor = hex (#rgb/#rrggbb) */
+      if(['acc','acc2','neon','bg','bg2','card','card2','line','mut','txt'].indexOf(k)>=0
+         &&/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(v.trim())){st.tema[k]=v.trim();return;}
+      /* idiomas do seletor (Presskit Manager: idioma_<lg>=0 esconde o idioma;
+         campo ausente = tudo ligado — compatível com planilhas antigas) */
+      if(k.indexOf('idioma_')===0){st.cfg['lang_'+k.slice(7)]=!(v==='0');hit.cfg=true;return;}
+      switch(k){
+        case 'artista':st.cfg.artista=v;break;
+        /* M8: base do CDN e IDs dos canais do YouTube — antes hardcoded no JS */
+        case 'cdn_base_url':case 'cdn_base':st.cfg.cdn=v;break;
+        case 'yt_channel_id':case 'yt_canal_id':st.cfg.ytMain=v;break;
+        case 'yt_topic_id':case 'yt_topico_id':st.cfg.ytTopic=v;break;
+        case 'cidade':st.cfg.cidade=v;break;
+        case 'bpm':case 'bpm_range':{const b=v.split('-');st.cfg.bpmMin=parseInt(b[0],10)||undefined;st.cfg.bpmMax=parseInt(b[1],10)||undefined;break;}
+        case 'bpm_min':st.cfg.bpmMin=parseInt(v,10)||undefined;break;
+        case 'bpm_max':st.cfg.bpmMax=parseInt(v,10)||undefined;break;
+        case 'video_destaque':case 'destaque':st.cfg.destaque=v;break;
+        case 'chip_live':case 'chiplive':st.cfg.chipLive=v;break;
+        /* visibilidade de seções (config): secao_<id>=0/1 */
+        case 'secao_destaque':st.cfg.show_destaque=v==='1'||v==='true';hit.cfg=true;break;
+        case 'secao_sobre':st.cfg.show_sobre=v==='1'||v==='true';hit.cfg=true;break;
+        case 'secao_musicas':case 'secao_tracks':st.cfg.show_musicas=v==='1'||v==='true';hit.cfg=true;break;
+        case 'secao_videos':st.cfg.show_videos=v==='1'||v==='true';hit.cfg=true;break;
+        case 'secao_galeria':st.cfg.show_galeria=v==='1'||v==='true';hit.cfg=true;break;
+        case 'secao_contato':st.cfg.show_contato=v==='1'||v==='true';hit.cfg=true;break;
+        case 'mostrar_metricas':st.cfg.show_live=v==='1'||v==='true';hit.cfg=true;break;
+        case 'metrica_inscritos_youtube':st.cfg.card_subs=v==='1'||v==='true';hit.cfg=true;break;
+        case 'metrica_views_canal':st.cfg.card_views=v==='1'||v==='true';hit.cfg=true;break;
+        case 'metrica_ouvintes_spotify':st.cfg.card_sp=v==='1'||v==='true';hit.cfg=true;break;
+        case 'metrica_seguidores_soundcloud':st.cfg.card_sc=v==='1'||v==='true';hit.cfg=true;break;
+        /* métrica personalizada: exibir/ocultar card (metrica_custom_<slug>) */
+        case 'foto_fundo':st.cfg.hero=v;break;
+        case 'foto_perfil':case 'avatar':st.cfg.avatar=v;break;
+        case 'email':st.links.email=v;break;
+        case 'youtube':st.links.link_youtube=v;break;
+        case 'spotify':st.links.link_spotify=v;break;
+        case 'soundcloud':st.links.link_soundcloud=v;break;
+        case 'bandcamp':st.links.link_bandcamp=v;break;
+        case 'instagram':st.links.link_instagram=v;break;
+        case 'tiktok':st.links.link_tiktok=v;break;
+        case 'inscritos_youtube':st.metrics.subs=parseInt(v,10)||null;break;
+        case 'seguidores_soundcloud':st.metrics.sc=parseInt(v,10)||null;break;
+        /* métricas personalizadas do Presskit Manager (3 linhas por card) */
+        default: {
+          const cm=k.match(/^metrica_custom_(.+?)(_label|_mostrar)?$/);
+          if(cm){const sl=cm[1],sf=cm[2]||'';const d=(st.metrics.custom[sl]=st.metrics.custom[sl]||{label:'',value:null,show:true});
+            if(sf==='_label')d.label=v;else if(sf==='_mostrar')d.show=!(v==='0');else d.value=parseInt(v,10)||0;}
+          else{
+            const mv=k.match(/^views_([\w-]+)$/);
+            if(mv)st.metrics.views[mv[1]]=parseInt(v,10)||0;
+          }
+        }
+      }
+      hit.kv=true;
+    }else if(mode==='txt'){ /* bios + contato por idioma */
+      const lg=g('l'),k=g('c'),t=g('t');
+      if(!lg||!t)return;
+      if(k==='contato')st.cbody[lg]=t;
+      else if(/^(role|lead|p\d+)$/.test(k))st.bios[k+'_'+lg]=t;
+      hit.txt=true;
+    }else if(mode==='gen'){ /* gêneros */
+      const n=g('n');if(n)st.generos.push(n);hit.gen=true;
+    }else if(mode==='vid'){ /* snapshot de vídeos do canal */
+      const id=g('id');if(!id)return;
+      st.videos.push({id,title:g('titulo')||g('title')||'',pub:g('data')||''});
+      hit.vid=true;
+    }else if(mode==='mus'){ /* faixas e sets */
+      const kindRaw=c0.toLowerCase();
+      if(!['faixa','single','track','set','ep','album','release'].includes(kindRaw))return;
+      const isSet=['set','ep','album','release'].includes(kindRaw);
+      const name=g('nome');if(!name)return;
+      const t={id:g('id')||csvSlug(name),name:name,type:isSet?'release':'track',
+        badge:kindRaw==='ep'?'ep':(kindRaw==='album'?'album':''),
+        date:g('data'),rel:csvRel(g('data')),
+        cover:g('capa'),pr:'',colab:g('colaboradores')||'',
+        bpm:parseInt(g('bpm'),10)||undefined,key:g('escala')||undefined,len:g('duracao')||undefined,
+        album:g('album')||undefined};
+      const lks=[];
+      const pl=[['spotify','sp'],['soundcloud','sc'],['bandcamp','bc'],['apple','am'],['deezer','dz']];
+      pl.forEach(([c,p])=>{if(g(c))lks.push([p,g(c)]);});
+      const yt=g('youtube');
+      if(yt){
+        /* URL completa ou id puro — guarda tal como (com minutagem se houver) */
+        const hasId=/[\w-]{6,}/.test(yt);
+        if(hasId){lks.push(['yt',/^https?:/.test(yt)?yt:LINKS.ytWatchBase+yt]);t.yt=[yt];}
+      }
+      t.links=lks;
+      const tl=g('tracklist');
+      if(tl)t.list=tl.split(/\n+/).map(l=>l.split('|').map(x=>x.trim()));
+      /* ids duplicados recebem sufixo */
+      if(st.tracks.some(x=>x.id===t.id))t.id=t.id+'-'+(st.tracks.length+1);
+      st.tracks.push(t);hit.mus=true;
+    }else if(mode==='gal'){ /* galeria */
+      const kindRaw=c0.toLowerCase();
+      if(!['foto','video'].includes(kindRaw))return;
+      const url=g('url');if(!url)return;
+      st.gallery.push({t:kindRaw==='foto'?'img':'vid',
+        cap:g('legenda')||undefined,capKey:kindRaw==='foto'?'a':'t',
+        full:url,src:url,thumb:g('thumb')||url,
+        name:g('nome')||url.split('/').pop().split('?')[0]});
+      hit.gal=true;
+    }
+  });
+  if(!Object.keys(hit).length)return false;
+  /* ---------- aplica no estado global ---------- */
+  if(st.cfg.artista){
+    ARTIST=st.cfg.artista;
+    if(typeof TPL==='object')TPL.artist=ARTIST;
+  }
+  /* M8: CDN/canais do YouTube vindos do config (const → let) */
+  if(st.cfg.cdn&&typeof BLOB!=='undefined')BLOB=String(st.cfg.cdn).replace(/\/+$/,'');
+  if(typeof YT!=='undefined'){if(st.cfg.ytMain)YT.main=st.cfg.ytMain;if(st.cfg.ytTopic)YT.topic=st.cfg.ytTopic;}
+  if(st.generos.length){GENRES.length=0;GENRES.push(...st.generos);}
+  CSVDATA.artista=ARTIST;
+  if(st.cfg.hero)CSVDATA.hero=st.cfg.hero;
+  if(st.cfg.avatar)CSVDATA.avatar=st.cfg.avatar;
+  if(st.cfg.cidade)CSVDATA.cidade=st.cfg.cidade;
+  if(st.cfg.bpmMin&&st.cfg.bpmMax){CSVDATA.bpmMin=st.cfg.bpmMin;CSVDATA.bpmMax=st.cfg.bpmMax;BPM_RANGE[0]=st.cfg.bpmMin,BPM_RANGE[1]=st.cfg.bpmMax;}
+  if(st.cfg.destaque)CSVDATA.destaque=st.cfg.destaque;
+  if(st.cfg.chipLive)CSVDATA.chipLive=st.cfg.chipLive;
+  applySections(st.cfg);
+  if(Object.keys(st.links).length){
+    const map={link_youtube:'ytChannel',link_spotify:'spArtist',link_soundcloud:'scProfile',link_bandcamp:'bcProfile',link_instagram:'igProfile',link_tiktok:'ttProfile',email:'email'};
+    for(const [k,v] of Object.entries(map))if(st.links[k])LINKS[v]=st.links[k];
+  }
+  /* botões de redes usam LINKS avaliado no load — sincroniza após o CSV */
+  if(typeof SOC!=='undefined'){SOC.yt.u=LINKS.ytChannel;SOC.sp.u=LINKS.spArtist;SOC.sc.u=LINKS.scProfile;SOC.bc.u=LINKS.bcProfile;SOC.ig.u=LINKS.igProfile;SOC.tt.u=LINKS.ttProfile;}
+  /* carimbo de impressão + botões sociais re-renderizados com os novos links */
+  if(Array.isArray(LINKS_DISPLAY))LINKS_DISPLAY.splice(0,LINKS_DISPLAY.length,LINKS.ytChannel,LINKS.spArtist,LINKS.scProfile,LINKS.bcProfile,LINKS.igProfile,LINKS.ttProfile);
+  try{const sh=$('#socHero'),sc=$('#socContact');if(sh)sh.innerHTML=socBtns();if(sc)sc.innerHTML=socBtns();}catch(e){}
+  if(st.metrics.views&&Object.keys(st.metrics.views).length){
+    /* dedup case-insensitive: "views_xHRp…" e "views_xhrp…" no CSV são o mesmo vídeo —
+       mantém uma única chave (o id real) para não somar views em duplicidade */
+    const seen={};
+    Object.keys(FALLBACK_VIEWS).forEach(k=>{seen[k.toLowerCase()]=k;});
+    Object.keys(st.metrics.views).forEach(k=>{
+      const canon=seen[k.toLowerCase()];
+      if(canon)FALLBACK_VIEWS[canon]=st.metrics.views[k]; /* atualiza o id já existente (case canônico) */
+      else{seen[k.toLowerCase()]=k;FALLBACK_VIEWS[k]=st.metrics.views[k];}
+    });
+  }
+  if(st.metrics.subs)FALLBACK_SUBS=st.metrics.subs;
+  if(st.tema&&Object.keys(st.tema).length){THEME=Object.assign({},THEME,st.tema);applyTheme();}
+  if(st.metrics.sc)FALLBACK_SC.followers=st.metrics.sc;
+  if(st.metrics.custom&&Object.keys(st.metrics.custom).length){
+    /* métricas personalizadas: injeta os cards no liveGrid (antes do selo de atualização) */
+    const grid=document.getElementById('liveGrid');
+    if(grid){
+      grid.querySelectorAll('.live.custom').forEach(el=>el.remove());
+      Object.values(st.metrics.custom).filter(d=>d.label).forEach(d=>{
+        const show=(st.cfg.custom?(st.cfg.custom[d.slug]!==false):(d.show!==false));
+        const box=document.createElement('div');
+        box.className='live custom';
+        box.style.display=show?'':'none';
+        box.innerHTML='<span class="k"><span class="pulse off"></span><span>'+esc(d.label)+
+          '</span></span><span class="v">'+fmt(d.value||0)+'</span>';
+        grid.appendChild(box);
+      });
+    }
+  }
+  if(st.tracks.length)TRACKS.length=0,TRACKS.push(...st.tracks);
+  if(st.gallery.length)GALLERY.length=0,GALLERY.push(...st.gallery);
+  if(st.videos&&st.videos.length){
+    /* snapshot de vídeos do canal (fallback do RSS) — SNAPSHOT_VIDEOS é mutável */
+    SNAPSHOT_VIDEOS.length=0;
+    st.videos.forEach(v=>SNAPSHOT_VIDEOS.push({
+      id:v.id,title:v.title,
+      pub:v.pub?v.pub+'T12:00:00+00:00':''
+    }));
+    YT_VIDEOS=SNAPSHOT_VIDEOS;
+  }
+  /* bio/papel/contato: mescla em T_SETS (por idioma) */
+  for(const lg of ['pt','en','es','de','fr','zh']){
+    const S=T_SETS[lg];if(!S)continue;
+    if(st.bios['role_'+lg])S.role=sanitizeInlineHTML(st.bios['role_'+lg]);
+    if(st.bios['lead_'+lg])S.bioLead=sanitizeInlineHTML(st.bios['lead_'+lg]);
+    const ps=Object.keys(st.bios).filter(k=>new RegExp('^p\\d+_'.concat(lg,'$')).test(k)).sort();
+    if(ps.length)S.bio=ps.map(k=>'<p>'+sanitizeInlineHTML(st.bios[k])+'</p>');
+    if(st.cbody[lg])S.cBody=st.cbody[lg];
+  }
+  if(st.cfg.destaque&&$('#hlPh'))$('#hlPh').dataset.yt='__csv__'+st.cfg.destaque;
+  applyCSVData.domDirty=true;
+  return true;
+}
+/* =====================================================================
+   VISIBILIDADE DE SEÇÕES (CSV: secao_*, mostrar_metricas, metrica_*)
+   Oculta/exibe blocos, renumera as seções visíveis e ajusta a navegação.
+   Também esconde do seletor os idiomas desligados no CSV (idioma_<lg>=0)
+   e devolve a página a um idioma disponível quando o salvo foi desligado.
+   ===================================================================== */
+const SEC_IDS=['destaque','sobre','musicas','videos','galeria','contato'];
+function applySections(cfg){
+  cfg=cfg||{};
+  const on=id=>cfg['show_'+id]!==false; /* default: tudo visível */
+  /* 0) idiomas: esconde opções do seletor; se o idioma atual saiu, volta p/ pt */
+  if(typeof T_SETS!=='undefined'){
+    /* pt é o idioma base — sempre disponível (garante ≥1 idioma no seletor) */
+    const lgOn=lg=>lg==='pt'||cfg['lang_'+lg]!==false;
+    const sel=document.getElementById('langSel');
+    if(sel)Array.from(sel.options).forEach(o=>{
+      const show=lgOn(o.value);
+      o.style.display=show?'':'none';o.disabled=!show;
+    });
+    if(!lgOn(lang)){
+      const alt=Object.keys(LOCALES).find(l=>lgOn(l)&&T_SETS[l]);
+      if(alt){
+        lang=alt;
+        try{localStorage.setItem(LS_PREFIX+'lang',lang);}catch(e){}
+        const s2=document.getElementById('langSel');if(s2)s2.value=lang;
+      }
+    }
+  }
+  /* 1) seções */
+  let visN=0;
+  SEC_IDS.forEach(id=>{
+    const sec=document.getElementById(id);
+    if(!sec)return;
+    const show=on(id);
+    sec.style.display=show?'':'none';
+    if(show){
+      visN++;
+      const n=sec.querySelector('.sh .n');
+      if(n)n.textContent=String(visN).padStart(2,'0');
+    }
+  });
+  /* 2) navegação desktop + menu mobile: esconde links de seções ocultas */
+  document.querySelectorAll('.navlinks a, .mmenu a').forEach(a=>{
+    const href=(a.getAttribute('href')||'').replace('#','');
+    if(SEC_IDS.includes(href))a.style.display=on(href)?'':'none';
+  });
+  /* 3) barra de métricas ao vivo: barra inteira ou cards individuais */
+  const bar=document.getElementById('livebar');
+  if(bar){
+    if(cfg.show_live===false){bar.style.display='none';}
+    else{
+      bar.style.display='';
+      const cards={stSubs:'card_subs',stViews:'card_views',spListeners:'card_sp',scFollowers:'card_sc'};
+      let any=false;
+      Object.entries(cards).forEach(([vid,key])=>{
+        const el=document.getElementById(vid);
+        if(!el)return;
+        const box=el.closest('.live');if(box)box.style.display=(cfg[key]===false)?'none':'';
+        if(cfg[key]!==false)any=true;
+      });
+      if(!any)bar.style.display='none';
+      /* sobreposição no hero só faz sentido com cards visíveis */
+      const lb=document.querySelector('.livebar');
+      if(lb&&bar.style.display==='none')lb.style.marginTop='0';
+    }
+  }
+  /* 4) garante estado consistente nos dois menus */
+  document.querySelectorAll('.navlinks a, .mmenu a').forEach(a=>{
+    const href=(a.getAttribute('href')||'').replace('#','');
+    if(SEC_IDS.includes(href)&&on(href)===false)a.style.display='none';
+  });
+  /* o link do PDF dentro do menu mobile não é seção — mantém */
+}
+
+/* aplica as cores do CSV como variáveis CSS (seção TEMA) */
+function applyTheme(){
+  const root=document.documentElement;
+  Object.entries(THEME).forEach(([k,v])=>{
+    if(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(v))root.style.setProperty('--'+k,v);
+  });
+  applyFavicon();
+}
+/* favicon derivado do tema (3 tijolos com acc/acc2) — antes hardcoded no <head> (M9) */
+function applyFavicon(){
+  try{
+    const c=k=>{const v=(THEME[k]||'').trim();
+      return /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(v)?v:(k==='acc'?'#ff7a1a':'#ffb56b');};
+    const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">'
+      +'<rect x="2" y="7" width="13" height="8" rx="1" fill="'+c('acc')+'"/>'
+      +'<rect x="17" y="7" width="13" height="8" rx="1" fill="'+c('acc2')+'"/>'
+      +'<rect x="9" y="17" width="13" height="8" rx="1" fill="'+c('acc')+'"/></svg>';
+    const l=document.querySelector('link[data-theme-favicon]');
+    if(l)l.href='data:image/svg+xml,'+encodeURIComponent(svg);
+  }catch(e){}
+}
+/* textos/imagens que o applyLang não cobre (name, cidade, bpm, hero, avatar, contatos) */
+function renderCSVIdentity(){
+  /* sempre roda: resolve {artist} e imagens-padrão mesmo sem CSV (file://);
+   * após o CSV, CSVDATA.* sobrepõe os defaults de BLOB (M11/M12) */
+  /* nome do artista: resolve {artist} restante em textos estáticos (M11) */
+  document.querySelectorAll('.brand, h1, footer .wrap > div, [data-mail]').forEach(el=>{
+    if(el.childNodes.length===1&&el.nodeType===1&&el.children.length===0)
+      el.textContent=el.textContent.replace(/\{artist\}/g,ARTIST);
+  });
+  document.querySelectorAll('h1').forEach(h=>{
+    h.childNodes[h.childNodes.length-1].textContent=' '+String(h.childNodes[h.childNodes.length-1].textContent).replace(/\{artist\}/g,ARTIST);
+  });
+  document.title=T('docTitle')||ARTIST+' — Presskit';
+  document.querySelectorAll('.brand').forEach(b=>{if(b.querySelector('.dot'))b.childNodes[b.childNodes.length-1].textContent=' '+ARTIST;});
+  const h1=document.querySelector('h1');
+  if(h1){
+    const span=h1.querySelector('.l');
+    h1.childNodes[h1.childNodes.length-1].textContent=' '+ARTIST;
+    if(span)span.innerHTML=T('role'); /* role vem sanitizado (sanitizeInlineHTML): preserva &amp; */
+  }
+  /* M12: imagens do hero vêm do CSV (foto_perfil/foto_fundo) ou de BLOB (cdn_base_url);
+     sem URL com UUID hardcoded no HTML */
+  const AVATAR_DEF=(typeof BLOB!=='undefined')?BLOB+'/profile/profileimage-1788959937781-d0785af8-5086-4b4c-964f-5cd933311282.webp':'';
+  const HERO_DEF=(typeof BLOB!=='undefined')?BLOB+'/cover/coverimage-1788961115610-bbe86120-801a-4854-9448-fc74538f1fd0.webp':'';
+  document.querySelectorAll('.avatar').forEach(a=>{a.src=CSVDATA.avatar||AVATAR_DEF||a.src;a.alt=ARTIST;});
+  document.querySelectorAll('.hero-bg').forEach(h=>{const u=CSVDATA.hero||HERO_DEF;if(u)h.style.backgroundImage="url('"+u+"')";});
+  const cty=$('#cityTxt');
+  if(cty&&CSVDATA.cidade)cty.textContent=CSVDATA.cidade;
+  const cl=document.querySelector('[data-i="chipLive"]');
+  if(cl&&CSVDATA.chipLive)cl.textContent=CSVDATA.chipLive;
+  const bpm=$('#bpmRange');
+  if(bpm&&CSVDATA.bpmMin)bpm.textContent=CSVDATA.bpmMin+'–'+CSVDATA.bpmMax+' BPM';
+  document.querySelectorAll('.mail').forEach(m=>m.textContent=LINKS.email);
+  document.querySelectorAll('[data-mail]').forEach(a=>{
+    const subj=a.dataset.subject?a.dataset.subject.replace(/\{artist\}/g,ARTIST):'';
+    a.href='mailto:'+LINKS.email+(subj?'?subject='+encodeURIComponent(subj):'');
+    if(a.children.length===0)a.textContent=LINKS.email;
+  });
+  document.querySelectorAll('[data-yt]').forEach(a=>{a.href=LINKS[a.dataset.yt]||'#';});
+  document.querySelectorAll('[data-ytthumb]').forEach(img=>{const id=(LINKS[img.dataset.ytthumb]||'').split('v=')[1]||'';if(id)img.src=LINKS.ytThumbBase+id+'/hqdefault.jpg';const alt=img.getAttribute('data-yt-alt');if(alt)img.alt=alt.replace(/\{artist\}/g,ARTIST);});
+  const cr=document.querySelector('footer .wrap > div');
+  if(cr)cr.innerHTML='© '+new Date().getFullYear()+' '+esc(ARTIST)+' — <span>'+T('fRights')+'</span> · <a data-mail href="#">'+esc(LINKS.email)+'</a>';
+}
+async function loadCSV(){
+  /* ?nocsv=1 desliga toda leitura de CSV (dados embutidos) */
+  try{if(new URLSearchParams(location.search).get('nocsv')==='1'){devlog('i','[csv] desativado (?nocsv=1) — usando dados embutidos');return;}}catch(e){}
+  /* fontes em ordem: data.csv local (se em http) → CSV_URL(s) fixos no código → ?csv= da URL.
+     Cada fonte pode ser 1 arquivo completo OU várias URLs (uma por aba do Google Sheets).
+     Os resultados são MERGADOS: a última fonte vence em caso de conflito. */
+  const sources=(location.protocol==='http:'||location.protocol==='https:')?['data.csv']:[];
+  /* ?csv=a.csv,b.csv → mescla várias abas; tem prioridade sobre data.csv local */
+  const qm=(location.search.match(/[?&]csv=([^&]+)/)||[])[1];
+  if(qm){
+    sources.length=0;
+    decodeURIComponent(qm).split(',').map(s=>s.trim()).filter(Boolean).forEach(u=>sources.push(u));
+  }
+  if(CSV_URL){(Array.isArray(CSV_URL)?CSV_URL:[CSV_URL]).forEach(u=>{if(sources.indexOf(u)<0)sources.push(u);});}
+  CSV_URLS.forEach(u=>{if(sources.indexOf(u)<0)sources.push(u);});
+  if(!sources.length){devlog('i','[csv] sem fonte — usando dados embutidos');return;}
+  const bust=u=>u+(u.indexOf('?')>=0?'&':'?')+'_='+Date.now();
+  let ok=0;
+  for(const src of sources){
+    const url=bust(src);
+    let done=false;
+    devlog('i','[csv] carregando '+src);
+    for(const [name,R] of RELAYS){
+      if(done)break;
+      try{
+        const ctrl=new AbortController();const tm=setTimeout(()=>ctrl.abort(),14000);
+        const r=await fetch(R(url),{signal:ctrl.signal});clearTimeout(tm);
+        if(!r.ok){devlog('w','[csv] HTTP '+r.status+' via '+name);continue;}
+        const txt=await r.text();
+        if(txt&&txt.length>10){
+          const rows=parseCSV(txt);
+          if(applyCSVData(rows)){
+            devlog('s','[csv] '+rows.length+' linhas de '+src+' aplicadas via '+name);
+            ok++;done=true;break;
+          }
+        }
+      }catch(e){devlog('w','[csv] falha via '+name+': '+(e&&e.message?e.message:e));}
+    }
+  }
+  if(ok){
+    devlog('s','[csv] '+ok+' fonte(s) mesclada(s) — re-renderizando');
+    applyLang();
+  }else{
+    devlog('e','[csv] nenhuma fonte carregou — mantendo dados embutidos');
+  }
+}
+
+/* =====================================================================
+   DADOS — fonte: MavelPoint EPK (api.mavelpoint.com/artist/dj-tijolo)
+   + galeria (props SSR das páginas /gallery/18028 e /gallery/18029)
+   + cruzamento manual com os canais oficiais do YouTube
+   ===================================================================== */
+/* =====================================================================
+   LINKS — FONTE ÚNICA DE TODAS AS URLS DO PROJETO
+   ---------------------------------------------------------------------
+   Para atualizar o currículo musical, edite APENAS este bloco (e as
+   constantes BLOB/PR logo abaixo, que apontam para o CDN do EPK):
+     · perfis oficiais (botões de redes, carimbos de impressão, fetches)
+     · vídeos do canal (cards, facades, listas de impressão)
+     · faixas/lançamentos (cards da seção Músicas e modal "Ver links")
+   Todo o resto do código referencia LINKS.<chave> via template strings
+   (`${LINKS.x}`), então trocar uma URL aqui atualiza a página inteira.
+   ===================================================================== */
+const LINKS={
+  /* -- perfis oficiais -- */
+  ytChannel:'https://www.youtube.com/@DJTIJOLO',
+  spArtist:'https://open.spotify.com/artist/4KjGnaEL18mbhepJOOEpwT',
+  scProfile:'https://soundcloud.com/djtijolo',
+  bcProfile:'https://djtijolo.bandcamp.com',
+  igProfile:'https://www.instagram.com/djtijoloofc',
+  ttProfile:'https://www.tiktok.com/@tijolodj',
+  email:'djtijoloofc@gmail.com',
+  /* -- YouTube: bases e vídeos do canal principal -- */
+  ytWatchBase:'https://www.youtube.com/watch?v=',
+  ytEmbedBase:'https://www.youtube.com/embed/',
+  ytShortBase:'https://youtu.be/',
+  ytThumbBase:'https://i.ytimg.com/vi/',
+  ytRssMain:'https://www.youtube.com/feeds/videos.xml?channel_id=UCgkyGevDOxzP-JVUpgQDnUA',
+  ytRssTopic:'https://www.youtube.com/feeds/videos.xml?channel_id=UCMe92c2xMu7wTgc8PodHdUg',
+  ytBoaldona:'https://www.youtube.com/watch?v=dh_-OmmgWis',
+  ytTremendo:'https://www.youtube.com/watch?v=GOFjH84Lbpk',
+  ytConstrucao:'https://www.youtube.com/watch?v=EmDmKSxSqjI',
+  ytMarido:'https://www.youtube.com/watch?v=qPphPOKrvcM',
+  ytCastelos:'https://www.youtube.com/watch?v=QT6zsYZOi64',
+  ytLamber:'https://www.youtube.com/watch?v=-kxjeTsndZA',
+  ytHemorragia:'https://www.youtube.com/watch?v=L_D9gB8PLe4',
+  ytQueimado:'https://www.youtube.com/watch?v=6XhsfavlHoM',
+  ytCastelosEP:'https://www.youtube.com/watch?v=xHRpJHqKH0g',
+  ytVol1:'https://www.youtube.com/watch?v=ROrZ0NT3Rc0',
+  /* -- singles -- */
+  spTremendo:'https://open.spotify.com/intl-pt/track/40ehxpcJbppBw34nXkeaeg',
+  bcBoaldona:'https://djtijolo.bandcamp.com/track/tjola-demole-barraco-boaldona-prod-dj-tijolo',
+  bcTremendo:'https://djtijolo.bandcamp.com/track/tremendo-tijol-o',
+  bcConstrucao:'https://djtijolo.bandcamp.com/track/constru-o-breakcore-ft-tijolo-buarque',
+  scTremendo:'https://soundcloud.com/djtijolo/tremendo-tijol-o',
+  scConstrucao:'https://soundcloud.com/djtijolo/construcao',
+  scRemix:'https://soundcloud.com/djtijolo/castelosdetijolo',
+  /* -- faixas individuais de MÚSICAS PARA BATER LAJE vol.1 (SoundCloud) -- */
+  scAteTransa:'https://soundcloud.com/djtijolo/ate-na-transa-voce-nao-larga-o-tijolo-3',
+  scCalma:'https://soundcloud.com/djtijolo/calma-dona-tromba-4',
+  scVaiTenta:'https://soundcloud.com/djtijolo/vai-tenta-comigo-tem-certeza-6',
+  scLaje:'https://soundcloud.com/djtijolo/musica-pra-bate-uma-laje-7',
+  scComer:'https://soundcloud.com/djtijolo/comer-tijolo-5',
+  scArCond:'https://soundcloud.com/djtijolo/quero-ar-condicionado-8',
+  scMarcelinho:'https://soundcloud.com/djtijolo/easter-egg-do-marcelinho-9',
+  /* -- sets / álbuns / EPs -- */
+  scCastelosEP:'https://soundcloud.com/djtijolo/dj-tijolo-castelos-de-tijolo',
+  scVol1:'https://soundcloud.com/djtijolo/sets/musicasparabaterlaje',
+  bcVol1:'https://djtijolo.bandcamp.com/album/m-sicas-para-bater-uma-laje-vol-1',
+  /* -- faixas do EP Castelos de Tijolo (Spotify) -- */
+  spMarido:'https://open.spotify.com/intl-pt/track/0KnzWRWd5H96XoJEbz0fBv',
+  spCastelos:'https://open.spotify.com/intl-pt/track/1lVUbQlHyUAHBArcGaNeUw',
+  spLamber:'https://open.spotify.com/intl-pt/track/6EgeIPucoh2KBuqb2hzrP7',
+  spHemorragia:'https://open.spotify.com/intl-pt/track/5FQH9uYVPLYtVWhDnAXQHk',
+  spQueimado:'https://open.spotify.com/intl-pt/track/2PzeNXyrlcIPgWoujRlgOI'
+};
+/* lista para os carimbos de links na versão impressa (ordem de exibição) */
+const LINKS_DISPLAY=[LINKS.ytChannel,LINKS.spArtist,LINKS.scProfile,LINKS.bcProfile,LINKS.igProfile,LINKS.ttProfile];
+
+/* M8: base do CDN do EPK (sem o UUID fixo do artista no meio) — pode ser
+   sobrescrita pelo config.csv (campo cdn_base_url). O caminho do artista
+   (…/artist/<uuid>) fica no CSV como prefixo das URLs de capa/galeria. */
+let BLOB='https://samavelpointappprodwe.blob.core.windows.net/app-images/artist/e6fc3090-069a-4766-b420-3a6be4e961f8';
+const PR='assets/print/'; // capas leves (apenas para o PDF)
+const BPM_RANGE=[90,210]; // ajustável (valor do EPK original: 90–180)
+/* IDs dos canais do YouTube (usados só no RSS de vídeos — as URLs de perfil estão em LINKS).
+   M8: também configuráveis via config.csv (yt_channel_id / yt_topic_id) */
+const YT={ main:'UCgkyGevDOxzP-JVUpgQDnUA', topic:'UCMe92c2xMu7wTgc8PodHdUg' };
+
+const TRACKS=[
+ {id:'boaldona',name:'Tjola Demole Barraco – Boaldona (prod. DJ TIJOLO)',type:'track',date:'2026-08-20',rel:'20/08/2026',
+  cover:BLOB+'/tracks/cover/tjola.png',pr:PR+'tjola.jpg',bpm:160,key:'A Maior',len:'04:53',
+  links:[['bc',`${LINKS.bcBoaldona}`],
+         ['yt',`${LINKS.ytBoaldona}`]],
+  yt:['dh_-OmmgWis']},
+ {id:'tremendo',name:'Tremendo Tijolão',type:'track',date:'2026-08-03',rel:'03/08/2026',
+  cover:BLOB+'/tracks/cover/capa_bandcamp.png',pr:PR+'tremendo.jpg',bpm:155,key:'Sol# Menor',len:'3:31',
+  links:[['sp',`${LINKS.spTremendo}`],
+         ['bc',`${LINKS.bcTremendo}`],
+         ['sc',`${LINKS.scTremendo}`],
+         ['yt',`${LINKS.ytTremendo}`]],
+  yt:['GOFjH84Lbpk']},
+ {id:'construcao',name:'Construção Breakcore (feat. Tijolo Buarque)',type:'track',date:'2026-07-12',rel:'12/07/2026',
+  cover:BLOB+'/tracks/cover/tijolo-buarque-capa-1x1.png',pr:PR+'construcao.jpg',bpm:174,key:'Sol Menor',len:'04:48',
+  links:[['bc',`${LINKS.bcConstrucao}`],
+         ['sc',`${LINKS.scConstrucao}`],
+         ['yt',`${LINKS.ytConstrucao}`]],
+  yt:['EmDmKSxSqjI']},
+ /* faixas individuais de MÚSICAS PARA BATER LAJE vol.1 (SoundCloud + Bandcamp; YT = set completo com minutagem) */
+ {id:'atetransa',name:'Até Na Transa Você Não Larga o Tijolo',type:'track',date:'2026-06-13',rel:'13/06/2026',
+  cover:BLOB+'/tracks/cover/capa-bandcamp.png',pr:PR+'vol1.jpg',len:'03:25',
+  links:[['sc',`${LINKS.scAteTransa}`],
+         ['bc',`${LINKS.bcVol1}`],
+         ['yt',`${LINKS.ytVol1}&t=399`]]},
+ {id:'calma',name:'Calma Dona Tromba',type:'track',date:'2026-06-13',rel:'13/06/2026',
+  cover:BLOB+'/tracks/cover/capa-bandcamp.png',pr:PR+'vol1.jpg',len:'02:29',
+  links:[['sc',`${LINKS.scCalma}`],
+         ['bc',`${LINKS.bcVol1}`],
+         ['yt',`${LINKS.ytVol1}&t=592`]]},
+ {id:'vaistema',name:'Vai Tenta Comigo Tem Certeza',type:'track',date:'2026-06-13',rel:'13/06/2026',
+  cover:BLOB+'/tracks/cover/capa-bandcamp.png',pr:PR+'vol1.jpg',len:'03:53',
+  links:[['sc',`${LINKS.scVaiTenta}`],
+         ['bc',`${LINKS.bcVol1}`],
+         ['yt',`${LINKS.ytVol1}&t=946`]]},
+ {id:'laje',name:'Música Pra Bate Uma Laje',type:'track',date:'2026-06-13',rel:'13/06/2026',
+  cover:BLOB+'/tracks/cover/capa-bandcamp.png',pr:PR+'vol1.jpg',len:'02:59',
+  links:[['sc',`${LINKS.scLaje}`],
+         ['bc',`${LINKS.bcVol1}`],
+         ['yt',`${LINKS.ytVol1}&t=1164`]]},
+ {id:'comer',name:'Comer Tijolo',type:'track',date:'2026-06-13',rel:'13/06/2026',
+  cover:BLOB+'/tracks/cover/capa-bandcamp.png',pr:PR+'vol1.jpg',len:'03:31',
+  links:[['sc',`${LINKS.scComer}`],
+         ['bc',`${LINKS.bcVol1}`],
+         ['yt',`${LINKS.ytVol1}&t=736`]]},
+ {id:'arcond',name:'Quero Ar Condicionado',type:'track',date:'2026-06-13',rel:'13/06/2026',
+  cover:BLOB+'/tracks/cover/capa-bandcamp.png',pr:PR+'vol1.jpg',len:'03:00',
+  links:[['sc',`${LINKS.scArCond}`],
+         ['bc',`${LINKS.bcVol1}`],
+         ['yt',`${LINKS.ytVol1}&t=1336`]]},
+ {id:'marcelinho',name:'Easter Egg do Marcelinho',type:'track',date:'2026-06-13',rel:'13/06/2026',
+  cover:BLOB+'/tracks/cover/capa-bandcamp.png',pr:PR+'vol1.jpg',len:'01:31',
+  links:[['sc',`${LINKS.scMarcelinho}`],
+         ['bc',`${LINKS.bcVol1}`],
+         ['yt',`${LINKS.ytVol1}&t=1513`]]},
+ /* remix do EP Castelos de Tijolo, exclusivo do SoundCloud */
+ {id:'remixcastelos',name:'Castelos de Tijolo (Danny Bond x Alice Glass REMIX)',type:'track',date:'2026-06-14',rel:'14/06/2026',
+  cover:BLOB+'/tracks/cover/1_2.png',pr:PR+'ep-castelos.jpg',len:'03:15',
+  links:[['sc',`${LINKS.scRemix}`]]},
+ {id:'marido',name:'Um Tijolo pra Bater no Meu Marido (feat. Kryartura)',type:'track',date:'2026-06-30',rel:'30/06/2026',
+  cover:BLOB+'/tracks/cover/1_2.png',pr:PR+'ep-castelos.jpg',bpm:156,key:'Lá# Menor',len:'02:30',album:'Castelos de Tijolo · EP',
+  links:[['sp',`${LINKS.spMarido}`],
+         ['sc',`${LINKS.scCastelosEP}`],
+         ['yt',`${LINKS.ytMarido}`]],
+  yt:['qPphPOKrvcM']},
+ {id:'castelos',name:'Castelos de Tijolo (feat. Danny Bond)',type:'track',date:'2026-06-30',rel:'30/06/2026',
+  cover:BLOB+'/tracks/cover/1_2.png',pr:PR+'ep-castelos.jpg',bpm:140,key:'Lá Menor',len:'03:14',album:'Castelos de Tijolo · EP',
+  links:[['sp',`${LINKS.spCastelos}`],
+         ['sc',`${LINKS.scCastelosEP}`],
+         ['yt',`${LINKS.ytCastelos}`]],
+  yt:['QT6zsYZOi64']},
+ {id:'lamber',name:'Vai Tijolar ou Vai Lamber? (feat. Kaya Conky)',type:'track',date:'2026-06-30',rel:'30/06/2026',
+  cover:BLOB+'/tracks/cover/1_2.png',pr:PR+'ep-castelos.jpg',bpm:140,key:'Lá# Menor',len:'04:22',album:'Castelos de Tijolo · EP',
+  links:[['sp',`${LINKS.spLamber}`],
+         ['sc',`${LINKS.scCastelosEP}`],
+         ['yt',`${LINKS.ytLamber}`]],
+  yt:['-kxjeTsndZA']},
+ {id:'hemorragia',name:'Deu Hemorragia no Furo do Tijolo (feat. LeorioStar & MC Carol)',type:'track',date:'2026-06-30',rel:'30/06/2026',
+  cover:BLOB+'/tracks/cover/1_2.png',pr:PR+'ep-castelos.jpg',bpm:150,key:'Si♭ Maior',len:'02:26',album:'Castelos de Tijolo · EP',
+  links:[['sp',`${LINKS.spHemorragia}`],
+         ['sc',`${LINKS.scCastelosEP}`],
+         ['yt',`${LINKS.ytHemorragia}`]],
+  yt:['L_D9gB8PLe4']},
+ {id:'queimado',name:'Cheiro de Tijolo Queimado (feat. Cidinho & Doca)',type:'track',date:'2026-06-30',rel:'30/06/2026',
+  cover:BLOB+'/tracks/cover/1_2.png',pr:PR+'ep-castelos.jpg',bpm:142,key:'Sol Menor',len:'03:17',album:'Castelos de Tijolo · EP',
+  links:[['sp',`${LINKS.spQueimado}`],
+         ['sc',`${LINKS.scCastelosEP}`],
+         ['yt',`${LINKS.ytQueimado}`]],
+  yt:['6XhsfavlHoM']},
+ {id:'ep',name:'Castelos de Tijolo — EP completo',type:'release',date:'2026-06-30',rel:'30/06/2026',
+  cover:BLOB+'/tracks/cover/1_2.png',pr:PR+'ep-castelos.jpg',badge:'ep',
+  links:[['sc',`${LINKS.scCastelosEP}`],
+         ['yt',`${LINKS.ytCastelosEP}`]],
+  yt:['xHRpJHqKH0g'],
+  /* link de cada faixa = vídeo do set completo + minutagem (canal principal) */
+  list:[['00:00','Um tijolo pra bater no meu marido','Kryartura','xHRpJHqKH0g'],
+        ['02:28','Castelos de Tijolo','Danny Bond','xHRpJHqKH0g?t=148'],
+        ['05:38','Vai chupar ou vai lamber','Kaya Conky','xHRpJHqKH0g?t=338'],
+        ['09:47','Deu hemorragia no c*','LeorioStar, MC Carol','xHRpJHqKH0g?t=587'],
+        ['12:07','Cheiro de tijolo queimado','Cidinho e Doca','xHRpJHqKH0g?t=727']]},
+ {id:'vol1',name:'MÚSICAS PARA BATER LAJE vol. 1 — Álbum completo',type:'release',date:'2026-06-12',rel:'12/06/2026',
+  cover:BLOB+'/tracks/cover/capa-bandcamp.png',pr:PR+'vol1.jpg',badge:'album',
+  links:[['bc',`${LINKS.bcVol1}`],
+         ['sc',`${LINKS.scVol1}`],
+         ['yt',`${LINKS.ytVol1}`]],
+  yt:['ROrZ0NT3Rc0'],
+  /* tracklist completa da descrição oficial do vídeo (canal principal) */
+  list:[['00:00','R.I.P MC Sapato','',''],
+        ['00:12','Se Ela Dança Eu Danço','','ROrZ0NT3Rc0?t=12'],
+        ['03:35','A Tijolinha tá de Quatro Mola','','ROrZ0NT3Rc0?t=215'],
+        ['06:39','Até na transa você não larga o Tijolo','','ROrZ0NT3Rc0?t=399'],
+        ['09:52','Calma Dona Tromba','','ROrZ0NT3Rc0?t=592'],
+        ['12:16','Comer Tijolo','','ROrZ0NT3Rc0?t=736'],
+        ['15:46','Vai tentar comigo tem certeza?','','ROrZ0NT3Rc0?t=946'],
+        ['19:16','Gente voltou do nada o áudio do meu celular','','ROrZ0NT3Rc0?t=1156'],
+        ['19:24','Música pra bate uma Laje','','ROrZ0NT3Rc0?t=1164'],
+        ['22:16','Quero ar condicionado','','ROrZ0NT3Rc0?t=1336'],
+        ['25:13','Easter Egg do Marcelinho','LeorioStar','ROrZ0NT3Rc0?t=1513'],
+        ['26:49','Uma vaga lembrança do Brabinha Boy','LeorioStar','ROrZ0NT3Rc0?t=1609']]},
+];
+
+const GALLERY=[
+ {t:'img',capKey:'a',
+  full:BLOB+'/collection/18028/gallery/foto-com-tijolos-1788962790704-e59d7f08-3618-4784-858e-ab1fb87f257c.png',
+  thumb:BLOB+'/collection/18028/gallery/thumbnails/foto-com-tijolos-thumb-1788962790925-de8c1418-3a67-45a6-a934-6c9e977365a9.png',prfull:PR+'foto1.jpg',
+  name:'foto-com-tijolos.png'},
+ {t:'img',capKey:'a',
+  full:BLOB+'/collection/18028/gallery/comendo-tijolo-1788962790706-cc822fd4-9b0e-46a8-8266-2b724156f8a6.png',
+  thumb:BLOB+'/collection/18028/gallery/thumbnails/comendo-tijolo-thumb-1788962790879-99fd8311-960c-4a71-b899-af676e443877.png',prfull:PR+'foto2.jpg',
+  name:'comendo-tijolo.png'},
+ {t:'vid',capKey:'t',
+  src:BLOB+'/collection/18029/gallery/tocando-mindclub-2-1788963438037-e95c45fb-8fe9-42ee-9a52-5055a4365bd2.mp4',
+  thumb:BLOB+'/collection/18029/gallery/thumbnails/tocando-mindclub-2-thumbnail-horizontal-thumb-1788963439965-a985420d-c148-4247-878e-ea02b604e104.jpg',
+  name:'tocando-mindclub-2.mp4'},
+ {t:'vid',capKey:'t',
+  src:BLOB+'/collection/18029/gallery/tocando-mindclub-3-1788963458488-a879fbc2-fe6e-4d3e-b337-eb27e7df6fc6.mp4',
+  thumb:BLOB+'/collection/18029/gallery/thumbnails/tocando-mindclub-3-thumbnail-horizontal-thumb-1788963460201-3064d75c-d285-49ae-ae30-730769945ee3.jpg',
+  name:'tocando-mindclub-3.mp4'},
+ {t:'vid',capKey:'t',
+  src:BLOB+'/collection/18029/gallery/tocando-mindclub-4-1788963478691-d3365edc-0aaa-49a9-989a-d60e5ea2f3fd.mp4',
+  thumb:BLOB+'/collection/18029/gallery/thumbnails/tocando-mindclub-4-thumbnail-horizontal-thumb-1788963480173-ad43426f-6faa-4aab-a9a3-6aec1f680a06.jpg',
+  name:'tocando-mindclub-4.mp4'},
+ {t:'vid',capKey:'t',
+  src:BLOB+'/collection/18029/gallery/video-tocando-mindclub-1-1788963496902-1924a49d-d97e-4d04-a7df-440eedbaf789.mp4',
+  thumb:BLOB+'/collection/18029/gallery/thumbnails/video-tocando-mindclub-1-thumbnail-horizontal-thumb-1788963498758-7417bfef-a5fa-41dc-a840-17f852e39db9.jpg',
+  name:'video-tocando-mindclub-1.mp4'},
+];
+
+/* Snapshot de fallback (capturado em 09/09/2026) — exibido INSTANTANEAMENTE */
+const FALLBACK_VIEWS={'xHRpJHqKH0g':24703,'ROrZ0NT3Rc0':33185,'GOFjH84Lbpk':9092,'EmDmKSxSqjI':23845,'dh_-OmmgWis':3034,
+ '-kxjeTsndZA':6,'6XhsfavlHoM':6,'L_D9gB8PLe4':6,'QT6zsYZOi64':9,'qPphPOKrvcM':18,'IpTOmk5sZH4':364};
+let FALLBACK_SUBS=2320;
+/* snapshot de rede sociais (capturado em 09/09/2026) — exibido instantaneamente */
+const FALLBACK_SC={followers:223};
+/* gêneros musicais (exibidos como chips coloridos na coluna à direita da bio) */
+const GENRES=['Baile Funk (EDM)','Funk Carioca','Breakcore','Hard Techno','Techno (Raw/Deep/Hypnotic)','Gabber','Uptempo','Hardstyle','Euphoric Hardstyle','Latincore','Dubstep','Deep Dubstep/Grime','Breaks/Breakbeat/UK Bass','Drum & Bass','Experimental Electronic','Hyperpop','Eurodance','Pop','Trap/Future Bass','Outros (Eletrônica)'];
+
+/* Snapshot dos vídeos do canal principal (RSS oficial, capturado em 09/09/2026).
+   Exibido instantaneamente; o refreshSocial() substitui pelos dados ao vivo. */
+const SNAPSHOT_VIDEOS=[
+ {id:'dh_-OmmgWis',title:'Tjola Demole Barraco - Boladona (prod. DJ Tijolo)',pub:'2026-08-20T22:00:06+00:00'},
+ {id:'GOFjH84Lbpk',title:'DJ TIJOLO - TREMENDO TIJOLÃO',pub:'2026-08-03T20:00:06+00:00'},
+ {id:'EmDmKSxSqjI',title:'DJ Tijolo - CONSTRUÇÃO BREAKCORE (feat. Tijolo Buarque) | ESPECIAL DE 1K DE INSCRITOS',pub:'2026-07-17T00:30:06+00:00'},
+ {id:'xHRpJHqKH0g',title:'DJ TIJOLO - Castelos de Tijolo (EP) (2026)',pub:'2026-06-30T23:00:06+00:00'},
+ {id:'ROrZ0NT3Rc0',title:'DJ Tijolo - MÚSICAS PARA BATER LAJE vol.1',pub:'2026-06-12T20:21:06+00:00'}
+];
+let liveViews=null; // preenchido pelo refreshSocial()
+let YT_VIDEOS=SNAPSHOT_VIDEOS; // vídeos do canal (RSS ao vivo; snapshot como base)
+let galFilter='all', trkView='grid', vidView='grid', galView='grid';
+
+/* =====================================================================
+   I18N — pt/en/es/de/fr/zh
+   ===================================================================== */
+const LOCALES={pt:'pt-BR',en:'en',es:'es',de:'de',fr:'fr',zh:'zh-CN'};
+let lang='pt';
+try{const s=localStorage.getItem(LS_PREFIX+'lang');if(s&&LOCALES[s])lang=s;}catch(e){}
+
+const T_SETS={
+ pt:{
+  navSobre:'Sobre',navMusicas:'Músicas',navVideos:'Vídeos',navGaleria:'Galeria',navContato:'Contato',navPdf:'Baixar PDF',
+  kicker:'Presskit Oficial · 2026',role:'DJ & prod.',chipLive:'Festas, clubs & eventos',
+  stSubs:'Inscritos no YouTube',stViews:'Views no canal',stVids:'Vídeos publicados',hDestaque:'Destaque',navDestaque:'Destaque',hlTitle:'MÚSICAS PARA BATER LAJE vol.1 — assista no YouTube',hlMore:'Ver mais',hlFileNote:'Reprodução embutida indisponível em arquivo local — sirva por HTTP (ex.: GitHub Pages).',mListeners:'Ouvintes mensais no Spotify',scFollowers:'Seguidores no SoundCloud',scPlays:'Faixas no SoundCloud',scTracks:'faixas',
+  stampLive:'Atualizado ao vivo às',stampOff:'Snapshot estático de 09/09/2026',
+  hSobre:'Sobre',hMusicas:'Músicas & Sets',hVideos:'Vídeos',hGaleria:'Galeria',hContato:'Contato & Booking',
+  genresLabel:'Gêneros:',
+  fAll:'Todas',fTracks:'Faixas',fReleases:'Livesets & Álbuns',
+  sortViews:'Mais relevantes (views)',sortDate:'Data de lançamento',sortName:'Ordem alfabética',dirTitle:'Inverter ordem',
+  badgeTrack:'Faixa',badgeEp:'EP',badgeAlbum:'Álbum',views:'views',copyLinks:'Copiar links',setOrder:'Ordem do set:',seeLinks:'Ver links',
+  s1:'32 mil+',s1k:'views — MÚSICAS PARA BATER LAJE vol. 1 (YouTube)',s2:'24 mil+',s2k:'views — EP Castelos de Tijolo (YouTube)',
+  s3:'30 mil+',s3k:'média de views por mixtape lançada',s4:'20',s4k:'gêneros no espectro: do funk ao gabber',
+  facEp:'Castelos de Tijolo — EP completo',facAlbum:'MÚSICAS PARA BATER LAJE vol.1 — Álbum completo',
+  vidsNote:'Clique para assistir no YouTube (abre em nova aba).',
+  srcNote:'Fontes: dados técnicos do press kit oficial (MavelPoint EPK) + links de YouTube cruzados manualmente com os canais oficiais do artista.',
+  viewsLive:'Visualizações por faixa atualizadas ao abrir a página (RSS oficial do YouTube).',
+  viewsOff:'(snapshot offline de 09/09/2026 — conecte-se para valores ao vivo)',
+  galNote:'Passe o mouse (ou toque) para baixar. Fotos e vídeos hospedados no CDN oficial do press kit — clique para ampliar.',
+  gAll:'Todas',gPhotos:'Fotos',gVideos:'Vídeos',gMore:'Mostrar mais',gLess:'Mostrar menos',
+  gLoading:'Carregando…',gLoadErr:'Não foi possível carregar o vídeo.',gOpenTab:'Abrir em nova aba',
+  toTop:'Voltar ao topo',menu:'Menu',
+  capA:'Ao Vivo na @__mindclub__',capT:'Tocando na @__mindclub__',
+  cHead:'Vamos fechar uma data?',cBody:'{artist} está disponível para festas, clubs, festivais e eventos — sets de Baile Funk experimental ao Gabber, com energia de 90 a 210 BPM.',
+  copyMail:'Copiar e-mail',sendProp:'Enviar proposta',bioCopy:'Copiar bio',tBio:'Bio copiada!',
+  abT:'Sobre este presskit',
+  abB:'Documento independente — não precisa de banco de dados nem servidor. Fotos, capas e vídeos são carregados direto do CDN oficial do press kit do artista, e as estatísticas do YouTube são atualizadas ao abrir a página.',
+  abPdfT:'PDF para impressão:',abPdfB:'use o botão "Baixar PDF" ou Imprimir → Salvar como PDF (no idioma exibido).',
+  fRights:'Todos os direitos reservados',fGen:'Presskit gerado a partir do EPK oficial (mavelpoint.com/artist/dj-tijolo) · Setembro/2026',
+  docTitle:'{artist} — Presskit Oficial',
+  tMail:'E-mail copiado!',tLinks:'Links copiados!',tDl:'Baixando',tTab:'Abrindo em nova aba — use "salvar como"',
+  srchPh:'Buscar nome, BPM, escala, duração…',noRes:'Nada encontrado.',
+  dvT:'Ativar modo dev?',dvP:'O painel mostra o log técnico de rede e dados da página (para diagnóstico). Feche com Alt+Shift+D quando quiser.',dvYes:'Ativar',dvOff:'Desativar',cancel:'Cancelar',
+  enFold:'Ver bio original em inglês',download:'Baixar arquivo',
+  bioLead:'<b>{artist}</b> faz produção e DJ underground, impulsionando a nova onda da música eletrônica e do bass experimental brasileiro.',
+  bio:['<p>Fundindo <b>Baile Funk de BPM alto</b> com Breakcore, Hardcore, Techno e Drum &amp; Bass, {artist} conquistou um espaço único dentro do movimento <b>cybercria</b>, movido pela internet.</p>',
+       '<p>Ganhando força em plataformas como YouTube e SoundCloud, o estilo marcante do artista gira em torno de mixtapes de alta octanagem e projetos virais. Lançamentos icônicos como <b>MÚSICAS PARA BATER LAJE vol. 1</b> acumularam dezenas de milhares de plays de forma orgânica (média de <b>30 mil+ views por mixtape</b>), mostrando um sampling criativo que conecta as paisagens sonoras tradicionais da favela a gêneros de club hipermodernos.</p>',
+       '<p>O EP <b>Castelos de Tijolo</b> (2026) consolidou ainda mais a pegada do {artist} na cena, somando <b>mais de 24 mil views</b> no lançamento. O EP se destaca pelas colaborações de alto nível com nomes influentes do pop brasileiro e do ecossistema underground da música web, incluindo <b>MC Carol, Danny Bond, Kaya Conky e Cidinho &amp; Doca</b>. Seja lançando bangers pesadíssimos ou curando sets sem freio, {artist} representa o futuro acelerado da música eletrônica moderna no Brasil.</p>']
+ },
+ en:{
+  navSobre:'About',navMusicas:'Music',navVideos:'Videos',navGaleria:'Gallery',navContato:'Contact',navPdf:'Download PDF',
+  kicker:'Official Presskit · 2026',role:'DJ & prod.',chipLive:'Parties, clubs & events',
+  stSubs:'YouTube subscribers',stViews:'Channel views',stVids:'Published videos',hDestaque:'Highlight',navDestaque:'Highlight',hlTitle:'MÚSICAS PARA BATER LAJE vol.1 — watch on YouTube',hlMore:'See more',hlFileNote:'Embedded playback unavailable on a local file — serve over HTTP (e.g. GitHub Pages).',mListeners:'Monthly listeners on Spotify',scFollowers:'SoundCloud followers',scPlays:'SoundCloud tracks',scTracks:'tracks',
+  stampLive:'Fetched live at',stampOff:'Static snapshot from 09/09/2026',
+  hSobre:'About',hMusicas:'Music & Sets',hVideos:'Videos',hGaleria:'Gallery',hContato:'Contact & Booking',
+  genresLabel:'Genres:',
+  fAll:'All',fTracks:'Tracks',fReleases:'Livesets & Albums',
+  sortViews:'Most relevant (views)',sortDate:'Release date',sortName:'Alphabetical',dirTitle:'Reverse order',
+  badgeTrack:'Track',badgeEp:'EP',badgeAlbum:'Album',views:'views',copyLinks:'Copy links',setOrder:'Set order:',seeLinks:'View links',
+  s1:'32K+',s1k:'views — MÚSICAS PARA BATER LAJE vol. 1 (YouTube)',s2:'24K+',s2k:'views — Castelos de Tijolo EP (YouTube)',
+  s3:'30K+',s3k:'average views per mixtape release',s4:'20',s4k:'genres spanning funk to gabber',
+  facEp:'Castelos de Tijolo — Full EP',facAlbum:'MÚSICAS PARA BATER LAJE vol.1 — Full album',
+  vidsNote:'Click to watch on YouTube (opens in a new tab).',
+  srcNote:'Sources: technical data from the official press kit (MavelPoint EPK) + YouTube links cross-checked manually with the artist’s official channels.',
+  viewsLive:'Per-track view counts refresh when the page opens (official YouTube RSS).',
+  viewsOff:'(offline snapshot from 09/09/2026 — connect to the internet for live values)',
+  galNote:'Hover (or tap) to download. Photos and videos hosted on the artist’s official press kit CDN — click to enlarge.',
+  gAll:'All',gPhotos:'Photos',gVideos:'Videos',gMore:'Show more',gLess:'Show less',
+  gLoading:'Loading…',gLoadErr:'Could not load the video.',gOpenTab:'Open in a new tab',
+  toTop:'Back to top',menu:'Menu',
+  capA:'Live at @__mindclub__',capT:'Playing at @__mindclub__',
+  cHead:'Shall we book a date?',cBody:'{artist} is available for parties, clubs, festivals and events — sets ranging from experimental Baile Funk to Gabber, with energy from 90 to 210 BPM.',
+  copyMail:'Copy e-mail',sendProp:'Send proposal',bioCopy:'Copy bio',tBio:'Bio copied!',
+  abT:'About this presskit',
+  abB:'A standalone document — no database or server needed. Photos, covers and videos load directly from the artist’s official press kit CDN, and YouTube stats refresh when the page opens.',
+  abPdfT:'Printable PDF:',abPdfB:'use the "Download PDF" button or Print → Save as PDF (in the displayed language).',
+  fRights:'All rights reserved',fGen:'Presskit generated from the official EPK (mavelpoint.com/artist/dj-tijolo) · September/2026',
+  docTitle:'{artist} — Official Presskit',
+  tMail:'E-mail copied!',tLinks:'Links copied!',tDl:'Downloading',tTab:'Opening in a new tab — use "save as"',
+  srchPh:'Search name, BPM, key, duration…',noRes:'Nothing found.',
+  dvT:'Enable dev mode?',dvP:'The panel shows the page\'s technical network and data log (for diagnostics). Close it with Alt+Shift+D anytime.',dvYes:'Enable',dvOff:'Disable',cancel:'Cancel',
+  enFold:'',download:'Download file',
+  bioLead:'<b>{artist}</b> is an underground producer and DJ driving the new wave of experimental Brazilian bass and electronic music.',
+  bio:['<p>Fusing high-BPM Baile Funk with Breakcore, Hardcore, Techno, and Drum &amp; Bass, {artist} has carved out a unique space within the internet-driven cybercria movement.</p>',
+       '<p>Gaining strong traction across web platforms like YouTube and SoundCloud, {artist}\'s signature style centers on high-octane mixtapes and viral projects. Iconic releases like <b>MÚSICAS PARA BATER LAJE vol. 1</b> have garnered tens of thousands of plays organically (averaging over <b>30K+ views per mixtape release</b>), showcasing creative sampling that bridges traditional favela soundscapes with hyper-modern club genres.</p>',
+       '<p>The 2026 EP <b>Castelos de Tijolo</b> further solidified {artist}\'s footprint in the scene, amassing <b>over 24,000 views</b> upon release. The EP stands out for high-profile collaborations with influential names across the Brazilian pop and underground web music ecosystem, including <b>MC Carol, Danny Bond, Kaya Conky, and Cidinho &amp; Doca</b>. Whether releasing brick-heavy bangers or curating unhinged sets, {artist} represents the fast-paced future of modern electronic music in Brazil.</p>']
+ },
+ es:{
+  navSobre:'Sobre',navMusicas:'Música',navVideos:'Vídeos',navGaleria:'Galería',navContato:'Contacto',navPdf:'Descargar PDF',
+  kicker:'Presskit Oficial · 2026',role:'DJ & prod.',chipLive:'Fiestas, clubs y eventos',
+  stSubs:'Suscriptores en YouTube',stViews:'Vistas del canal',stVids:'Vídeos publicados',hDestaque:'Destacado',navDestaque:'Destacado',hlTitle:'MÚSICAS PARA BATER LAJE vol.1 — mira en YouTube',hlMore:'Ver más',hlFileNote:'Reproducción incrustada no disponible en archivo local — sírvelo por HTTP (ej. GitHub Pages).',mListeners:'Oyentes mensuales en Spotify',scFollowers:'Seguidores en SoundCloud',scPlays:'Pistas en SoundCloud',scTracks:'pistas',
+  stampLive:'Actualizado en vivo a las',stampOff:'Captura estática del 09/09/2026',
+  hSobre:'Sobre',hMusicas:'Música & Sets',hVideos:'Vídeos',hGaleria:'Galería',hContato:'Contacto & Booking',
+  genresLabel:'Géneros:',
+  fAll:'Todos',fTracks:'Temas',fReleases:'Livesets & Álbumes',
+  sortViews:'Más relevantes (vistas)',sortDate:'Fecha de lanzamiento',sortName:'Orden alfabético',dirTitle:'Invertir orden',
+  badgeTrack:'Tema',badgeEp:'EP',badgeAlbum:'Álbum',views:'vistas',copyLinks:'Copiar enlaces',setOrder:'Orden del set:',seeLinks:'Ver enlaces',
+  s1:'32 mil+',s1k:'vistas — MÚSICAS PARA BATER LAJE vol. 1 (YouTube)',s2:'24 mil+',s2k:'vistas — EP Castelos de Tijolo (YouTube)',
+  s3:'30 mil+',s3k:'promedio de vistas por mixtape lanzada',s4:'20',s4k:'géneros que abarcan del funk al gabber',
+  facEp:'Castelos de Tijolo — EP completo',facAlbum:'MÚSICAS PARA BATER LAJE vol.1 — Álbum completo',
+  vidsNote:'Haz clic para ver en YouTube (se abre en una pestaña nueva).',
+  srcNote:'Fuentes: datos técnicos del press kit oficial (MavelPoint EPK) + enlaces de YouTube cruzados manualmente con los canales oficiales del artista.',
+  viewsLive:'Las vistas por tema se actualizan al abrir la página (RSS oficial de YouTube).',
+  viewsOff:'(captura sin conexión del 09/09/2026 — conéctate para valores en vivo)',
+  galNote:'Pasa el ratón (o toca) para descargar. Fotos y vídeos alojados en el CDN oficial del press kit — clic para ampliar.',
+  gAll:'Todas',gPhotos:'Fotos',gVideos:'Vídeos',gMore:'Mostrar más',gLess:'Mostrar menos',
+  gLoading:'Cargando…',gLoadErr:'No se pudo cargar el vídeo.',gOpenTab:'Abrir en nueva pestaña',
+  toTop:'Volver arriba',menu:'Menú',
+  capA:'En vivo en @__mindclub__',capT:'Tocando en @__mindclub__',
+  cHead:'¿Cerramos una fecha?',cBody:'{artist} está disponible para fiestas, clubs, festivales y eventos — sets que van del Baile Funk experimental al Gabber, con energía de 90 a 210 BPM.',
+  copyMail:'Copiar e-mail',sendProp:'Enviar propuesta',bioCopy:'Copiar bio',tBio:'¡Bio copiada!',
+  abT:'Sobre este presskit',
+  abB:'Documento independiente — no necesita base de datos ni servidor. Fotos, portadas y vídeos se cargan directamente del CDN oficial del press kit del artista, y las estadísticas de YouTube se actualizan al abrir la página.',
+  abPdfT:'PDF para impresión:',abPdfB:'usa el botón "Descargar PDF" o Imprimir → Guardar como PDF (en el idioma mostrado).',
+  fRights:'Todos los derechos reservados',fGen:'Presskit generado a partir del EPK oficial (mavelpoint.com/artist/dj-tijolo) · Septiembre/2026',
+  docTitle:'{artist} — Presskit Oficial',
+  tMail:'¡E-mail copiado!',tLinks:'¡Enlaces copiados!',tDl:'Descargando',tTab:'Abriendo en nueva pestaña — usa "guardar como"',
+  srchPh:'Buscar nombre, BPM, tonalidad, duración…',noRes:'Nada encontrado.',
+  dvT:'¿Activar el modo dev?',dvP:'El panel muestra el registro técnico de red y de datos de la página (para diagnóstico). Ciérralo con Alt+Shift+D cuando quieras.',dvYes:'Activar',dvOff:'Desactivar',cancel:'Cancelar',
+  enFold:'Ver bio original en inglés',download:'Descargar archivo',
+  bioLead:'<b>{artist}</b> hace producción y DJ underground, impulsando la nueva ola del bass experimental y la música electrónica brasileña.',
+  bio:['<p>Fusionando Baile Funk de alto BPM con Breakcore, Hardcore, Techno y Drum &amp; Bass, {artist} ha creado un espacio único dentro del movimiento <b>cybercria</b> impulsado por internet.</p>',
+       '<p>Ganando gran repercusión en plataformas web como YouTube y SoundCloud, el estilo característico de {artist} se centra en mixtapes de alta intensidad y proyectos virales. Lanzamientos icónicos como <b>MÚSICAS PARA BATER LAJE vol. 1</b> han acumulado decenas de miles de reproducciones de forma orgánica (con una media de <b>más de 30K+ vistas por mixtape</b>), mostrando un sampling creativo que une los paisajes sonoros tradicionales de la favela con géneros de club hipermodernos.</p>',
+       '<p>El EP de 2026 <b>Castelos de Tijolo</b> consolidó aún más la presencia de {artist} en la escena, acumulando <b>más de 24.000 vistas</b> en su lanzamiento. El EP destaca por colaboraciones de alto perfil con nombres influyentes del ecosistema brasileño del pop y la música underground web, incluyendo <b>MC Carol, Danny Bond, Kaya Conky y Cidinho &amp; Doca</b>. Ya sea lanzando temas pesados o seleccionando sets desquiciados, {artist} representa el futuro trepidante de la música electrónica moderna en Brasil.</p>']
+ },
+ de:{
+  navSobre:'Über',navMusicas:'Musik',navVideos:'Videos',navGaleria:'Galerie',navContato:'Kontakt',navPdf:'PDF laden',
+  kicker:'Offizielles Presskit · 2026',role:'DJ & prod.',chipLive:'Partys, Clubs & Events',
+  stSubs:'YouTube-Abonnenten',stViews:'Kanal-Aufrufe',stVids:'Veröffentlichte Videos',hDestaque:'Highlight',navDestaque:'Highlight',hlTitle:'MÚSICAS PARA BATER LAJE vol.1 — auf YouTube ansehen',hlMore:'Mehr sehen',hlFileNote:'Eingebettete Wiedergabe bei lokaler Datei nicht verfügbar — über HTTP ausliefern (z. B. GitHub Pages).',mListeners:'Monatliche Hörer auf Spotify',scFollowers:'SoundCloud-Follower',scPlays:'Tracks auf SoundCloud',scTracks:'Tracks',
+  stampLive:'Live abgerufen um',stampOff:'Statischer Snapshot vom 09.09.2026',
+  hSobre:'Über',hMusicas:'Musik & Sets',hVideos:'Videos',hGaleria:'Galerie',hContato:'Kontakt & Booking',
+  genresLabel:'Genres:',
+  fAll:'Alle',fTracks:'Tracks',fReleases:'Livesets & Alben',
+  sortViews:'Relevanteste (Aufrufe)',sortDate:'Veröffentlichungsdatum',sortName:'Alphabetisch',dirTitle:'Reihenfolge umkehren',
+  badgeTrack:'Track',badgeEp:'EP',badgeAlbum:'Album',views:'Aufrufe',copyLinks:'Links kopieren',setOrder:'Set-Reihenfolge:',seeLinks:'Links ansehen',
+  s1:'32 Tsd.+',s1k:'Aufrufe — MÚSICAS PARA BATER LAJE vol. 1 (YouTube)',s2:'24 Tsd.+',s2k:'Aufrufe — Castelos de Tijolo EP (YouTube)',
+  s3:'30 Tsd.+',s3k:'durchschnittliche Aufrufe pro Mixtape-Release',s4:'20',s4k:'Genres von Funk bis Gabber',
+  facEp:'Castelos de Tijolo — komplette EP',facAlbum:'MÚSICAS PARA BATER LAJE vol.1 — komplettes Album',
+  vidsNote:'Klicken, um auf YouTube anzusehen (öffnet in neuem Tab).',
+  srcNote:'Quellen: technische Daten aus dem offiziellen Presskit (MavelPoint EPK) + manuell mit den offiziellen Kanälen des Künstlers abgeglichene YouTube-Links.',
+  viewsLive:'Aufrufe pro Track aktualisieren sich beim Öffnen der Seite (offizieller YouTube-RSS).',
+  viewsOff:'(Offline-Snapshot vom 09.09.2026 — für Live-Werte bitte verbinden)',
+  galNote:'Zum Herunterladen mit der Maus darüberfahren (oder tippen). Fotos und Videos liegen auf dem offiziellen Presskit-CDN des Künstlers — zum Vergrößern klicken.',
+  gAll:'Alle',gPhotos:'Fotos',gVideos:'Videos',gMore:'Mehr anzeigen',gLess:'Weniger anzeigen',
+  gLoading:'Wird geladen…',gLoadErr:'Video konnte nicht geladen werden.',gOpenTab:'In neuem Tab öffnen',
+  toTop:'Nach oben',menu:'Menü',
+  capA:'Live in der @__mindclub__',capT:'Aufgelegt in der @__mindclub__',
+  cHead:'Lassen Sie uns ein Datum festmachen?',cBody:'{artist} ist für Partys, Clubs, Festivals und Events buchbar — Sets von experimentellem Baile Funk bis Gabber, mit Energie von 90 bis 210 BPM.',
+  copyMail:'E-Mail kopieren',sendProp:'Angebot senden',bioCopy:'Bio kopieren',tBio:'Bio kopiert!',
+  abT:'Über dieses Presskit',
+  abB:'Ein eigenständiges Dokument — keine Datenbank, kein Server nötig. Fotos, Cover und Videos werden direkt vom offiziellen Presskit-CDN des Künstlers geladen, die YouTube-Statistiken aktualisieren sich beim Öffnen der Seite.',
+  abPdfT:'PDF zum Drucken:',abPdfB:'über die Schaltfläche „PDF laden“ oder Drucken → Als PDF speichern (in der angezeigten Sprache).',
+  fRights:'Alle Rechte vorbehalten',fGen:'Presskit erstellt aus dem offiziellen EPK (mavelpoint.com/artist/dj-tijolo) · September/2026',
+  docTitle:'{artist} — Offizielles Presskit',
+  tMail:'E-Mail kopiert!',tLinks:'Links kopiert!',tDl:'Lade herunter',tTab:'Wird in neuem Tab geöffnet — bitte „speichern unter“',
+  srchPh:'Name, BPM, Tonart, Länge suchen…',noRes:'Nichts gefunden.',
+  dvT:'Dev-Modus aktivieren?',dvP:'Das Panel zeigt das technische Netzwerk- und Datenprotokoll der Seite (zur Diagnose). Jederzeit mit Alt+Shift+D schließen.',dvYes:'Aktivieren',dvOff:'Deaktivieren',cancel:'Abbrechen',
+  enFold:'Original-Bio auf Englisch anzeigen',download:'Datei herunterladen',
+  bioLead:'<b>{artist}</b> macht Underground-Produktion und DJing und treibt die neue Welle experimenteller brasilianischer Bass- und elektronischer Musik voran.',
+  bio:['<p>Durch die Verbindung von High-BPM-Baile Funk mit Breakcore, Hardcore, Techno und Drum &amp; Bass hat sich {artist} einen einzigartigen Platz innerhalb der internetgetriebenen <b>Cybercria</b>-Bewegung geschaffen.</p>',
+       '<p>Der charakteristische Stil von {artist} gewinnt auf Webplattformen wie YouTube und SoundCloud stark an Bedeutung und konzentriert sich auf energiegeladene Mixtapes und virale Projekte. Ikonische Veröffentlichungen wie <b>MÚSICAS PARA BATER LAJE vol. 1</b> haben organisch zehntausende Plays erhalten (durchschnittlich über <b>30.000+ Aufrufe pro Mixtape-Release</b>) und zeigen kreatives Sampling, das traditionelle Favela-Klanglandschaften mit hypermodernen Club-Genres verbindet.</p>',
+       '<p>Die EP <b>Castelos de Tijolo</b> von 2026 festigte {artist}s Einfluss in der Szene weiter und sammelte bei der Veröffentlichung <b>über 24.000 Aufrufe</b>. Die EP zeichnet sich durch hochkarätige Kollaborationen mit einflussreichen Namen aus dem brasilianischen Pop- und Underground-Web-Ökosystem aus, darunter <b>MC Carol, Danny Bond, Kaya Conky und Cidinho &amp; Doca</b>. Ob brick-lastige Banger oder verrückte Sets — {artist} repräsentiert die schnelle Zukunft der modernen elektronischen Musik in Brasilien.</p>']
+ },
+ fr:{
+  navSobre:'À propos',navMusicas:'Musique',navVideos:'Vidéos',navGaleria:'Galerie',navContato:'Contact',navPdf:'Télécharger le PDF',
+  kicker:'Presskit Officiel · 2026',role:'DJ & prod.',chipLive:'Soirées, clubs & événements',
+  stSubs:'Abonnés YouTube',stViews:'Vues de la chaîne',stVids:'Vidéos publiées',hDestaque:'À la une',navDestaque:'À la une',hlTitle:'MÚSICAS PARA BATER LAJE vol.1 — regarder sur YouTube',hlMore:'Voir plus',hlFileNote:'Lecture intégrée indisponible en fichier local — servez via HTTP (ex. GitHub Pages).',mListeners:'Auditeurs mensuels sur Spotify',scFollowers:'Abonnés SoundCloud',scPlays:'Titres sur SoundCloud',scTracks:'titres',
+  stampLive:'Récupéré en direct à',stampOff:'Capture statique du 09/09/2026',
+  hSobre:'À propos',hMusicas:'Musique & Sets',hVideos:'Vidéos',hGaleria:'Galerie',hContato:'Contact & Booking',
+  genresLabel:'Genres :',
+  fAll:'Tous',fTracks:'Titres',fReleases:'Livesets & Albums',
+  sortViews:'Pertinence (vues)',sortDate:'Date de sortie',sortName:'Ordre alphabétique',dirTitle:'Inverser l\'ordre',
+  badgeTrack:'Titre',badgeEp:'EP',badgeAlbum:'Album',views:'vues',copyLinks:'Copier les liens',setOrder:'Ordre du set :',seeLinks:'Voir les liens',
+  s1:'32 k+',s1k:'vues — MÚSICAS PARA BATER LAJE vol. 1 (YouTube)',s2:'24 k+',s2k:'vues — EP Castelos de Tijolo (YouTube)',
+  s3:'30 k+',s3k:'moyenne de vues par mixtape',s4:'20',s4k:'genres, du funk au gabber',
+  facEp:'Castelos de Tijolo — EP complet',facAlbum:'MÚSICAS PARA BATER LAJE vol.1 — Album complet',
+  vidsNote:'Cliquez pour regarder sur YouTube (ouvre un nouvel onglet).',
+  srcNote:'Sources : données techniques du press kit officiel (MavelPoint EPK) + liens YouTube recoupés manuellement avec les chaînes officielles de l\'artiste.',
+  viewsLive:'Les vues par titre se rafraîchissent à l\'ouverture de la page (RSS officiel YouTube).',
+  viewsOff:'(capture hors ligne du 09/09/2026 — connectez-vous pour les valeurs en direct)',
+  galNote:'Survolez (ou touchez) pour télécharger. Photos et vidéos hébergées sur le CDN officiel du press kit — cliquez pour agrandir.',
+  gAll:'Tout',gPhotos:'Photos',gVideos:'Vidéos',gMore:'Voir plus',gLess:'Voir moins',
+  gLoading:'Chargement…',gLoadErr:'Impossible de charger la vidéo.',gOpenTab:'Ouvrir dans un nouvel onglet',
+  toTop:'Haut de page',menu:'Menu',
+  capA:'En direct à @__mindclub__',capT:'En train de mixer à @__mindclub__',
+  cHead:'On réserve une date ?',cBody:'{artist} est disponible pour soirées, clubs, festivals et événements — des sets allant du Baile Funk expérimental au Gabber, avec une énergie de 90 à 210 BPM.',
+  copyMail:'Copier l\'e-mail',sendProp:'Envoyer une proposition',bioCopy:'Copier la bio',tBio:'Bio copiée !',
+  abT:'À propos de ce presskit',
+  abB:'Document autonome — sans base de données ni serveur. Les photos, pochettes et vidéos sont chargées directement depuis le CDN officiel du press kit de l\'artiste, et les statistiques YouTube se rafraîchissent à l\'ouverture de la page.',
+  abPdfT:'PDF imprimable :',abPdfB:'utilisez le bouton « Télécharger le PDF » ou Imprimer → Enregistrer en PDF (dans la langue affichée).',
+  fRights:'Tous droits réservés',fGen:'Presskit généré depuis l\'EPK officiel (mavelpoint.com/artist/dj-tijolo) · Septembre/2026',
+  docTitle:'{artist} — Presskit Officiel',
+  tMail:'E-mail copié !',tLinks:'Liens copiés !',tDl:'Téléchargement',tTab:'Ouverture dans un nouvel onglet — utilisez « enregistrer sous »',
+  srchPh:'Rechercher nom, BPM, tonalité, durée…',noRes:'Aucun résultat.',
+  dvT:'Activer le mode dev ?',dvP:'Le panneau affiche le journal technique réseau et données de la page (pour le diagnostic). Fermez-le avec Alt+Shift+D à tout moment.',dvYes:'Activer',dvOff:'Désactiver',cancel:'Annuler',
+  enFold:'Voir la bio originale en anglais',download:'Télécharger le fichier',
+  bioLead:'<b>{artist}</b> fait de la production et du DJing underground et pilote la nouvelle vague de la bass expérimentale brésilienne et de la musique électronique.',
+  bio:['<p>En fusionnant le Baile Funk à haut BPM avec le Breakcore, la Hardcore, la Techno et la Drum &amp; Bass, {artist} a taillé une place unique au sein du mouvement <b>cybercria</b> porté par Internet.</p>',
+       '<p>Fort d\'une forte croissance sur des plateformes web comme YouTube et SoundCloud, le style signature de {artist} repose sur des mixtapes à haute intensité et des projets viraux. Des sorties emblématiques comme <b>MÚSICAS PARA BATER LAJE vol. 1</b> ont obtenu des dizaines de milliers d\'écoutes de manière organique (avec une moyenne de <b>plus de 30 000 vues par mixtape</b>), mettant en avant un sampling créatif qui relie les paysages sonores traditionnels des favelas aux genres de club hyper-modernes.</p>',
+       '<p>L\'EP 2026 <b>Castelos de Tijolo</b> a encore renforcé la présence de {artist} sur la scène, accumulant <b>plus de 24 000 vues</b> à sa sortie. L\'EP se distingue par ses collaborations de haut niveau avec des noms influents de l\'écosystème brésilien de la pop et de la musique web underground, dont <b>MC Carol, Danny Bond, Kaya Conky et Cidinho &amp; Doca</b>. Qu\'il s\'agisse de sortir des bangers lourds ou de sélectionner des sets déjantés, {artist} représente l\'avenir effréné de la musique électronique moderne au Brésil.</p>']
+ },
+ zh:{
+  navSobre:'关于',navMusicas:'音乐',navVideos:'视频',navGaleria:'图库',navContato:'联系',navPdf:'下载 PDF',
+  kicker:'官方新闻资料包 · 2026',role:'DJ & 制作',chipLive:'派对、俱乐部与活动',
+  stSubs:'YouTube 订阅者',stViews:'频道播放量',stVids:'已发布视频',hDestaque:'精选',navDestaque:'精选',hlTitle:'MÚSICAS PARA BATER LAJE vol.1 — 在 YouTube 观看',hlMore:'查看更多',hlFileNote:'本地文件无法内嵌播放 — 请通过 HTTP 提供（例如 GitHub Pages）。',mListeners:'Spotify 月度听众',scFollowers:'SoundCloud 粉丝',scPlays:'SoundCloud 曲目',scTracks:'首曲目',
+  stampLive:'于以下时间实时获取',stampOff:'2026/09/09 静态快照',
+  hSobre:'关于',hMusicas:'音乐与 Sets',hVideos:'视频',hGaleria:'图库',hContato:'联系与预订',
+  genresLabel:'曲风：',
+  fAll:'全部',fTracks:'单曲',fReleases:'Liveset 与专辑',
+  sortViews:'最受欢迎（播放量）',sortDate:'发行日期',sortName:'字母顺序',dirTitle:'反向排序',
+  badgeTrack:'单曲',badgeEp:'EP',badgeAlbum:'专辑',views:'次播放',copyLinks:'复制链接',setOrder:'Set 顺序：',seeLinks:'查看链接',
+  s1:'3.2万+',s1k:'播放 — MÚSICAS PARA BATER LAJE vol. 1（YouTube）',s2:'2.4万+',s2k:'播放 — Castelos de Tijolo EP（YouTube）',
+  s3:'3万+',s3k:'每张混音带的平均播放量',s4:'20',s4k:'种曲风，从 Funk 到 Gabber',
+  facEp:'Castelos de Tijolo — 完整 EP',facAlbum:'MÚSICAS PARA BATER LAJE vol.1 — 完整专辑',
+  vidsNote:'点击在 YouTube 上观看（在新标签页打开）。',
+  srcNote:'数据来源：官方新闻资料包（MavelPoint EPK）的技术数据 + 人工与艺术家官方频道核对的 YouTube 链接。',
+  viewsLive:'每首曲目的播放量会在页面打开时刷新（YouTube 官方 RSS）。',
+  viewsOff:'（2026/09/09 离线快照 — 联网后显示实时数据）',
+  galNote:'悬停（或点按）即可下载。照片与视频托管在艺术家官方新闻资料包 CDN — 点击放大。',
+  gAll:'全部',gPhotos:'照片',gVideos:'视频',gMore:'显示更多',gLess:'收起',
+  gLoading:'加载中…',gLoadErr:'视频加载失败。',gOpenTab:'在新标签页打开',
+  toTop:'回到顶部',menu:'菜单',
+  capA:'在 @__mindclub__ 现场演出',capT:'在 @__mindclub__ 打碟',
+  cHead:'定个档期吗？',cBody:'{artist} 可承接派对、俱乐部、音乐节与各类活动 — Set 风格从实验性 Baile Funk 到 Gabber，能量覆盖 90 至 210 BPM。',
+  copyMail:'复制邮箱',sendProp:'发送合作意向',bioCopy:'复制简介',tBio:'简介已复制！',
+  abT:'关于此新闻资料包',
+  abB:'独立文档 — 无需数据库或服务器。照片、封面与视频直接从艺术家官方新闻资料包 CDN 加载，YouTube 数据会在页面打开时刷新。',
+  abPdfT:'打印版 PDF：',abPdfB:'使用“下载 PDF”按钮或 打印 → 另存为 PDF（以当前显示的语言）。',
+  fRights:'版权所有',fGen:'新闻资料包基于官方 EPK 生成（mavelpoint.com/artist/dj-tijolo）· 2026年9月',
+  docTitle:'{artist} — 官方新闻资料包',
+  tMail:'邮箱已复制！',tLinks:'链接已复制！',tDl:'正在下载',tTab:'正在新标签页打开 — 请使用“另存为”',
+  srchPh:'搜索名称、BPM、调性、时长…',noRes:'未找到结果。',
+  dvT:'启用开发者模式？',dvP:'面板显示页面的网络与数据技术日志（用于诊断）。随时可用 Alt+Shift+D 关闭。',dvYes:'启用',dvOff:'停用',cancel:'取消',
+  enFold:'查看英文原版简介',download:'下载文件',
+  bioLead:'<b>{artist}</b> 来自巴西地下电子音乐界，从事制作与 DJ，正在推动巴西实验贝斯与电子音乐的新浪潮。',
+  bio:['<p>将高 BPM 的 Baile Funk 与 Breakcore、Hardcore、Techno 和 Drum &amp; Bass 相融合，在这个由互联网驱动的 <b>cybercria</b> 运动中开辟了独一无二的阵地。</p>',
+       '<p>在 YouTube 和 SoundCloud 等网络平台上人气飙升的 {artist}，以其高能混音带和病毒式传播的项目而闻名。诸如 <b>MÚSICAS PARA BATER LAJE vol. 1</b> 等标志性作品获得了数万次自然播放（每张混音带平均超过 <b>3 万次播放</b>），展现出别具匠心的采样艺术，将传统的贫民窟音景与超现代的俱乐部音乐类型紧密相连。</p>',
+       '<p>2026 年发行的 EP <b>Castelos de Tijolo</b> 进一步巩固了 {artist} 在业界的影响力，发行即斩获 <b>超过 2.4 万次播放</b>。这张 EP 的亮点在于与巴西流行乐及地下网络音乐生态中极具影响力的人物合作，其中包括 <b>MC Carol、Danny Bond、Kaya Conky 以及 Cidinho &amp; Doca</b>。无论是推出重型炸弹级的作品，还是策划疯狂失控的 Set，{artist} 都代表着巴西现代电子音乐风驰电掣的未来。</p>']
+ }
+};
+/* T() resolve {artist} → ARTIST em todo texto i18n (M11/D3) */
+const T=k=>{const v=(T_SETS[lang]&&T_SETS[lang][k])||T_SETS.pt[k]||'';return typeof v==='string'?v.replace(/\{artist\}/g,ARTIST):v;};
+
+/* =====================================================================
+   HELPERS
+   ===================================================================== */
+const $=s=>document.querySelector(s);
+function dec1(x){const s=x.toFixed(1).replace(/\.0$/,'');return lang==='en'?s:s.replace('.',',');}
+function fmt(n){
+  if(lang==='zh'){if(n>=1e8)return dec1(n/1e8)+'亿';if(n>=1e4)return dec1(n/1e4)+'万';return String(n);}
+  const suf={pt:['mil','mi'],es:['mil','M'],de:['Tsd.','Mio'],fr:['k','M'],en:['K','M']}[lang]||['mil','mi'];
+  if(n>=1e6)return dec1(n/1e6)+suf[1];
+  if(n>=1e3)return dec1(n/1e3)+suf[0];
+  return String(n);
+}
+const getViews=id=>{const m=Object.assign({},FALLBACK_VIEWS,liveViews||{});return m[id]||0;};
+const trackViews=t=>(t.yt||[]).reduce((a,id)=>a+getViews(id),0);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+/* URL segura para href/src: bloqueia javascript:/vbscript:/data (exceto imagens
+   seguras) e aspas — complementa esc() nos atributos de link e mídia */
+const safeUrl=u=>{
+  u=String(u==null?'':u).trim();
+  if(/^(javascript|vbscript|file):/i.test(u))return '#';
+  if(/^data:/i.test(u)&&!/^data:image\/(png|jpe?g|gif|webp|svg\+xml);/i.test(u))return '#';
+  return esc(u).replace(/'/g,'%27');
+};
+/* Bio/lead/papel aceitam APENAS <b> <i> <u> do CSV (tradução/edição Rica).
+   Qualquer outra tag ou atributo é descartado — <script>, onclick, <svg>,
+   javascript: etc. viram texto inofensivo ou somem. Sem innerHTML cru. */
+const ALLOWED_TAGS=/^(b|i|u)$/i;
+function sanitizeInlineHTML(s){
+  const clean=node=>{
+    let html='';
+    node.childNodes.forEach(ch=>{
+      if(ch.nodeType===3){html+=esc(ch.nodeValue);return;}
+      if(ch.nodeType!==1||!ALLOWED_TAGS.test(ch.tagName))return;
+      const tag=ch.tagName.toLowerCase();
+      html+='<'+tag+'>'+clean(ch)+'</'+tag+'>';
+    });
+    return html;
+  };
+  const doc=new DOMParser().parseFromString(String(s==null?'':s),'text/html');
+  return clean(doc.body);
+}
+/* paginação por seção (colapsado → "Ver Mais" revela mais uma página):
+   músicas 9/4 · vídeos 9/6 · galeria 10/6 (desktop/mobile) */
+const PAGE_N={m:[9,4],v:[9,6],g:[10,6]};
+let pageSeq=0; /* 0 = primeira página; N = páginas extras já reveladas */
+const pageLimit=k=>{const [d,m]=PAGE_N[k];return (window.matchMedia('(max-width:640px)').matches?m:d)*(pageSeq+1);};
+const pageReset=()=>{pageSeq=0;};
+
+const I={
+ cal:'<svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 3v4"/><path d="M16 3v4"/></svg>',
+ gauge:'<svg class="ic" viewBox="0 0 24 24"><path d="M4 16a8 8 0 1 1 16 0"/><path d="M12 16l4.5-5.5"/><path d="M2.5 20h19"/></svg>',
+ note:'<svg class="ic" viewBox="0 0 24 24"><path d="M9 18V5l10-2v11"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="14" r="2"/></svg>',
+ clock:'<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>',
+ user:'<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>',
+ eye:'<svg class="ic" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.5"/></svg>',
+ dl:'<svg class="ic" viewBox="0 0 24 24"><path d="M12 3v13"/><path d="M6 12l6 6 6-6"/><path d="M4 21h16"/></svg>',
+ link:'<svg class="ic" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 1 0-6-6l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 1 0 6 6l1.5-1.5"/></svg>',
+ play:'<svg class="ic fill" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>',
+ chev:'<svg class="ic" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>'
+};
+
+/* Botões de redes — ícone oficial de cada marca + estilo único (menores) */
+const SOC={
+ yt:{n:'YouTube',u:`${LINKS.ytChannel}`,d:'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'},
+ sp:{n:'Spotify',u:`${LINKS.spArtist}`,d:'M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z'},
+ sc:{n:'SoundCloud',u:`${LINKS.scProfile}`,d:'M23.999 14.165c-.052 1.796-1.612 3.169-3.4 3.169h-8.18a.68.68 0 0 1-.675-.683V7.862a.747.747 0 0 1 .452-.724s.75-.513 2.333-.513a5.364 5.364 0 0 1 2.763.755 5.433 5.433 0 0 1 2.57 3.54c.282-.08.574-.121.868-.12.884 0 1.73.358 2.347.992s.948 1.49.922 2.373ZM10.721 8.421c.247 2.98.427 5.697 0 8.672a.264.264 0 0 1-.53 0c-.395-2.946-.22-5.718 0-8.672a.264.264 0 0 1 .53 0ZM9.072 9.448c.285 2.659.37 4.986-.006 7.655a.277.277 0 0 1-.55 0c-.331-2.63-.256-5.02 0-7.655a.277.277 0 0 1 .556 0Zm-1.663-.257c.27 2.726.39 5.171 0 7.904a.266.266 0 0 1-.532 0c-.38-2.69-.257-5.21 0-7.904a.266.266 0 0 1 .532 0Zm-1.647.77a26.108 26.108 0 0 1-.008 7.147.272.272 0 0 1-.542 0 27.955 27.955 0 0 1 0-7.147.275.275 0 0 1 .55 0Zm-1.67 1.769c.421 1.865.228 3.5-.029 5.388a.257.257 0 0 1-.514 0c-.21-1.858-.398-3.549 0-5.389a.272.272 0 0 1 .543 0Zm-1.655-.273c.388 1.897.26 3.508-.01 5.412-.026.28-.514.283-.54 0-.244-1.878-.347-3.54-.01-5.412a.283.283 0 0 1 .56 0Zm-1.668.911c.4 1.268.257 2.292-.026 3.572a.257.257 0 0 1-.514 0c-.241-1.262-.354-2.312-.023-3.572a.283.283 0 0 1 .563 0Z'},
+ bc:{n:'Bandcamp',u:`${LINKS.bcProfile}`,d:'M0 18.75l7.437-13.5H24l-7.438 13.5H0z'},
+ ig:{n:'Instagram',u:`${LINKS.igProfile}`,d:'M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077'},
+ tt:{n:'TikTok',u:`${LINKS.ttProfile}`,d:'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z'}
+};
+/* fallback de capa: tenta thumb do YouTube (se a faixa tem vídeo) e depois placeholder */
+function imgFallback(img,id){
+  img.onerror=function(){img.onerror=null;img.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3Crect width="1" height="1" fill="%231c1c28"/%3E%3C/svg%3E';};
+  const t=(TRACKS||[]).find(x=>x.id===id);
+  const raw=t&&Array.isArray(t.yt)&&t.yt[0]?String(t.yt[0]):'';
+  const mv=raw.match(/(?:\?|&|\b)v=([\w-]{6,})/)||raw.match(/^([\w-]{6,})$/);
+  const yid=mv?mv[1]:null;
+  if(yid)img.src=LINKS.ytThumbBase+yid+'/mqdefault.jpg';
+  else img.onerror();
+}
+function socBtns(){
+  return Object.values(SOC).map(s=>
+    '<a href="'+safeUrl(s.u)+'" target="_blank" rel="noopener" aria-label="'+s.n+'">'
+    +'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+s.d+'"/></svg>'+s.n+'</a>').join('');
+}
+
+/* =====================================================================
+   ESTADO (filtros + ordenação)
+   ===================================================================== */
+let curFilter='all', sortBy='views', sortDir=-1; // default: mais relevantes (views) ↓
+
+function sortTracks(arr){
+  arr.sort((a,b)=>{
+    let c;
+    if(sortBy==='views') c=trackViews(a)-trackViews(b);
+    else if(sortBy==='date') c=(a.date<b.date?-1:a.date>b.date?1:0);
+    else c=a.name.localeCompare(b.name,LOCALES[lang]);
+    return c*sortDir;
+  });
+  return arr;
+}
+
+function trackCard(t){
+  const tags=(t.type==='release')
+    ? '<span class="tag ep">'+T(t.badge==='ep'?'badgeEp':'badgeAlbum')+'</span><span class="tag">MavelPoint</span>'
+    : '<span class="tag">'+T('badgeTrack')+'</span>'+(t.album?'<span class="tag">'+T('badgeEp')+'</span>':'');
+  /* bpm, escala e duração discretos, numa única linha */
+  const meta=(t.type==='release')?''
+    :'<div class="meta">'
+      +(t.bpm?'<span>'+I.gauge+' '+esc(t.bpm)+' BPM</span>':'')
+      +(t.key?'<span>'+I.note+' '+esc(t.key)+'</span>':'')
+      +(t.len?'<span>'+I.clock+' '+esc(t.len)+'</span>':'')
+      +(t.colab?'<span>'+I.user+' '+esc(t.colab)+'</span>':'')
+      +'</div>';
+  const links=''
+    +'<div class="linksbar"><button class="lbtn" onclick="lkOpen(\''+esc(t.id)+'\')">'+I.link+' '+T('seeLinks')+'</button></div>';
+  /* tracklist colapsável: 3 faixas + 4ª semi-transparente quando fechada */
+  let tlBlock='';
+  if(t.list&&t.list.length){
+    const lis=t.list.map((r,idx)=>{
+      /* r[3] = 'VIDEO_ID?t=SEGUNDOS' → link pula para a faixa dentro do set completo */
+      const yt=r[3]?` <a class="views" href="${LINKS.ytShortBase}${encodeURIComponent(String(r[3]).split('?')[0])}" target="_blank" rel="noopener" title="YouTube">${I.play}</a>`:'';
+      const peek=idx===3?' class="peek"':'';
+      return '<li'+peek+'><span class="tn">'+String(idx+1).padStart(2,'0')+'</span><b>'+esc(r[1])+'</b>'+(r[2]?' <i>feat. '+esc(r[2])+'</i>':'')+yt+'<span class="tt2">'+esc(r[0])+'</span></li>';
+    }).join('');
+    const tgl=(t.list.length>3)
+      ?'<button class="tl-tgl no-print" aria-expanded="false" aria-label="'+T('gMore')+'">'+I.chev+'</button>':'';
+    tlBlock='<div class="tl-wrap"><div class="tl-lbl">'+T('setOrder')+'</div><ul class="tl">'+lis+'</ul>'+tgl+'</div>';
+  }
+  return '<article class="tk" data-type="'+t.type+'" data-id="'+esc(t.id)+'"'+(t.album?' data-album="1"':'')+'>'
+    /* topo horizontal: capa + título/data/views + botão de links */
+    +'<div class="top"><div class="cap">'+tags+'<img src="'+(IS_PRINT&&t.pr?t.pr:t.cover)+'" alt="'+esc(t.name)+'" loading="lazy" onerror="imgFallback(this,\''+esc(t.id)+'\')" onclick="lbOpenImg(this.src)"></div>'
+    +'<div class="info"><h3>'+esc(t.name)+'</h3>'
+    +'<div class="sub">'+I.cal+' '+esc(t.rel)+(trackViews(t)?' <span class="views">'+I.eye+' '+fmt(trackViews(t))+' '+T('views')+'</span>':'')+'</div>'
+    +meta
+    +links+'</div></div>'
+    +tlBlock+'</article>';
+}
+
+/* =====================================================================
+   MODAL "VER LINKS" — uma janela por card, com todas as redes + copiar
+   ===================================================================== */
+const PLATFORMS={sp:'Spotify',sc:'SoundCloud',bc:'Bandcamp',yt:'YouTube'};
+function lkOpen(id){
+  const t=TRACKS.find(x=>x.id===id);if(!t)return;
+  const rows=t.links.map(l=>
+    '<a href="'+safeUrl(l[1])+'" target="_blank" rel="noopener">'
+    +'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+SOC[l[0]].d+'"/></svg>'
+    +'<span style="flex:1">'+PLATFORMS[l[0]]+'</span><span class="ext">↗</span></a>').join('');
+  const all=t.links.map(l=>l[1]).join(' ');
+  $('#lkBox').innerHTML='<h4>'+esc(t.name)+'</h4>'
+    +'<button class="iconbtn x" onclick="lkClose()" aria-label="Fechar"><svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>'
+    +'<div class="lklinks">'+rows+'</div>'
+    +'<div class="lkfoot"><button class="lbtn cpy" onclick="copyLink(this.dataset.u)" data-u="'+esc(all)+'">'+I.link+' '+T('copyLinks')+'</button></div>';
+  lk.classList.add('on');
+}
+function lkClose(){lk.classList.remove('on');}
+const lk=$('#lk');
+lk.addEventListener('click',e=>{if(e.target===lk)lkClose();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){lkClose();dvClose();}});
+
+function renderGrid(){
+  const q=($('#trkSearch')&&$('#trkSearch').value.trim().toLowerCase())||'';
+  let arr=sortTracks(TRACKS.slice()).filter(t=>curFilter==='all'||t.type===curFilter);
+  if(q){
+    arr=arr.filter(t=>{
+      const hay=[t.name,t.bpm?(t.bpm+' bpm'):'',t.key||'',t.len||'',t.album||''].join(' ').toLowerCase();
+      const num=parseInt(q,10);
+      return hay.includes(q)||(num&&(t.bpm&&Math.round(t.bpm)===num));
+    });
+  }
+  const grid=$('#trackGrid');grid.classList.toggle('listmode',trkView==='list');
+  grid.innerHTML=arr.map(trackCard).join('');
+  const nores=$('#trkNoRes');if(nores)nores.style.display=arr.length?'none':'block';
+  const more=$('#trkMore');
+  const lim=IS_PRINT?arr.length:pageLimit('m');
+  [...grid.children].forEach((el,i)=>{if(i>=lim)el.style.display='none';});
+  /* expandido: botão vira "Mostrar menos" e permanece visível */
+  if(arr.length>lim){more.style.display='block';more.textContent=T('gMore');}
+  else if(pageSeq){more.style.display='block';more.textContent=T('gLess');}
+  else more.style.display='none';
+}
+$('#trkSearch').addEventListener('input',()=>{pageReset();renderGrid();});
+$('#trkMore').addEventListener('click',()=>{pageSeq=pageSeq?0:1;renderGrid();});
+$('#trkView').addEventListener('click',()=>{trkView=(trkView==='grid')?'list':'grid';renderGrid();});
+/* expandir/recolher tracklist (delegação — sobrevive a re-renders) */
+$('#trackGrid').addEventListener('click',e=>{
+  const b=e.target.closest('.tl-tgl');if(!b)return;
+  const w=b.closest('.tl-wrap');const open=w.classList.toggle('open');
+  b.setAttribute('aria-expanded',open);b.setAttribute('aria-label',T(open?'gLess':'gMore'));
+});
+
+/* =====================================================================
+   GALERIA + LIGHTBOX
+   ===================================================================== */
+function galItem(g,i){
+  const cap=g.cap||T(g.capKey==='a'?'capA':'capT');
+  const dl='<a class="iconbtn" href="'+safeUrl(g.t==='img'?g.full:g.src)+'" download="'+esc(g.name)+'" onclick="dlItem(event,'+i+')" title="Download">'+I.dl+'</a>';
+  if(g.t==='img'){
+    return '<figure class="git"><img src="'+safeUrl(IS_PRINT&&g.prfull?g.prfull:g.thumb)+'" alt="'+esc(cap)+'" loading="lazy" onerror="this.onerror=null;this.src=\'data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 16 9\"%3E%3Crect width=\"16\" height=\"9\" fill=\"%231c1c28\"/%3E%3C/svg%3E\'" onclick="lbOpenImg(this.dataset.f)" data-f="'+esc(g.full)+'">'
+      +'<div class="bar no-print">'+dl+'</div><figcaption class="gcap">'+esc(cap)+'</figcaption></figure>';
+  }
+  /* vídeos: thumbnail leve no grid; o arquivo .mp4 só carrega no lightbox */
+  return '<figure class="git vid"><img class="vth" src="'+safeUrl(g.thumb)+'" alt="'+esc(cap)+'" loading="lazy" onclick="lbOpenVid('+i+')">'
+    +'<div class="vplay no-print"><div class="c">'+I.play+'</div></div>'
+    +'<div class="bar no-print">'+dl+'</div><figcaption class="gcap">'+esc(cap)+'</figcaption></figure>';
+}
+function renderGallery(){
+  const items=GALLERY.map((g,i)=>({g,i})).filter(x=>galFilter==='all'||x.g.t===galFilter);
+  const grid=$('#galGrid');grid.classList.toggle('listmode',galView==='list');
+  const lim=IS_PRINT?items.length:pageLimit('g');
+  grid.innerHTML=items.slice(0,lim).map(x=>galItem(x.g,x.i)).join('');
+  const more=$('#galMore');
+  if(items.length>lim){more.style.display='block';more.textContent=T('gMore');}
+  else if(pageSeq){more.style.display='block';more.textContent=T('gLess');}
+  else more.style.display='none';
+}
+$('#galView').addEventListener('click',()=>{galView=(galView==='grid')?'list':'grid';renderGallery();});
+const lb=$('#lb');
+function lbOpenImg(src,name){
+  $('#lbBox').innerHTML='<img src="'+safeUrl(src)+'" alt="">';
+  $('#lbCap').textContent=name||'';
+  const d=$('#lbDl');d.href=src;d.setAttribute('download',name||'');
+  lb.classList.add('on');
+}
+function lbOpenVid(i){
+  const g=GALLERY[i];
+  $('#lbBox').innerHTML='<div class="lbvwrap"><video src="'+safeUrl(g.src)+'" controls autoplay playsinline></video>'
+    +'<div class="lbload on" id="lbLoad"><span class="lbspin"></span><span>'+T('gLoading')+'</span><div class="lbbar"><i id="lbBarFill"></i></div></div></div>';
+  const v=$('#lbBox video'),ld=$('#lbLoad'),fill=$('#lbBarFill');
+  const done=()=>ld.classList.remove('on');
+  v.addEventListener('loadedmetadata',upd);
+  v.addEventListener('progress',upd);
+  v.addEventListener('canplay',done);
+  v.addEventListener('playing',done);
+  v.addEventListener('error',()=>{
+    ld.innerHTML='<span>'+T('gLoadErr')+'</span><a href="'+safeUrl(g.src)+'" target="_blank" rel="noopener">'+T('gOpenTab')+'</a>';
+    setTimeout(done,4000);
+  });
+  setTimeout(done,25000); /* libera a interação mesmo em conexões lentas */
+  function upd(){
+    try{if(v.buffered.length&&v.duration)fill.style.width=Math.min(100,Math.round(v.buffered.end(v.buffered.length-1)/v.duration*100))+'%';}catch(e){}
+  }
+  $('#lbCap').textContent=g.name;
+  const d=$('#lbDl');d.href=g.src;d.setAttribute('download',g.name);
+  lb.classList.add('on');
+}
+function lbClose(){lb.classList.remove('on');$('#lbBox').innerHTML='';}
+lb.addEventListener('click',e=>{if(e.target===lb)lbClose();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lbClose();});
+
+/* =====================================================================
+   DOWNLOAD (fetch→blob com fallback de aba)
+   ===================================================================== */
+async function dlItem(ev,i){
+  const g=GALLERY[i];const url=g.t==='img'?g.full:g.src;
+  try{
+    const r=await fetch(url);if(!r.ok)throw 0;
+    const b=await r.blob();const u=URL.createObjectURL(b);
+    const a=document.createElement('a');a.href=u;a.download=g.name;document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(u),4000);
+    toast(T('tDl')+' '+g.name);
+  }catch(e){ window.open(url,'_blank'); toast(T('tTab')); }
+}
+
+/* =====================================================================
+   UTILITÁRIOS
+   ===================================================================== */
+function toast(m){const t=$('#toast');t.innerHTML=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2600);}
+function copyMail(){navigator.clipboard.writeText(LINKS.email).then(()=>toast(T('tMail')),()=>toast(LINKS.email));}
+function copyLink(u){navigator.clipboard.writeText(u).then(()=>toast(T('tLinks')));}
+
+/* =====================================================================
+   VÍDEOS — grid 5x4 com todos os vídeos do canal (via RSS), "mostrar mais"
+   ===================================================================== */
+/* VÍDEOS — filtros/ordenação (mesmos controles da seção Músicas) */
+let vidFilter='all', vidSort='views', vidDir=-1;
+/* heurística: faixas individuais vs sets/álbuns completos, pelo título */
+function isTrackTitle(s){
+  s=(s||'').toLowerCase();
+  if(/vol|\(ep\)|\(2026\)/.test(s))return false;
+  return s.includes('prod.')||s.includes('feat')||s.includes('ft.')||((s.match(/ - /g)||[]).length===1);
+}
+function renderVideos(){
+  const grid=$('#vidGrid'),more=$('#vidMore');if(!grid)return;
+  let vids=(YT_VIDEOS||[]).slice();
+  if(!vids.length){grid.innerHTML='';more.style.display='none';return;}
+  if(vidFilter!=='all')vids=vids.filter(v=>isTrackTitle(v.title)===(vidFilter==='tracks'));
+  vids.sort((a,b)=>{
+    let c;
+    if(vidSort==='views')c=(getViews(a.id)||a.v||0)-(getViews(b.id)||b.v||0);
+    else if(vidSort==='date')c=(a.pub<b.pub?-1:a.pub>b.pub?1:0);
+    else c=(a.title||'').localeCompare(b.title||'',LOCALES[lang]);
+    return c*vidDir;
+  });
+  $('#vidFallback').style.display='none';
+  grid.classList.toggle('listmode',vidView==='list');
+  const lim=IS_PRINT?vids.length:pageLimit('v');
+  grid.innerHTML=vids.slice(0,lim).map(v=>{
+    const views=getViews(v.id)||v.v||0;
+    const vw=views>0?'<span class="views">'+I.eye+' '+fmt(views)+'</span>':'';
+    return `<a class="vit" href="${LINKS.ytWatchBase}${v.id}" target="_blank" rel="noopener" title="${esc(v.title)}">`
+      +`<img src="${LINKS.ytThumbBase}${v.id}/mqdefault.jpg" alt="${esc(v.title)}" loading="lazy">`
+      +'<span class="vply">'+I.play+'</span>'
+      +'<span class="vcap"><span class="vt">'+esc(v.title)+'</span>'+vw+'</span></a>';
+  }).join('');
+  if(vids.length>lim){more.style.display='block';more.textContent=T('gMore');}
+  else if(pageSeq){more.style.display='block';more.textContent=T('gLess');}
+  else more.style.display='none';
+}
+function setFacViews(id,t){const el=document.getElementById(id);if(el)el.innerHTML=I.eye+' '+fmt(trackViews(t))+' '+T('views');}
+/* estado do pulso de cada métrica: laranja=carregando · verde=ok · vermelho=erro · cinza=indisponível */
+function setPulse(id,state){const p=document.getElementById(id);if(!p)return;p.classList.remove('ok','err','off');if(state)p.classList.add(state);}
+function setLiveVal(id,val){const el=document.getElementById(id);if(el)el.textContent=val;}
+function renderLiveStatic(){
+  setLiveVal('stSubs',fmt(FALLBACK_SUBS));
+  let tot=0;Object.values(FALLBACK_VIEWS).forEach(v=>tot+=v);
+  setLiveVal('stViews',fmt(tot));
+  $('#liveStamp').textContent=T('stampOff');
+  setLiveVal('scFollowers',fmt(FALLBACK_SC.followers));
+  document.querySelectorAll('#liveGrid .pulse').forEach(p=>{if(p.id!=='plSp')setPulse(p.id,'');});
+  const ep=TRACKS.find(t=>t.id==='ep'),v1=TRACKS.find(t=>t.id==='vol1');
+  setFacViews('facVw-ep',ep);setFacViews('facVw-vol1',v1);
+}
+/* Destaque: substitui a capa por um iframe do YouTube só no clique (evita erro 153
+   embedder.identity.missing.referrer — o iframe só nasce quando há interação e dentro
+   de página servida por HTTP; com file:// o link abre direto no YouTube) */
+function renderDestaque(){
+  const f=$('#hlFrame');if(!f)return;
+  if(f.classList.contains('live'))return;
+  const ph=$('#hlPh');
+  if(ph){ph.title=T('hlTitle');ph.setAttribute('aria-label',T('hlTitle'));}
+  /* capa do destaque: thumb do vídeo (id do CSV __csv__ ou chave do LINKS) — nada de asset local */
+  if(ph){
+    const raw=ph.dataset.yt||'ytVol1';
+    const vid=raw.indexOf('__csv__')===0?raw.slice(7):((LINKS[raw]||'').split('v=')[1]||'');
+    /* vid só entra na URL do YouTube se for um id válido — CSS injection via
+       url('…') com aspas/hostis do CSV fica impossível */
+    if(vid&&/^[-_A-Za-z0-9]{6,}$/.test(vid))ph.style.backgroundImage="url('"+LINKS.ytThumbBase+vid+"/hqdefault.jpg')";
+  }
+  if(f.dataset.bound)return; /* evita listeners duplicados ao trocar idioma */
+  f.dataset.bound='1';
+  if(location.protocol==='file:'){
+    devlog('w','[destaque] file:// detectado — reprodução embutida bloqueada pelo YouTube (referrer). O play abre no YouTube; sirva por HTTP (GitHub Pages) para embutir.');
+    const w=document.createElement('div');
+    w.style.cssText='position:absolute;left:0;right:0;bottom:10px;text-align:center;font-size:.72rem;color:#c9c9d4;text-shadow:0 1px 3px #000;z-index:3';
+    w.textContent=T('hlFileNote');
+    f.appendChild(w);
+    ph.addEventListener('click',()=>{window.open(LINKS[ph.dataset.yt]||LINKS.ytVol1,'_blank','noopener');});
+    return;
+  }
+  ph.addEventListener('click',e=>{
+    e.preventDefault();
+    f.classList.add('live');
+    const fr=document.createElement('iframe');
+    const raw=ph&&ph.dataset.yt?ph.dataset.yt:'ytVol1';
+    /* id pode vir direto do CSV (__csv__VIDEOID — aceita id puro OU link completo
+       colado pelo usuário) ou de uma chave do LINKS */
+    const rawCsv=raw.indexOf('__csv__')===0?raw.slice(7):raw;
+    const mYt=rawCsv.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/);
+    const vid=mYt?mYt[1]:(raw.indexOf('__csv__')===0&&/[\w-]{11}/.test(rawCsv)?rawCsv:((LINKS[raw]||'').split('v=')[1]||''));
+    /* o iframe exige a URL /embed/ — a /watch é bloqueada por X-Frame-Options */
+    fr.src=LINKS.ytEmbedBase+(vid||'ROrZ0NT3Rc0')+'?autoplay=1&rel=0';
+    fr.title=T('hlTitle');
+    fr.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    fr.allowFullscreen=true;
+    fr.referrerPolicy='strict-origin-when-cross-origin';
+    f.appendChild(fr);
+    devlog('s','[destaque] iframe do YouTube injetado com referrerPolicy');
+  },{once:true});
+}
+function renderBio(){
+  const S=T_SETS[lang];
+  if(!S)return; /* idioma desligado/sem tradução — bio permanece a do idioma ativo */
+  /* bioLead/bio passam pelo sanitizer MESMO nos dados embutidos — se algum
+     valor hostil chegar por estado (CSV, fonte externa, edição manual),
+     ainda assim nada executa. Formatação <b>/<i>/<u> é preservada. */
+  /* {artist} → ARTIST antes do sanitize (que escapa o resultado) (M11) */
+  const rep=s=>sanitizeInlineHTML(String(s).replace(/\{artist\}/g,ARTIST));
+  $('#bioBox').innerHTML='<button class="bioCopy no-print" onclick="copyBio()" title="'+T('bioCopy')+'" aria-label="'+T('bioCopy')+'"><svg class="ic" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><p class="lead">'+rep(S.bioLead)+'</p>'+S.bio.map(p=>rep(p)).join('');
+}
+function copyBio(){
+  const b=$('#bioBox');if(!b)return;
+  const txt=b.innerText.replace(/\n{3,}/g,'\n\n').trim();
+  const ok=()=>toast(T('tBio'));
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(ok,()=>legacyCopy(txt)?ok():toast('…'));
+  }else legacyCopy(txt)?ok():toast('…');
+}
+/* fallback (file:// / webviews sem Clipboard API): textarea oculta + execCommand */
+function legacyCopy(txt){
+  try{const ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();const r=document.execCommand('copy');ta.remove();return r;}catch(e){return false;}
+}
+function renderGenres(){
+  const box=$('#genreBox');if(!box)return;
+  box.innerHTML='';
+  GENRES.forEach(g=>{
+    const s=document.createElement('span');
+    s.className='gchip';
+    s.textContent=g;
+    box.appendChild(s);
+  });
+}
+/* listas de links para impressão (vídeos do canal + vídeos da galeria) */
+function renderPrintLists(){
+  const vl=$('#vidsPrintList');
+  if(vl)vl.innerHTML=(YT_VIDEOS||[]).map(v=>`<div><b>${esc(v.title)}</b> — <a href="${LINKS.ytWatchBase}${v.id}" target="_blank" rel="noopener">${LINKS.ytWatchBase.replace('https://','')}${v.id}</a></div>`).join('');
+  /* links estáticos do HTML (impressão, facades, e-mail) alimentados por LINKS */
+  const dl=LINKS_DISPLAY.map(u=>u.replace(/^https:\/\/(www\.)?/,''));
+  const hp=$('#heroPrintLinks');if(hp)hp.textContent='Links: '+dl.join(' · ');
+  const fp=$('#footPrintLinks');if(fp)fp.textContent=[LINKS.email].concat(dl).join(' · ');
+  document.querySelectorAll('[data-mail]').forEach(a=>{
+    const subj=a.dataset.subject?a.dataset.subject.replace(/\{artist\}/g,ARTIST):'';
+    a.href='mailto:'+LINKS.email+(subj?'?subject='+encodeURIComponent(subj):'');
+    if(a.children.length===0)a.textContent=LINKS.email;
+  });
+  document.querySelectorAll('a[data-yt]').forEach(a=>{a.href=LINKS[a.dataset.yt]||'#';});
+  document.querySelectorAll('[data-ytthumb]').forEach(img=>{const id=(LINKS[img.dataset.ytthumb]||'').split('v=')[1]||'';if(id)img.src=LINKS.ytThumbBase+id+'/hqdefault.jpg';const alt=img.getAttribute('data-yt-alt');if(alt)img.alt=alt.replace(/\{artist\}/g,ARTIST);});
+  const ms=document.querySelector('.mail');if(ms)ms.textContent=LINKS.email;
+  const gl=$('#galVidLinks');
+  if(gl)gl.innerHTML=GALLERY.filter(g=>g.t==='vid').map(g=>'<div><b>'+T('capT')+'</b> — <a href="'+safeUrl(g.src)+'" target="_blank" rel="noopener">'+esc(g.name)+'</a></div>').join('');
+}
+
+/* =====================================================================
+   I18N — aplicar idioma em tudo
+   ===================================================================== */
+function applyLang(){
+  document.documentElement.lang=LOCALES[lang];
+  document.title=T('docTitle');
+  document.querySelectorAll('[data-i]').forEach(el=>{el.textContent=T(el.dataset.i);});
+  document.querySelectorAll('[data-i-ph]').forEach(el=>{el.placeholder=T(el.dataset.iPh);});
+  $('#dirBtn').title=T('dirTitle');
+  $('#vidDirBtn').title=T('dirTitle');
+  $('#lbDl').title=T('download');
+  $('#burgerBtn').setAttribute('aria-label',T('menu'));
+  const tt=$('#toTop');tt.title=T('toTop');tt.setAttribute('aria-label',T('toTop'));
+  renderBio();renderGenres();renderDestaque();renderPrintLists();renderLiveStatic();renderGrid();renderGallery();renderVideos();renderLiveMore();
+  renderCSVIdentity();
+}
+$('#langSel').addEventListener('change',e=>{
+  lang=e.target.value;
+  try{localStorage.setItem(LS_PREFIX+'lang',lang);}catch(err){}
+  applyLang();
+});
+
+/* =====================================================================
+   CONTROLES — filtros + ordenação
+   ===================================================================== */
+document.querySelectorAll('#musicas .fbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#musicas .fbtn').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  curFilter=b.dataset.f;pageReset();renderGrid();
+}));
+document.querySelectorAll('#galeria .fbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#galeria .fbtn').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  galFilter=b.dataset.g;pageReset();renderGallery();
+}));
+$('#sortSel').addEventListener('change',e=>{sortBy=e.target.value;pageReset();renderGrid();});
+document.querySelectorAll('#videos .fbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#videos .fbtn').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  vidFilter=b.dataset.vf;pageReset();renderVideos();
+}));
+$('#vidSortSel').addEventListener('change',e=>{vidSort=e.target.value;pageReset();renderVideos();});
+$('#vidDirBtn').addEventListener('click',()=>{
+  vidDir*=-1;
+  $('#vidDirIco').innerHTML=vidDir<0?'<path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/>':'<path d="M12 19V5"/><path d="M5 12l7-7 7 7"/>';
+  pageReset();renderVideos();
+});
+$('#dirBtn').addEventListener('click',()=>{
+  sortDir*=-1;
+  $('#dirIco').innerHTML=sortDir<0?'<path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/>':'<path d="M12 19V5"/><path d="M5 12l7-7 7 7"/>';
+  pageReset();renderGrid();
+});
+$('#vidView').addEventListener('click',()=>{vidView=(vidView==='grid')?'list':'grid';renderVideos();});
+$('#galMore').addEventListener('click',()=>{pageSeq=pageSeq?0:1;renderGallery();});
+$('#vidMore').addEventListener('click',()=>{pageSeq=pageSeq?0:1;renderVideos();});
+
+/* =====================================================================
+   NAV MOBILE — hambúrguer + voltar ao topo
+   ===================================================================== */
+const nav=$('#nav'),burger=$('#burgerBtn');
+burger.addEventListener('click',()=>{
+  const o=nav.classList.toggle('open');
+  burger.setAttribute('aria-expanded',o);
+});
+document.querySelectorAll('#mMenu a').forEach(a=>a.addEventListener('click',()=>{
+  nav.classList.remove('open');burger.setAttribute('aria-expanded','false');
+}));
+const toTopBtn=$('#toTop');
+toTopBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+window.addEventListener('scroll',()=>{toTopBtn.classList.toggle('on',window.scrollY>420);},{passive:true});
+
+/* re-render dos grids quando o layout muda de mobile ↔ desktop */
+let rsT;window.addEventListener('resize',()=>{clearTimeout(rsT);rsT=setTimeout(()=>{renderGenres();renderGallery();renderVideos();renderLiveMore();},180);});
+/* métricas de texto mudam quando a webfont termina de carregar — reajustar os chips */
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>renderGenres());
+
+/* =====================================================================
+   CONTADORES AO VIVO (YouTube) — substituem os estáticos quando prontos
+   RSS oficial (views + vídeos, incl. canal Topic) + página do canal
+   (inscritos), via relays CORS com fallback em cadeia e cache de 30 min.
+   ===================================================================== */
+const CACHE_KEY=LS_PREFIX+'yt_stats_v2';
+/* cadeia de acesso: direto → Jina Reader (CORS aberto, texto/markdown) → allorigins → codetabs */
+const RELAYS=[
+  ['direto',u=>u],
+  ['jina',u=>'https://r.jina.ai/'+u],
+  ['allorigins',u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u)],
+  ['codetabs',u=>'https://api.codetabs.com/v1/proxy/?quest='+encodeURIComponent(u)],
+];
+async function relayText(label,url,timeout=20000){
+  for(const [name,R] of RELAYS){
+    try{
+      const ctrl=new AbortController();const tm=setTimeout(()=>ctrl.abort(),timeout);
+      const r=await fetch(R(url),{signal:ctrl.signal});clearTimeout(tm);
+      if(!r.ok){devlog('w','[relay] '+label+' → HTTP '+r.status+' ('+name+')');continue;}
+      const t=await r.text();
+      if(t&&t.length>200){devlog('s','[relay] '+label+' OK via '+name+' ('+t.length+' bytes)');return t;}
+      devlog('w','[relay] '+label+' → resposta vazia ('+name+')');
+    }catch(e){devlog('w','[relay] '+label+' → '+(e&&e.name==='AbortError'?'timeout':(e&&e.message?e.message:e))+' ('+name+')');}
+  }
+  throw new Error('todos os relays falharam');
+}
+/* entende "2,32 mil", "2.32K", "1.234" e "223" */
+function numIntl(s){
+  if(!s)return null;
+  const m=String(s).replace(/\s/g,'').match(/([\d.,]+)(mil|mi|K|M|B)?/i);if(!m)return null;
+  const u=(m[2]||'').toLowerCase();let v;
+  if(u==='mil'||u==='k')v=parseFloat(m[1].replace(',','.'))*1e3;
+  else if(u==='mi'||u==='m')v=parseFloat(m[1].replace(',','.'))*1e6;
+  else if(u==='b')v=parseFloat(m[1].replace(',','.'))*1e9;
+  else v=parseFloat(m[1].replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.'));
+  return isNaN(v)?null:Math.round(v);
+}
+function parseFeed(f,views,vids,seen){
+  (f.match(/<entry>[\s\S]*?<\/entry>/g)||[]).forEach(e=>{
+    const id=(e.match(/<yt:videoId>([^<]+)<\/yt:videoId>/)||[])[1];
+    if(!id)return;
+    const title=((e.match(/<title>([\s\S]*?)<\/title>/)||[])[1]||'').replace(/<!\[CDATA\[|\]\]>/g,'').replace(/&amp;/g,'&').trim();
+    const pub=(e.match(/<published>([^<]+)<\/published>/)||[])[1]||'';
+    const v=+((e.match(/views="(\d+)"/)||[])[1]||0);
+    if(!seen[id]){
+      seen[id]=1;
+      if(v)views[id]=v;
+      vids.push({id,title,pub,v});
+    }else if(v){views[id]=v;}
+  });
+}
+/* =====================================================================
+   MODO DEV (Alt+Shift+D) — log de diagnóstico na própria página
+   ===================================================================== */
+let devOn=false;
+try{devOn=localStorage.getItem(LS_PREFIX+'dev')==='1';}catch(e){}
+const devLog=[];
+function devlog(type,msg){
+  const t=new Date().toLocaleTimeString('pt-BR',{hour12:false});
+  devLog.push({t,type,msg:String(msg)});
+  if(devLog.length>200)devLog.shift();
+  if(devOn)devRender();
+}
+function devRender(){
+  const b=$('#devBody');if(!b)return;
+  b.innerHTML=devLog.map(l=>'<div class="l"><span class="t">'+l.t+'</span><span class="'+l.type+'">'+String(l.msg).replace(/</g,'&lt;')+'</span></div>').join('');
+  b.scrollTop=b.scrollHeight;
+}
+function devAsk(){
+  const m=$('#dvAsk');
+  $('#dvYes').textContent=T(devOn?'dvOff':'dvYes');
+  m.classList.add('on');m.setAttribute('aria-hidden','false');
+}
+function dvClose(){const m=$('#dvAsk');m.classList.remove('on');m.setAttribute('aria-hidden','true');}
+function devToggle(force){
+  devOn=(force!==undefined)?force:!devOn;
+  try{localStorage.setItem(LS_PREFIX+'dev',devOn?'1':'0');}catch(e){}
+  const p=$('#devPanel');p.classList.toggle('on',devOn);p.setAttribute('aria-hidden',!devOn);
+  if(devOn)devRender();
+}
+document.addEventListener('keydown',e=>{if(e.altKey&&e.shiftKey&&(e.key==='D'||e.key==='d')){e.preventDefault();if(!$('#dvAsk').classList.contains('on'))devAsk();}});
+$('#dvYes').addEventListener('click',()=>{devToggle(!devOn);dvClose();devlog('i','[dev] modo dev '+(devOn?'ativado':'desativado')+' manualmente');});
+$('#dvNo').addEventListener('click',dvClose);
+$('#dvAsk').addEventListener('click',e=>{if(e.target.id==='dvAsk')dvClose();});
+$('#devClear').addEventListener('click',()=>{devLog.length=0;devRender();});
+$('#devMin').addEventListener('click',()=>{$('#devPanel').classList.toggle('min');});
+$('#devX').addEventListener('click',()=>{devToggle(false);});
+$('#devCopy').addEventListener('click',()=>{
+  navigator.clipboard.writeText(devLog.map(l=>l.t+' '+l.msg).join('\n')).then(()=>toast('Log copiado!'),()=>{});
+});
+
+/* todo fetch externo passa por aqui — loga tentativa e resultado */
+async function fetchText(label,url,timeout=14000){
+  devlog('i','[fetch] '+label+' → '+url);
+  try{
+    const ctrl=new AbortController();const tm=setTimeout(()=>ctrl.abort(),timeout);
+    const r=await fetch(url,{signal:ctrl.signal});clearTimeout(tm);
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const t=await r.text();
+    devlog('s','[ok] '+label+' ('+t.length+' bytes)');
+    return t;
+  }catch(e){
+    devlog('e','[falha] '+label+' — '+(e&&e.message?e.message:e));
+    throw e;
+  }
+}
+
+const SC_URL=LINKS.scProfile;
+
+/* evita martelar os sites quando um bloco já está em andamento */
+const inFlight={};
+async function once(key,fn){
+  if(inFlight[key])return inFlight[key];
+  inFlight[key]=fn().finally(()=>{delete inFlight[key];});
+  return inFlight[key];
+}
+
+/* SOUNDCLOUD: ld+json do perfil traz followersCount/trackCount */
+function refreshSoundCloud(){
+  return once('sc',async()=>{
+    setPulse('plSc1','');setPulse('plSc2','off');
+    try{
+      const html=await relayText('soundcloud',SC_URL);
+      let f=null,tc=null;
+      const m=html.match(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/);
+      if(m){try{const j=JSON.parse(m[1]);f=j.followersCount||j.userInteractionCount||null;tc=j.trackCount||null;}catch(e){}}
+      if(!f)f=(html.match(/\[Followers (\d+)\]/)||html.match(/"followers_count":(\d+)/)||[])[1];
+      if(!tc)tc=(html.match(/\[Tracks (\d+)\]/)||html.match(/"track_count":(\d+)/)||[])[1];
+      if(f){setLiveVal('scFollowers',fmt(+f));setPulse('plSc1','ok');devlog('s','[dados] soundcloud followers='+f);}
+      else{setPulse('plSc1','err');devlog('e','[dados] soundcloud: followers não encontrado no HTML');}
+      if(tc){setLiveVal('scPlays',fmt(+tc)+' '+T('scTracks'));setPulse('plSc2','ok');}
+      else setPulse('plSc2','off');
+    }catch(e){
+      setPulse('plSc1','err');setPulse('plSc2','err');
+      devlog('e','[soundcloud] indisponível — mantido snapshot ('+FALLBACK_SC.followers+')');
+    }
+  });
+}
+
+/* SPOTIFY: ouvintes mensais via Jina Reader (página do artista renderizada; CORS aberto) */
+function refreshSpotify(){
+  return once('sp',async()=>{
+    setPulse('plSp','');
+    try{
+      const txt=await relayText('spotify',`${LINKS.spArtist}`);
+      const m=txt.match(/([\d.,]+)\s*(?:monthly listeners|ouvintes mensais|oyentes mensuales|monatliche Hörern|Hörern monatlich|auditeurs mensuels|月听众|月度听众)/i);
+      const n=m?numIntl(m[1]):null;
+      if(n){setLiveVal('spListeners',fmt(n));setPulse('plSp','ok');devlog('s','[dados] spotify monthly listeners='+n);}
+      else{setPulse('plSp','err');devlog('e','[dados] spotify: contagem de ouvintes não encontrada no texto da página');}
+    }catch(e){
+      setPulse('plSp','err');
+      devlog('e','[spotify] indisponível — card mostra "—"');
+    }
+  });
+}
+
+
+/* YOUTUBE: rss2json (JSON com CORS aberto) → fallback XML via relays; inscritos via página do canal */
+async function refreshYouTube(){
+  setPulse('plYt1','');setPulse('plYt2','');
+  let d=null;
+  /* 1) rss2json — devolve a lista de vídeos, mas sem contagens de views */
+  try{
+    const j=JSON.parse(await fetchText('rss2json','https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(`${LINKS.ytRssMain}`)));
+    if(j.status==='ok'&&j.items&&j.items.length){
+      const vids=j.items.map(it=>({
+        id:((it.guid||'').split(':').pop()||'').trim(),
+        title:it.title||'',
+        pub:(it.pubDate||'').replace(' ','T')+'Z',v:0
+      })).filter(v=>v.id);
+      if(vids.length){d={views:{},vids,subs:null,fetched:Date.now()};devlog('s','[dados] youtube: '+vids.length+' vídeos via rss2json (views ficam no snapshot)');}
+    }
+  }catch(e){devlog('w','[youtube] rss2json falhou — tentando XML via relays');}
+  /* 2) fallback: XML dos feeds via relays (preserva views por vídeo) */
+  if(!d){
+    try{
+      const [rss,topic]=await Promise.all([
+        relayText('youtube-rss',`${LINKS.ytRssMain}`),
+        relayText('youtube-topic',`${LINKS.ytRssTopic}`).catch(()=>{devlog('w','[youtube] canal Topic falhou — seguindo sem ele');return null;}),
+      ]);
+      const views={},vids=[],seen={};
+      [rss,topic].forEach(f=>{if(f)parseFeed(f,views,vids,seen);});
+      vids.sort((a,b)=>(a.pub<b.pub?1:-1));
+      if(vids.length)d={views,vids,subs:null,fetched:Date.now()};
+    }catch(e){devlog('e','[youtube] feeds indisponíveis — mantendo snapshot');}
+  }
+  /* 3) inscritos: página do canal (HTML ou markdown via Jina) */
+  try{
+    const chan=await relayText('youtube-canal',`${LINKS.ytChannel}`);
+    const m=chan.match(/"accessibilityLabel":"([^"]{0,30}inscritos)"/)||chan.match(/"subscriberCountText":\{"simpleText":"([^"]+)"/)||chan.match(/([\d.,]+\s*(?:mil|K|M)?)\s*(?:subscribers|inscritos)/i);
+    if(d&&m){d.subs=numIntl(m[1]);if(d.subs)devlog('s','[dados] youtube inscritos='+d.subs);}
+  }catch(e){devlog('w','[youtube] página do canal indisponível — inscritos ficam no snapshot');}
+  if(d){
+    try{localStorage.setItem(CACHE_KEY,JSON.stringify({t:Date.now(),d}));}catch(e){}
+    applyYT(d,true);
+  }else{
+    let cache=null;try{cache=JSON.parse(localStorage.getItem(CACHE_KEY)||'null');}catch(e){}
+    if(cache)applyYT(cache.d,false);
+    else{setPulse('plYt1','err');setPulse('plYt2','err');}
+  }
+  function applyYT(d,fresh){
+    liveViews=d.views||{};
+    if(d.vids&&d.vids.length)YT_VIDEOS=d.vids;
+    const st=fresh?'ok':'err';
+    setPulse('plYt1',st);setPulse('plYt2',st);
+    const tm=new Date(d.fetched||Date.now());
+    const stamp=tm.toLocaleTimeString(LOCALES[lang],{hour:'2-digit',minute:'2-digit'});
+    $('#liveStamp').textContent=fresh?(T('stampLive')+' '+stamp):(T('stampOff')+' · '+stamp);
+    if(d.subs)setLiveVal('stSubs',fmt(d.subs));
+    let tot=0;Object.values(Object.assign({},FALLBACK_VIEWS,liveViews)).forEach(v=>tot+=v);
+    setLiveVal('stViews',fmt(tot));
+    renderGrid();renderVideos();
+    const ep=TRACKS.find(t=>t.id==='ep'),v1=TRACKS.find(t=>t.id==='vol1');
+    setFacViews('facVw-ep',ep);setFacViews('facVw-vol1',v1);
+  }
+}
+
+/* orquestra tudo: YouTube + SoundCloud + Instagram + Spotify */
+const CACHE_SOC=LS_PREFIX+'soc_v1';
+async function refreshSocial(){
+  let c=null;try{c=JSON.parse(localStorage.getItem(CACHE_SOC)||'null');}catch(e){}
+  const fresh=c&&(Date.now()-c.t)<30*60*1000;
+  if(fresh){
+    devlog('i','[cache] métricas sociais de '+new Date(c.t).toLocaleTimeString('pt-BR'));
+    if(c.sc&&c.sc.followers){setLiveVal('scFollowers',fmt(c.sc.followers));setPulse('plSc1','ok');}
+  }
+  await Promise.allSettled([refreshYouTube(),refreshSoundCloud(),refreshSpotify()]);
+  try{
+    const sc=numIntl(document.getElementById('scFollowers').textContent)||FALLBACK_SC.followers;
+    localStorage.setItem(CACHE_SOC,JSON.stringify({t:Date.now(),sc:{followers:sc}}));
+  }catch(e){}
+}
+
+/* painel de métricas: 4 cards sempre visíveis (desktop em linha, mobile 2x2) */
+function renderLiveMore(){
+  const b=$('#liveMore'),g=$('#liveGrid');if(!b||!g)return;
+  b.style.display='none';g.classList.add('all');
+}
+$('#liveMore').addEventListener('click',()=>{$('#liveGrid').classList.toggle('all');renderLiveMore();});
+
+/* =====================================================================
+   BOOT
+   ===================================================================== */
+$('#langSel').value=lang;
+$('#socHero').innerHTML=socBtns();      // botões de redes com ícones das marcas
+$('#socContact').innerHTML=socBtns();
+applyLang();          // renderiza tudo já com textos e números estáticos
+loadCSV().then(()=>refreshSocial()); // CSV (se houver ?csv=) → re-render → métricas ao vivo
+devlog('i','[boot] página carregada — Alt+Shift+D abre a confirmação deste painel');
+</script>
+</body>
+</html>

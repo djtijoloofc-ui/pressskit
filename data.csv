@@ -1,0 +1,157 @@
+﻿# PRESSKIT — dados do site (editado pelo Presskit Manager).,
+# Linhas iniciando com # são ignoradas pelo site.,
+,
+"# ===== CONFIG — artista, cidade, BPM, imagens, destaque, redes, métricas =====",
+campo,valor
+artista,DJ TIJOLO
+cidade,"Carapicuiba, SP - Brasil"
+bpm_min,130
+bpm_max,210
+chip_live,"Festas, clubs & eventos"
+video_destaque,zBoxX7ipt3g
+foto_fundo,https://f4.bcbits.com/img/0045509407_102.avif
+foto_perfil,https://f4.bcbits.com/img/0045509279_10.jpg
+favicon,none
+email,djtijoloofc@gmail.com
+youtube,https://www.youtube.com/@DJTIJOLO
+spotify,https://open.spotify.com/intl-pt/artist/4KjGnaEL18mbhepJOOEpwT?si=bSYUbuCRSVqmBKbu15sSXg
+soundcloud,https://soundcloud.com/DJTIJOLO
+bandcamp,https://djtijolo.bandcamp.com/
+instagram,https://www.instagram.com/djtijoloofc
+tiktok,https://www.tiktok.com/tijolodj
+destaque_texto,Novo albo na pixta!
+destaque_botao_texto,OUÇA AGORA
+destaque_botao_link,https://youtu.be/zBoxX7ipt3g
+destaque_imagem_url,
+destaque_imagem_link,
+destaque_imagem_legenda,
+destaque_botao_mostrar,0
+destaque_imagem_mostrar,0
+destaque_ordem,"Texto,Vídeo,Botão customizado,Imagem"
+idioma_pt,1
+idioma_en,1
+idioma_es,0
+idioma_de,0
+idioma_fr,0
+idioma_zh,0
+inscritos_youtube,
+seguidores_soundcloud,
+views_canal,
+ouvintes_spotify,
+metrica_formato,abreviado
+secao_destaque,1
+secao_sobre,1
+secao_musicas,1
+secao_videos,1
+secao_galeria,1
+secao_rider,1
+secao_contato,1
+mostrar_metricas,1
+metrica_inscritos_youtube,1
+metrica_views_canal,1
+metrica_ouvintes_spotify,1
+metrica_seguidores_soundcloud,1
+galeria_download_url,
+rider_mostrar_marca,1
+rider_mostrar_entradas,1
+rider_mostrar_tipo,1
+rider_mostrar_peso,1
+rider_mostrar_medidas,1
+rider_mostrar_voltagem,1
+rider_mostrar_amperagem,1
+rider_mostrar_tomada,1
+rider_mostrar_descricao,1
+rider_mostrar_fotos,1
+mostrar_pdf,0
+mostrar_idiomas,0
+views_zBoxX7ipt3g,38729
+views_xHRpJHqKH0g,27281
+views_ROrZ0NT3Rc0,38575
+views_dh_-OmmgWis,4688
+views_GOFjH84Lbpk,11491
+views_EmDmKSxSqjI,32330
+,
+# ===== TEMA — cores do site (variáveis CSS) =====,
+campo,valor
+acc,#ff7a1a
+acc2,#ffb56b
+neon,#c8ff3e
+bg,#0b0b10
+bg2,#12121a
+card,#16161f
+card2,#1c1c28
+line,#2a2a38
+mut,#9a9aae
+txt,#f2f2f5
+,
+"# ===== TEXTOS — papel, lead, bio e contato por idioma =====",
+idioma,campo,texto
+pt,role,DJ & Prod.
+pt,lead,Bio de teste.
+pt,contato,Esses são meus contatos para contratações
+en,role,
+en,lead,
+en,contato,These are my contacts for hiring
+pt,p1,isso também é teste
+pt,p2_1,alou dona de casa
+pt,p3_1,aaaaaaaaaaaaa
+,
+# ===== GÊNEROS =====,
+ordem,nome,cor_fonte,cor_fundo
+1,Baile Funk,#ff7a1a,#000040
+2,Techno,#91ddf7,#183987
+3,Cybercria,#fad91f,#270345
+4,Drum n Bass,#80fa7c,#13793c
+5,Hard techno,#f7ea46,#840000
+6,Breakcore,#f396f3,#6218eb
+,
+# ===== MÚSICAS E SETS — uma linha por lançamento =====,
+tipo,nome,data,bpm,escala,duracao,album,capa,spotify,soundcloud,bandcamp,youtube,apple,deezer,isrc,upc,colaboradores,tracklist,id,mostrar_views
+set,MÚSICAS PARA DEMOLIR LAJE,2026-10-13,,,45:35,,https://i.ytimg.com/vi/zBoxX7ipt3g/hqdefault.jpg,,,https://djtijolo.bandcamp.com/album/m-sicas-para-demolir-laje,https://www.youtube.com/watch?v=zBoxX7ipt3g,,,,,"DJ Corote de Limão, DJ Cultivador, Dj Dengue, BRVXO","0:00|A Tijolada Na Tua Cara||zBoxX7ipt3g&t=0
+03:27|Vários Tijolo-Bomba||zBoxX7ipt3g&t=207
+05:51|Tijolinho de Diamante|DJ Cultivador|zBoxX7ipt3g&t=351
+09:22|RIP Tigrinho||zBoxX7ipt3g&t=562
+13:19|Soul Foda||zBoxX7ipt3g&t=799
+15:27|Meu Tijolo de Metal||zBoxX7ipt3g&t=927
+19:58|Tijolo Envolvente||zBoxX7ipt3g&t=1198
+22:25|Dança da Motinha|DJ Cultivador|zBoxX7ipt3g&t=1345
+25:44|Assuma!|DJ Cultivador, DJ Corote de Limão|zBoxX7ipt3g&t=1544
+29:43|Fique Tranquilo||zBoxX7ipt3g&t=1783
+31:15|Polícia Covarde|DJ Corote de Limão|zBoxX7ipt3g&t=1875
+34:15|Chá de Tijolão||zBoxX7ipt3g&t=2055
+38:00|Quero Te Jolar|DJ Dengue|zBoxX7ipt3g&t=2280
+40:42|Roubando a Cena|BRVXO|zBoxX7ipt3g&t=2442
+43:17|Pense Num Tijolo Bom||zBoxX7ipt3g&t=2597",m-sicas-para-demolir-laj,
+set,MÚSICAS PARA BATER LAJE vol.1,2026-09-19,,,29:23,,https://i.ytimg.com/vi/ROrZ0NT3Rc0/hqdefault.jpg,,,https://djtijolo.bandcamp.com/album/m-sicas-para-bater-uma-laje-vol-1,https://www.youtube.com/watch?v=ROrZ0NT3Rc0,https://music.apple.com/us/album/m%C3%BAsicas-para-bater-laje-vol-1/6814222713?uo=4,,,,,"0:00|Se Ela Dança, Eu Danço||zBoxX7ipt3g&t=0
+03:30|A Tijolinha Tá de Quatro Mola||zBoxX7ipt3g&t=210
+06:40|Até na Transa Você Não Larga o Tijolo||zBoxX7ipt3g&t=400
+10:05|Calma, Dona Tromba||zBoxX7ipt3g&t=605
+12:34|Comer Tijolo||zBoxX7ipt3g&t=754
+16:05|Vai tentar Comigo Tem Certeza?||zBoxX7ipt3g&t=965
+19:58|Música Pra Bate Uma Laje||zBoxX7ipt3g&t=1198
+22:57|Quero Ar Condicionado||zBoxX7ipt3g&t=1377
+25:57|Easter Egg Do Marcelinho||zBoxX7ipt3g&t=1557",m-sicas-para-bater-laje--2,
+set,Castelos de Tijolo (EP) (2026),2026-08-29,,,15:25,,https://i.ytimg.com/vi/xHRpJHqKH0g/hqdefault.jpg,,https://soundcloud.com/djtijolo/dj-tijolo-castelos-de-tijolo,https://djtijolo.bandcamp.com/album/castelos-de-tijolo,https://www.youtube.com/watch?v=xHRpJHqKH0g,https://music.apple.com/us/album/castelos-de-tijolo-ep/6806948751?uo=4,,,,,"00:00|Um tijolo pra bater no meu marido|Kryartura|xHRpJHqKH0g&t=0
+02:28|Castelos de Tijolo|Danny Bond|xHRpJHqKH0g&t=148
+05:38|Vai chupar ou vai lamber|Kaya Conky|xHRpJHqKH0g&t=338
+09:47|Deu hemorragia no c*|LeorioStar, MC Carol|xHRpJHqKH0g&t=587
+12:07|Cheiro de tijolo queimado|Cidinho e Doca|xHRpJHqKH0g&t=727",castelos-de-tijolo-ep-20,
+faixa,Tjola Demole Barraco - Boladona (prod. DJ Tijolo),2026-09-15,,,4:53,,https://i.ytimg.com/vi/dh_-OmmgWis/hqdefault.jpg,,https://soundcloud.com/daniel-alvez-924630369/tjola-demole-barraco-boladona,https://djtijolo.bandcamp.com/track/tjola-demole-barraco-boaldona-prod-dj-tijolo,https://www.youtube.com/watch?v=dh_-OmmgWis,https://music.apple.com/us/album/tjola-demole-barraco-boladona-single/6813312818?uo=4,,,,,,tjola-demole-barraco-bol,
+faixa,DJ TIJOLO - TREMENDO TIJOLÃO,2026-08-20,,,3:13,,https://i.ytimg.com/vi/GOFjH84Lbpk/hqdefault.jpg,,https://soundcloud.com/djtijolo/tremendo-tijol-o,https://djtijolo.bandcamp.com/track/tremendo-tijol-o,https://www.youtube.com/watch?v=GOFjH84Lbpk,https://music.apple.com/us/album/tremendo-tijol%C3%A3o-single/6803808031?uo=4,https://www.deezer.com/track/4236875602,,,,,dj-tijolo-tremendo-tijol,
+faixa,CONSTRUÇÃO BREAKCORE  (feat. Tijolo Buarque) | ESPECIAL DE 1K DE INSCRITOS,,,,4:48,,https://i.ytimg.com/vi/EmDmKSxSqjI/hqdefault.jpg,,https://soundcloud.com/djtijolo/construcao,https://djtijolo.bandcamp.com/track/constru-o-breakcore-ft-tijolo-buarque,https://www.youtube.com/watch?v=EmDmKSxSqjI,,,,,,,constru-o-breakcore-feat,
+,
+# ===== GALERIA =====,
+tipo,legenda,nome,thumb,url
+foto,,,https://samavelpointappprodwe.blob.core.windows.net/app-images/artist/e6fc3090-069a-4766-b420-3a6be4e961f8/collection/18028/gallery/foto-com-tijolos-1788962790704-e59d7f08-3618-4784-858e-ab1fb87f257c.png,https://samavelpointappprodwe.blob.core.windows.net/app-images/artist/e6fc3090-069a-4766-b420-3a6be4e961f8/collection/18028/gallery/foto-com-tijolos-1788962790704-e59d7f08-3618-4784-858e-ab1fb87f257c.png
+,
+# ===== VÍDEOS DO CANAL — usados se o feed do YouTube falhar =====,
+id,titulo,data,mostrar
+zBoxX7ipt3g,DJ TIJOLO - MÚSICAS PARA DEMOLIR LAJE,2026-10-13,
+dh_-OmmgWis,Tjola Demole Barraco - Boladona (prod. DJ Tijolo),2026-08-20,
+GOFjH84Lbpk,DJ TIJOLO - TREMENDO TIJOLÃO,2026-08-03,
+EmDmKSxSqjI,DJ Tijolo - CONSTRUÇÃO BREAKCORE  (feat. Tijolo Buarque) | ESPECIAL DE 1K DE INSCRITOS,2026-07-17,
+xHRpJHqKH0g,DJ TIJOLO - Castelos de Tijolo (EP) (2026),2026-06-30,
+ROrZ0NT3Rc0,DJ Tijolo - MÚSICAS PARA BATER LAJE vol.1,2026-06-12,
+,
+"# ===== RIDER TÉCNICO — equipamentos (categoria, nome, detalhe) =====",
+categoria,nome,marca,entradas,saidas,tipo,peso,medidas,voltagem,amperagem,tomada,descricao,foto1,foto2,foto3
